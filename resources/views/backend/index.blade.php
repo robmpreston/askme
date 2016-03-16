@@ -14,5 +14,4 @@
         <a>@{{ question.text }}</a>
       </li>
     </template>
-
 @endsection

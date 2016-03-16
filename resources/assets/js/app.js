@@ -14,5 +14,8 @@ new Vue({
             text: "What is your opinion on Super PACs?",
             votes: 11
         }]
+    },
+    components: {
+        'question' : Question
     }
 })
