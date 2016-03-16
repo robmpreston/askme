@@ -9,7 +9,6 @@ Vue.component('question', {
     },
     methods: {
         upvote: function() {
-            this.http.
             this.upvoted = !this.upvoted;
             this.downvoted = false;
         },
@@ -76,6 +75,7 @@ var vm = new Vue({
             profile_image: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/blog/author/photos/deray2.png",
             first_name: "DeRay",
             last_name: "Mckesson",
+            title: "Mayoral Candidate",
             location: "Baltimore, MD",
             description: "Running for Mayor of Baltimore. I am an organizer, activist and educator focused primarily on issues of innovation, equity and justice."
         },

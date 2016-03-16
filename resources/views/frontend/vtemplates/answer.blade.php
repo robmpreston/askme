@@ -1,7 +1,9 @@
 <template id="answer-template">
-  <li class="list-group-item">
-    <i class="fa fa-chevron-up" @click="upvote" :class="{disabled: upvoted}"></i>
-    <span class="label label-primary">@{{ votes }}</span>
-    <p>@{{ answer.text }}</p>
-  </li>
+    <div class="answer-container">
+        <p>@{{ answer.text }}</p>
+        <i class="fa fa-thumbs-o-up fa-2x like-btn-outline" @click="upvote" v-show="!upvoted"></i>
+        <div class="like-block">
+            <p><i class="fa fa-thumbs-up fa-2x like-btn" @click="upvote" v-show="upvoted"></i> @{{ votes }}</p>
+        </div>
+    </div>
 </template>
