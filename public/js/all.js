@@ -47,9 +47,9 @@ Vue.component('answer', {
     computed: {
         votes: function() {
             if (this.upvoted) {
-                return this.question.votes + 1;
+                return this.answer.votes + 1;
             } else {
-                return this.question.votes;
+                return this.answer.votes;
             }
         }
     }
