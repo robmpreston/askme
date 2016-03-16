@@ -9,6 +9,7 @@ Vue.component('question', {
     },
     methods: {
         upvote: function() {
+            this.http.
             this.upvoted = !this.upvoted;
             this.downvoted = false;
         },

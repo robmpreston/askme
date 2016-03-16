@@ -7,5 +7,6 @@
         <question v-for="question in questions" :question="question"></question>
     </div>
     @include('backend.vtemplates.question')
+    @include('backend.vtemplates.answer')
     <script src="js/all.js"></script>
 @endsection
