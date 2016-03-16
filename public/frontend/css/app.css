@@ -5762,7 +5762,7 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  margin: 40px auto 40px auto; }
+  margin: 40px auto 64px auto; }
 
 .disabled {
   color: red; }
@@ -5838,6 +5838,15 @@ p {
   .no-border-btn:hover {
     border: 0px;
     text-decoration: underline; }
+
+.ask-container {
+  margin: 0 auto 24px auto;
+  padding: 0; }
+  .ask-container input {
+    width: 100%;
+    border: solid 1px #b0bec5;
+    outline: 0;
+    padding: 11px 24px 11px 24px; }
 
 .qa-container {
   margin-bottom: 24px;

@@ -6,11 +6,12 @@ $open-sans: 'Open Sans', sans-serif;
 $muli: 'Muli', sans-serif;
 
 $faded-grey: #cfd8dc;
+$light-grey: #b0bec5;
 $grey: #607d8b;
 $dark-grey: #263238;
 $answer-bg: #f7f9fa;
-$answer-border: #eceff1;
-$question-border: #b0bec5;
+$light-border: #eceff1;
+$normal-border: #b0bec5;
 
 body {
     font-family: $muli;
@@ -24,7 +25,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
-    margin: 40px auto 40px auto;
+    margin: 40px auto 64px auto;
 }
 
 .disabled {
@@ -124,9 +125,20 @@ p {
     }
 }
 
+.ask-container {
+    margin: 0 auto 24px auto;
+    padding: 0;
+    input {
+        width: 100%;
+        border: solid 1px $normal-border;
+        outline: 0;
+        padding: 11px 24px 11px 24px;
+    }
+}
+
 .qa-container {
     margin-bottom: 24px;
-    border: 1px solid $question-border;
+    border: 1px solid $normal-border;
 
     .question-container {
         background: white;
@@ -134,7 +146,7 @@ p {
     }
 
     .answer-container {
-        border-top: 1px solid $answer-border;
+        border-top: 1px solid $light-border;
         background: $answer-bg;
         padding: 24px;
         .like-block {
