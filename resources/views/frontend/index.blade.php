@@ -1,4 +1,4 @@
-@extends('backend.shared.master')
+@extends('frontend.shared.master')
 
 @section('title', 'Ask DeRay')
 
@@ -6,7 +6,7 @@
     <div id="app">
         <question v-for="question in questions" :question="question"></question>
     </div>
-    @include('backend.vtemplates.question')
-    @include('backend.vtemplates.answer')
-    <script src="backend/js/app.js"></script>
+    @include('frontend.vtemplates.question')
+    @include('frontend.vtemplates.answer')
+    <script src="frontend/js/app.js"></script>
 @endsection
