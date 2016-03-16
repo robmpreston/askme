@@ -3,5 +3,5 @@
 @section('title', 'Ask me')
 
 @section('content')
-    <p>Test</p>
+
 @endsection
