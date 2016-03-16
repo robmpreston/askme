@@ -1,0 +1,7 @@
+Setting up on your local:
+
+composer install
+php artisan migrate
+php artisan db:seed
+npm install (in root project dir)
+gulp
