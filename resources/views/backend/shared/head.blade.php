@@ -1,3 +1,3 @@
-<head>
-    <title>@yield('title')</title>
-</head>
+    <head>
+        <title>@yield('title')</title>
+    </head>
