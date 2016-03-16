@@ -1,6 +1,13 @@
 var vm = new Vue({
     el: '#app',
     data: {
+        user: {
+            profile_image: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/blog/author/photos/deray2.png",
+            first_name: "DeRay",
+            last_name: "Mckesson",
+            location: "Baltimore, MD",
+            description: "Running for Mayor of Baltimore. I am an organizer, activist and educator focused primarily on issues of innovation, equity and justice."
+        },
         questions: [{
             text: "What are your thoughts on Donald Trump?",
             votes: 5,
