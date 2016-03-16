@@ -1,7 +1,4 @@
-var Vue = require('vue');
-var Question = require('./components/question.vue');
-
-new Vue({
+var vm = new Vue({
     el: '#app',
     data: {
         questions: [{
@@ -14,8 +11,5 @@ new Vue({
             text: "What is your opinion on Super PACs?",
             votes: 11
         }]
-    },
-    components: {
-        'question' : Question
     }
 })

@@ -5752,4 +5752,7 @@ button.close {
 .disabled {
   color: red; }
 
+.fa:hover {
+  cursor: pointer; }
+
 /*# sourceMappingURL=app.css.map */
