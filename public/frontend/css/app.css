@@ -5,6 +5,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5749,10 +5751,80 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+body {
+  font-family: "Muli", sans-serif;
+  font-weight: normal;
+  background: white; }
+
 .disabled {
   color: red; }
 
 .fa:hover {
   cursor: pointer; }
+
+p {
+  color: #263238;
+  font-size: 1em; }
+
+.grey-text {
+  color: #607d8b; }
+
+.faded-text {
+  color: #cfd8dc; }
+
+.featured {
+  margin: 20px auto 20px auto;
+  text-align: center; }
+  .featured img {
+    border-radius: 50%;
+    width: 60px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle; }
+  .featured .info {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto 16px auto 16px; }
+    .featured .info h1 {
+      font-size: 1.3em;
+      margin: 0; }
+    .featured .info h2 {
+      font-size: 1.1em;
+      margin: 0; }
+    .featured .info p {
+      font-size: 1.0em;
+      margin: 0; }
+
+.default-btn {
+  margin: 10px;
+  padding: 12px 24px 12px 24px;
+  border-radius: 3px;
+  border: solid 1px #cfd8dc;
+  color: #607d8b;
+  font-size: 1em;
+  background-color: white;
+  outline: none; }
+  .default-btn:disabled p {
+    background-color: white;
+    color: #cfd8dc; }
+  .default-btn[disabled]:hover {
+    border: solid 1px #cfd8dc; }
+  .default-btn:hover {
+    border: solid 1px #607d8b; }
+  .default-btn p {
+    background-color: white;
+    color: #607d8b;
+    margin: 0; }
+
+.no-border-btn {
+  border: 0px;
+  padding: 12px; }
+  .no-border-btn[disabled]:hover {
+    border: 0px;
+    text-decoration: none; }
+  .no-border-btn:hover {
+    border: 0px;
+    text-decoration: underline; }
 
 /*# sourceMappingURL=app.css.map */

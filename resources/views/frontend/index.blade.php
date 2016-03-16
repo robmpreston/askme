@@ -4,8 +4,14 @@
 
 @section('content')
     <div id="app">
-        <feature :user="user"></feature>
-        <question v-for="question in questions" :question="question"></question>
+        <div class="container">
+            <button class="default-btn"><p>Button</p></button>
+            <p>Testing testing testing testing</p>
+            <p class="faded-text">Testing testing testing testing</p>
+            <button class="default-btn no-border-btn"><p>Button</p></button>
+            <feature :user="user"></feature>
+            <question v-for="question in questions" :question="question"></question>
+        </div>
     </div>
     @include('frontend.vtemplates.question')
     @include('frontend.vtemplates.answer')

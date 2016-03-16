@@ -1,8 +1,9 @@
 <template id="feature-template">
     <div class="featured">
         <img v-bind:src="user.profile_image">
-        <h1>@{{ name }}</h1>
-        <h2>@{{ user.location }}</h2>
-        <p>@{{ user.description }}</p>
+        <div class="info">
+            <p>I am @{{ name }}, <span class="grey-text">@{{ title }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.location }}</span></p>
+            <p>@{{ user.description }}</p>
+        </div>
     </div>
 </template>
