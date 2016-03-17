@@ -16,7 +16,6 @@ class CreateVotesTable extends Migration
             $table->increments('id');
             $table->integer('question_id')->unsigned()->references('id')->on('questions');
             $table->integer('user_id')->unsigned()->references('id')->on('users');
-            $table->text('text');
             $table->boolean('is_down_vote')->default(0);
             $table->timestamps();
         });
@@ -25,7 +24,6 @@ class CreateVotesTable extends Migration
             $table->increments('id');
             $table->integer('answer_id')->unsigned()->references('id')->on('answers');
             $table->integer('user_id')->unsigned()->references('id')->on('users');
-            $table->text('text');
             $table->boolean('is_down_vote')->default(0);
             $table->timestamps();
         });
