@@ -26,10 +26,30 @@ Vue.component('question', {
         upvote: function() {
             this.upvoted = !this.upvoted;
             this.downvoted = false;
+            // GET request
+            this.$http({url: '/api/question/upvote', method: 'GET'}).then(function (response) {
+                if (response.data.success) {
+                    console.log('success!');
+                } else {
+                    this.upvoted = !this.upvoted;
+                }
+            }, function (response) {
+                this.upvoted = !this.upvoted;
+            });
         },
         downvote: function() {
             this.downvoted = !this.downvoted;
             this.upvoted = false;
+            // GET request
+            this.$http({url: '/api/question/downvote', method: 'GET'}).then(function (response) {
+                if (response.data.success) {
+                    console.log('success!');
+                } else {
+                    this.downvoted = !this.downvoted;
+                }
+            }, function (response) {
+                this.downvoted = !this.downvoted;
+            });
         }
     },
     computed: {
@@ -50,17 +70,27 @@ Vue.component('answer', {
     props: ['answer'],
     data: function() {
         return {
-            upvoted: false
+            liked: false
         };
     },
     methods: {
-        upvote: function() {
-            this.upvoted = !this.upvoted;
+        like: function() {
+            this.liked = !this.liked;
+            // GET request
+            this.$http({url: '/api/answer/like', method: 'GET'}).then(function (response) {
+                if (response.data.success) {
+                    console.log('success!');
+                } else {
+                    this.liked = !this.liked;
+                }
+            }, function (response) {
+                this.liked = !this.liked;
+            });
         }
     },
     computed: {
         votes: function() {
-            if (this.upvoted) {
+            if (this.liked) {
                 return this.answer.votes + 1;
             } else {
                 return this.answer.votes;
