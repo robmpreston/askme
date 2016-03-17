@@ -1,10 +1,8 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Models\Question;
 
 class QuestionController extends Controller
 {
@@ -25,4 +23,21 @@ class QuestionController extends Controller
             'error' => null
         ];
     }
+
+    /**
+     * AJAX REQUEST 
+     * If Validation Fails Json Response w/ Errors
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'respondent_id' => 'required|integer',
+            'question' => 'required|max:255',
+            'user-from' => 'required|max:100',
+        ]);
+        $question = Question::makeOne($request);
+        
+        // return view
+    }
+
 }
