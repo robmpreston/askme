@@ -2,16 +2,19 @@
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Models\Answer;
+use App\Models\Answer_Vote;
 
 class AnswerController extends Controller
 {
-    public function like()
+    public function like(Request $request)
     {
-        return [
-            'data' => null,
-            'success' => true,
-            'error' => null
-        ];
+        $vote = Answer_Vote::makeOne($request->answer_id);
+        if ($vote) {
+            $likes = Answer::getLikeCount($request->answer_id);
+            return ['success' => true, 'error' => null, 'data' => ['count' => $likes]];
+        }
+        return ['success' => false, 'error' => null];
     }
 
     /**

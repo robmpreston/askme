@@ -3,25 +3,28 @@
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Question;
+use App\Models\Question_Vote;
 
 class QuestionController extends Controller
 {
-    public function upvote()
+    public function upvote(Request $request)
     {
-        return [
-            'data' => null,
-            'success' => true,
-            'error' => null
-        ];
+        $vote = Question_Vote::makeOne($request->question_id);
+        if ($vote) {
+            $net_votes = Question::getNetVoteCount($request->question_id);
+            return ['success' => true, 'error' => null, 'data' => ['count' => $net_votes]];
+        }
+        return ['success' => false, 'error' => null];
     }
 
-    public function downvote()
+    public function downvote(Request $request)
     {
-        return [
-            'data' => null,
-            'success' => true,
-            'error' => null
-        ];
+        $vote = Question_Vote::makeOne($request->question_id, true);
+        if ($vote) {
+            $net_votes = Question::getNetVoteCount($request->question_id);
+            return ['success' => true, 'error' => null, 'data' => ['count' => $net_votes]];
+        }
+        return ['success' => false, 'error' => null];
     }
 
     /**

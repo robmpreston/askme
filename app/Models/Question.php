@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\DB;
 use Event;
 
 class Question extends Model
@@ -98,4 +98,13 @@ class Question extends Model
         }
         return $s > 0 ? 1 : -1;
     }
+
+    public static function getNetVoteCount($question_id)
+    {
+        $ups = DB::table('question_votes')->where('question_id', '=', $question_id)->where('is_down_vote', '=', false)->count();
+        $downs = DB::table('question_votes')->where('question_id', '=', $question_id)->where('is_down_vote', '=', true)->count();
+        $net = $ups - $downs;
+        return $net;
+    }
+
 }

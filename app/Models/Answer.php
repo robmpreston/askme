@@ -51,4 +51,9 @@ class Answer extends Model
         Event::fire(new AnswerWasGiven($answer));
         return $answer;
     }
+
+    public static function getLikeCount($answer_id)
+    {
+        return DB::table('answer_votes')->where('answer_id', '=', $answer_id)->where('is_down_vote', '=', false)->count();
+    }
 }
