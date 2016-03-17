@@ -43,6 +43,11 @@ class Question extends Model
         return $this->hasMany('App\Models\Question_Votes', 'question_id')->where('is_down_vote', '=', true);
     }
 
+    public function answer()
+    {
+        return $this->hasOne('App\Models\Answer', 'question_id');
+    }
+
     /***************************************************************************************************
      ** GENERAL METHODS
      ***************************************************************************************************/
@@ -62,6 +67,16 @@ class Question extends Model
         $question->weight = $this->getWeight();
         $question->save();
         return $question;
+    }
+
+    /**
+     * GET QUESTIONS FOR RESPONDENT
+     * @param (int) Respondent Id
+     * @return (array of objects) Question
+     */
+    public static function getForRespondent($respondent_id)
+    {
+        return self::with('votes', 'asker', 'answer')->get();
     }
 
     public function getWeight()

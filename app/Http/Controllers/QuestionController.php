@@ -25,7 +25,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * AJAX REQUEST 
+     * AJAX REQUEST
      * If Validation Fails Json Response w/ Errors
      */
     public function store(Request $request)
@@ -33,11 +33,19 @@ class QuestionController extends Controller
         $this->validate($request, [
             'respondent_id' => 'required|integer',
             'question' => 'required|max:255',
-            'user-from' => 'required|max:100',
+            'user_from' => 'required|max:100',
         ]);
         $question = Question::makeOne($request);
-        
+
         // return view
     }
 
+    /*
+     * AJAX REQUEST
+     * Returns all questions for user
+     */
+    public function getAll($respondent_id)
+    {
+        return Question::getForRespondent($respondent_id);
+    }
 }
