@@ -1,6 +1,7 @@
 var vm = new Vue({
     el: '#app',
     data: {
+        showLoginModal: false,
         user: {
             profile_image: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/blog/author/photos/deray2.png",
             first_name: "DeRay",

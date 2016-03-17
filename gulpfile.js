@@ -15,6 +15,8 @@ elixir(function(mix) {
         './resources/assets/frontend/js/components/question.js',
         './resources/assets/frontend/js/components/answer.js',
         './resources/assets/frontend/js/components/feature.js',
+        './resources/assets/frontend/js/components/modal.js',
+        './resources/assets/frontend/js/components/login_modal.js',
         './resources/assets/frontend/js/app.js'
     ], 'public/frontend/js/app.js');
 });

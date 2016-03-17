@@ -113,9 +113,49 @@ Vue.component('feature', {
     }
 });
 
+Vue.component('modal', {
+    template: '#modal-template',
+    props: ['show', 'onClose'],
+    methods: {
+        close: function () {
+            this.onClose();
+        }
+    },
+    ready: function () {
+        document.addEventListener("keydown", (e) => {
+            if (this.show && e.keyCode == 27) {
+                this.onClose();
+            }
+        });
+    }
+});
+
+Vue.component('loginModal', {
+    template: '#login-modal-template',
+    props: ['show'],
+    data: function () {
+        return {
+	        title: '',
+            body: ''
+        };
+    },
+    methods: {
+        close: function () {
+            this.show = false;
+            this.title = '';
+            this.body = '';
+        },
+        savePost: function () {
+            // Insert AJAX call here...
+            this.close();
+        }
+    }
+});
+
 var vm = new Vue({
     el: '#app',
     data: {
+        showLoginModal: false,
         user: {
             profile_image: "https://www.teachforamerica.org/sites/default/files/styles/list_thumbnail/public/blog/author/photos/deray2.png",
             first_name: "DeRay",

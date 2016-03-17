@@ -10,7 +10,8 @@
 @section('content')
     <div id="app">
         <div class="container">
-
+            <login-modal :show.sync="showLoginModal"></login-modal>
+            <button class="default-btn" @click="showLoginModal = true">Login</button>
             <h1>Soapbox</h1>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -25,6 +26,8 @@
     @include('frontend.vtemplates.answer')
     @include('frontend.vtemplates.feature')
     @include('frontend.vtemplates.ask')
+    @include('frontend.vtemplates.modal')
+    @include('frontend.vtemplates.login')
 
     <script src="frontend/js/app.js"></script>
 @endsection
