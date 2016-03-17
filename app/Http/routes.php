@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
+    return view('frontend.index');
+});
+
+Route::get('/admin', function () {
     return view('backend.index');
 });
+
+Route::get('/api/question/upvote', 'QuestionController@upvote');
+Route::get('/api/question/downvote', 'QuestionController@downvote');
+Route::get('/api/answer/like', 'AnswerController@like');
 
 /*
 |--------------------------------------------------------------------------

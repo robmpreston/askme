@@ -1,16 +1,12 @@
 @extends('backend.shared.master')
 
-@section('title', 'Ask me')
+@section('title', 'Ask DeRay')
 
 @section('content')
-
-<div id="app">
-
-    <ul class="list-group">
-      <question v-for="question in questions" :question="question"></question>
-    </ul>
-
+    <div id="app">
+        <question v-for="question in questions" :question="question"></question>
+    </div>
     @include('backend.vtemplates.question')
-</div>
-
+    @include('backend.vtemplates.answer')
+    <script src="backend/js/app.js"></script>
 @endsection
