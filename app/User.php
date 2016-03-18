@@ -45,12 +45,31 @@ class User extends Authenticatable
         return User::with('profile')->where('slug', '=', $slug)->first();
     }
 
+    public static function getByEmail($email)
+    {
+        return User::where('email', '=', $email)->first();
+    }
+
     /***************************************************************************************************
      ** GENERAL METHODS
      ***************************************************************************************************/
 
+    public static function createSlug($first_name, $last_name)
+    {
+        $slug = substr($first_name . '-' . $last_name, 0, 20);
+        if (self::slugExists($slug)) {
+            $slug = $slug . rand(111, 99999);
+        }
+        return $slug;
+    }
+
+    public static function slugExists($slug)
+    {
+        return User::where('slug', '=', $slug)->exists();
+    }
+
     public function listQuestions($limit)
     {
-        return $this->questions()->with('answer')->orderBy('weight', 'DESC')->take($limit)->get();
+        return $this->questions()->with('asker', 'answer')->orderBy('weight', 'DESC')->take($limit)->get();
     }
 }

@@ -15,6 +15,10 @@ Route::get('/admin', function () {
     return view('backend.index');
 });
 
+// SOCIAL LOGIN 
+Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+
 // HOME
 Route::get('/api/home', 'HomeController@index');
 
@@ -26,6 +30,24 @@ Route::post('/api/question/downvote', 'QuestionController@downvote');
 // ANSWER
 Route::post('/api/answer/like', 'AnswerController@like');
 Route::post('/api/answer/store', 'AnswerController@store');
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+    Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+});
 
 Route::get('/{slug}', 'HomeController@index');
 Route::get('/', 'HomeController@index');
