@@ -107,4 +107,11 @@ class Question extends Model
         return $net;
     }
 
+    public static function updateNetVotes($question_id)
+    {
+        $net_votes = self::getNetVoteCount($question_id);
+        DB::table('questions')->where('id', '=', $question_id)->update(['net_votes' => $net_votes]);
+        return $net_votes;
+    }
+
 }

@@ -56,4 +56,11 @@ class Answer extends Model
     {
         return DB::table('answer_votes')->where('answer_id', '=', $answer_id)->where('is_down_vote', '=', false)->count();
     }
+
+    public static function updateLikeCount($answer_id)
+    {
+        $count = self::getLikeCount($answer_id);
+        DB::table('answers')->where('id', '=', $answer_id)->update(['net_votes' => $count]);
+        return $count;
+    }
 }

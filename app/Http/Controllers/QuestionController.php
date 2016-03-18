@@ -11,8 +11,8 @@ class QuestionController extends Controller
     {
         $vote = Question_Vote::makeOne($request->question_id);
         if ($vote) {
-            $net_votes = Question::getNetVoteCount($request->question_id);
-            return ['success' => true, 'error' => null, 'data' => ['count' => $net_votes]];
+            $net_votes = Question::updateNetVotes($request->question_id);
+            return ['success' => true, 'error' => null, 'data' => ['net_votes' => $net_votes]];
         }
         return ['success' => false, 'error' => null];
     }
@@ -21,8 +21,8 @@ class QuestionController extends Controller
     {
         $vote = Question_Vote::makeOne($request->question_id, true);
         if ($vote) {
-            $net_votes = Question::getNetVoteCount($request->question_id);
-            return ['success' => true, 'error' => null, 'data' => ['count' => $net_votes]];
+            $net_votes = Question::updateNetVotes($request->question_id);
+            return ['success' => true, 'error' => null, 'data' => ['net_votes' => $net_votes]];
         }
         return ['success' => false, 'error' => null];
     }

@@ -11,7 +11,7 @@ class AnswerController extends Controller
     {
         $vote = Answer_Vote::makeOne($request->answer_id);
         if ($vote) {
-            $likes = Answer::getLikeCount($request->answer_id);
+            $likes = Answer::updateLikeCount($request->answer_id);
             return ['success' => true, 'error' => null, 'data' => ['count' => $likes]];
         }
         return ['success' => false, 'error' => null];
