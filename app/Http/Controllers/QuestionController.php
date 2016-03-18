@@ -34,7 +34,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'respondent_id' => 'required|integer',
+            'recipient_id' => 'required|integer',
             'question' => 'required|max:255',
             'user_from' => 'required|max:100',
         ]);

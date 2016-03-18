@@ -19,9 +19,17 @@ Route::get('/admin', function () {
     return view('backend.index');
 });
 
-Route::get('/api/question/upvote', 'QuestionController@upvote');
-Route::get('/api/question/downvote', 'QuestionController@downvote');
-Route::get('/api/answer/like', 'AnswerController@like');
+// HOME
+Route::get('/api/home', 'HomeController@index');
+
+// QUESTION
+Route::post('/api/question/store', 'QuestionController@store');
+Route::post('/api/question/upvote', 'QuestionController@upvote');
+Route::post('/api/question/downvote', 'QuestionController@downvote');
+
+// ANSWER
+Route::post('/api/answer/like', 'AnswerController@like');
+Route::post('/api/answer/store', 'AnswerController@store');
 
 /*
 |--------------------------------------------------------------------------

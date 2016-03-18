@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\DB;
+use Auth;
+use App\User;
 use Event;
 use App\Events\AnswerWasGiven;
 
@@ -40,15 +42,18 @@ class Answer extends Model
      */
     public static function makeOne(Question $question, $params)
     {
+        if ($question->answer) {
+            return false; // prevent duplicates
+        }
         $answer = new Answer;
-        $answer->question()->attach($question);
-        $answer->user()->attach($auth->user());
+        $answer->question_id = $question->id;
+        $answer->user_id = Auth::user() ? Auth::user()->id : 5;
         $answer->text_response = array_get($params, 'text_response');
         $answer->video_url = array_get($params, 'video_url', null);
         $answer->is_video = array_get($params, 'is_video', false);
         $answer->save();
 
-        Event::fire(new AnswerWasGiven($answer));
+        //Event::fire(new AnswerWasGiven($answer));
         return $answer;
     }
 

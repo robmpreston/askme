@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Answer;
 use App\Models\Answer_Vote;
+use App\Models\Question;
 
 class AnswerController extends Controller
 {
@@ -24,8 +25,8 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'respondent_id' => 'required|integer',
             'question_id' => 'required|integer',
+            'text_response' => 'required',
             'video_url' => 'max:255',
         ]);
 
@@ -35,6 +36,6 @@ class AnswerController extends Controller
         	'is_video' => $request->video_url ? true : false,
         	'video_url' => $request->video_url,
         ]);
-        // return view
+        return response()->json(['success' => true, 'error' => null, 'data' => ['answer' => $answer]]);
     }
 }
