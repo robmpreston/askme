@@ -4,6 +4,7 @@ var vm = new Vue({
     data: {
         showLoginModal: false,
         recipient: recipient,
-        questions: questions
+        questions: questions,
+        loggedIn: loggedIn
     }
 })
