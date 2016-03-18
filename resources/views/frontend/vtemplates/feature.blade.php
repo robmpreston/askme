@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-11">
                 <div class="info">
-                    <p>I am @{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.profile.from }}</span></p>
+                    <p>I am @{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.from }}</span></p>
                     <p class="description">@{{ user.profile.description }}</p>
                     <p>
                         <a v-if="user.profile.website_url != ''" :href="user.profile.website_url" target="_blank"><i class="fa fa-external-link"></i></a>
