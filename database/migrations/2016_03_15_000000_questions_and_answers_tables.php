@@ -16,7 +16,6 @@ class QuestionsAndAnswersTables extends Migration
             $table->increments('id');
             $table->integer('to_user_id')->unsigned()->references('id')->on('users');
             $table->integer('from_user_id')->unsigned()->references('id')->on('users');
-            $table->string('user_from')->nullable();
             $table->text('text_response');
             $table->integer('weight')->default(0);
             $table->integer('net_votes')->default(0);
