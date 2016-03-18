@@ -22,11 +22,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index()
     {
+        $slug = 'deray-mckesson';
         $recipient = User::getBySlug($slug);
         if ($recipient) {
             $questions = $recipient->listQuestions(20);
+            return response()->json([
+                'recipient' => $recipient,
+                'questions' => $questions,
+            ]);
         }
+        // return 404 error
     }
 }
