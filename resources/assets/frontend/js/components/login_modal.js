@@ -4,7 +4,8 @@ Vue.component('loginModal', {
     data: function () {
         return {
 	        title: '',
-            body: ''
+            body: '',
+            login: false
         };
     },
     methods: {
@@ -12,6 +13,9 @@ Vue.component('loginModal', {
             this.show = false;
             this.title = '';
             this.body = '';
+        },
+        toggle: function() {
+            this.login = !this.login;
         },
         savePost: function () {
             // Insert AJAX call here...

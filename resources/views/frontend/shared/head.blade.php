@@ -8,6 +8,6 @@
     <script>
         var recipient = <?php echo json_encode($recipient); ?>;
         var questions = <?php echo json_encode($questions); ?>;
-        var logged_in = <?php echo json_encode($logged_in); ?>;
+        var loggedIn = <?php echo json_encode($logged_in); ?>;
     </script>
 </head>

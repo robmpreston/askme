@@ -7,8 +7,13 @@ Vue.component('ask', {
         };
     },
     methods: {
-        toggle: function() {
+        toggle: function(holder) {
             this.open = !this.open;
+            if (this.open) {
+                holder.$$.questionTextArea.focus()
+            } else {
+                holder.$$.questionTextInput.focus()
+            }
         }
     }
 });
@@ -130,7 +135,8 @@ Vue.component('loginModal', {
     data: function () {
         return {
 	        title: '',
-            body: ''
+            body: '',
+            login: false
         };
     },
     methods: {
@@ -138,6 +144,9 @@ Vue.component('loginModal', {
             this.show = false;
             this.title = '';
             this.body = '';
+        },
+        toggle: function() {
+            this.login = !this.login;
         },
         savePost: function () {
             // Insert AJAX call here...
@@ -152,7 +161,8 @@ var vm = new Vue({
     data: {
         showLoginModal: false,
         recipient: recipient,
-        questions: questions
+        questions: questions,
+        loggedIn: loggedIn
     }
 })
 

@@ -18,7 +18,7 @@
                     <feature :user="recipient"></feature>
                 </div>
             </div>
-            <ask v-if="loggedIn"></ask>
+            <ask></ask>
             <question v-for="question in questions" :question="question"></question>
         </div>
     </div>

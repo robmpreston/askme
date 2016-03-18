@@ -12,6 +12,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="question-container">
+                            <p><img src="/"> Derek From Baltimore</p>
                             <p>@{{ question.text_response }}</p>
                         </div>
                     </div>
