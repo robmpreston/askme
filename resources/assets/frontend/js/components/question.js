@@ -13,9 +13,7 @@ Vue.component('question', {
             this.downvoted = false;
             // GET request
             this.$http({url: '/api/question/upvote', method: 'GET'}).then(function (response) {
-                if (response.data.success) {
-                    console.log('success!');
-                } else {
+                if (!response.data.success) {
                     this.upvoted = !this.upvoted;
                 }
             }, function (response) {
@@ -27,9 +25,7 @@ Vue.component('question', {
             this.upvoted = false;
             // GET request
             this.$http({url: '/api/question/downvote', method: 'GET'}).then(function (response) {
-                if (response.data.success) {
-                    console.log('success!');
-                } else {
+                if (!response.data.success) {
                     this.downvoted = !this.downvoted;
                 }
             }, function (response) {

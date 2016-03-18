@@ -11,9 +11,7 @@ Vue.component('answer', {
             this.liked = !this.liked;
             // GET request
             this.$http({url: '/api/answer/like', method: 'GET'}).then(function (response) {
-                if (response.data.success) {
-                    console.log('success!');
-                } else {
+                if (!response.data.success) {
                     this.liked = !this.liked;
                 }
             }, function (response) {
