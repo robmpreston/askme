@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Question_Vote extends Model
 {
@@ -10,7 +11,6 @@ class Question_Vote extends Model
     public $timestamps = true;
     protected $guarded = ['id'];
     protected $hidden = ['deleted_at'];
-    use SoftDeletes;
 
     public function user()
     {
@@ -28,7 +28,7 @@ class Question_Vote extends Model
         if (!$vote) {
             $vote = new Question_Vote;
             $vote->question_id = $question_id;
-            $vote->user_id = $auth->user()->id;
+            $vote->user_id = Auth::user() ? Auth::user()->id : 3;
         }
         $vote->is_down_vote = $down_vote;
         $vote->save();
@@ -37,6 +37,6 @@ class Question_Vote extends Model
 
     public static function getForUser($question_id)
     {
-        return self::where('question_id', '=', $question_id)->where('user_id', '=', $auth->user()->id)->first();
+        return self::where('question_id', '=', $question_id)->where('user_id', '=', Auth::user() ? Auth::user()->id : 3)->first();
     }
 }

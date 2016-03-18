@@ -3,6 +3,8 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Auth;
 use Event;
 
 class Question extends Model
@@ -60,11 +62,11 @@ class Question extends Model
     public static function makeOne(Request $request)
     {
         $question = new Question;
-        $question->to_user_id = $request->respondent_id;
-        $question->asker()->attach($auth->user());
+        $question->to_user_id = $request->recipient_id;
+        $question->from_user_id = Auth::user() ? Auth::user()->id : 1;
         $question->user_from = $request->user_from;
         $question->text_response = $request->question;
-        $question->weight = $this->getWeight();
+        $question->weight = $question->getWeight();
         $question->save();
         return $question;
     }
