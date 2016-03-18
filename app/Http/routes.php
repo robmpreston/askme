@@ -37,3 +37,9 @@ Route::get('/api/answer/like', 'AnswerController@like');
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});

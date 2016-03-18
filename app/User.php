@@ -11,9 +11,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -23,4 +21,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /***************************************************************************************************
+     ** RELATIONS
+     ***************************************************************************************************/
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile', 'user_id');
+    }
+
+    public static function getBySlug($slug)
+    {
+        return User::with('profile')->where('slug', '=', $slug)->first();
+    }
 }
