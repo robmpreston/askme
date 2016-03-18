@@ -5910,4 +5910,11 @@ p {
   -webkit-transform: scale(1.1);
   transform: scale(1.1); }
 
+/* Social Icons */
+.fa-facebook-official, .fa-facebook-square {
+  color: #3b5998; }
+
+.fa-twitter, .fa-twitter-square {
+  color: #00aced; }
+
 /*# sourceMappingURL=app.css.map */

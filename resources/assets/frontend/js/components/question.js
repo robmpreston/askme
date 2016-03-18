@@ -8,11 +8,11 @@ Vue.component('question', {
         };
     },
     methods: {
-        upvote: function() {
+        upvote: function(questionId) {
             this.upvoted = !this.upvoted;
             this.downvoted = false;
             // GET request
-            this.$http({url: '/api/question/upvote', method: 'GET'}).then(function (response) {
+            this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.upvoted = !this.upvoted;
                 }
@@ -20,11 +20,11 @@ Vue.component('question', {
                 this.upvoted = !this.upvoted;
             });
         },
-        downvote: function() {
+        downvote: function(questionId) {
             this.downvoted = !this.downvoted;
             this.upvoted = false;
             // GET request
-            this.$http({url: '/api/question/downvote', method: 'GET'}).then(function (response) {
+            this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.downvoted = !this.downvoted;
                 }
@@ -36,11 +36,11 @@ Vue.component('question', {
     computed: {
         votes: function() {
             if (this.upvoted) {
-                return this.question.votes + 1;
+                return this.question.net_votes + 1;
             } else if (this.downvoted) {
-                return this.question.votes - 1;
+                return this.question.net_votes - 1;
             } else {
-                return this.question.votes;
+                return this.question.net_votes;
             }
         }
     }
