@@ -19,6 +19,7 @@ class QuestionsAndAnswersTables extends Migration
             $table->string('user_from')->nullable();
             $table->text('text_response');
             $table->integer('weight')->default(0);
+            $table->integer('vote_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,7 @@ class QuestionsAndAnswersTables extends Migration
             $table->text('text_response')->nullable();
             $table->string('video_url')->nullable();
             $table->boolean('is_video')->default(0);
+            $table->integer('vote_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

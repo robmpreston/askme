@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index($slug)
     {
-        $recipient = User::getForPage($slug);
+        $recipient = User::getBySlug($slug);
+        if ($recipient) {
+            $questions = $recipient->listQuestions(20);
+        }
     }
 }

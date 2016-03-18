@@ -31,8 +31,26 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Profile', 'user_id');
     }
 
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question', 'to_user_id');
+    }
+
+    /***************************************************************************************************
+     ** GETTERS
+     ***************************************************************************************************/
+
     public static function getBySlug($slug)
     {
         return User::with('profile')->where('slug', '=', $slug)->first();
+    }
+
+    /***************************************************************************************************
+     ** GENERAL METHODS
+     ***************************************************************************************************/
+
+    public function listQuestions($limit)
+    {
+        return $this->questions()->with('answer')->orderBy('weight', 'DESC')->take($limit)->get();
     }
 }
