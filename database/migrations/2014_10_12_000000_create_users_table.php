@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->string('from')->nullable();
             $table->string('picture')->nullable();
-            $table->string('i_am_a')->nullable();
             $table->string('facebook_id')->nullable();
             $table->string('twitter_id')->nullable();
             $table->boolean('respondant')->default(0); // can this person take questions?
@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->references('id')->on('users');
-            $table->string('from')->nullable();
+            $table->string('i_am_a')->nullable();
             $table->text('description')->nullable();
 
             // websites + social media
