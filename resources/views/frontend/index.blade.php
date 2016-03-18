@@ -15,7 +15,7 @@
             <h1>Soapbox</h1>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <feature :user="user"></feature>
+                    <feature :user="recipient"></feature>
                 </div>
             </div>
             <ask></ask>

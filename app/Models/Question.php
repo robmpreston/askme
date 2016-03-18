@@ -78,7 +78,7 @@ class Question extends Model
      */
     public static function getForRespondent($respondent_id)
     {
-        return self::with('votes', 'asker', 'answer')->get();
+        return self::with('votes', 'asker', 'answer')->where('to_user_id', '=', $respondent_id)->get();
     }
 
     public function getWeight()

@@ -7,13 +7,11 @@ Vue.component('answer', {
         };
     },
     methods: {
-        like: function() {
+        like: function(answerId) {
             this.liked = !this.liked;
             // GET request
-            this.$http({url: '/api/answer/like', method: 'GET'}).then(function (response) {
-                if (response.data.success) {
-                    console.log('success!');
-                } else {
+            this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
+                if (!response.data.success) {
                     this.liked = !this.liked;
                 }
             }, function (response) {
@@ -24,9 +22,9 @@ Vue.component('answer', {
     computed: {
         votes: function() {
             if (this.liked) {
-                return this.answer.votes + 1;
+                return this.answer.net_votes + 1;
             } else {
-                return this.answer.votes;
+                return this.answer.net_votes;
             }
         }
     }
