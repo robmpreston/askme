@@ -16,6 +16,22 @@ class Question extends Model
     protected $hidden = ['deleted_at'];
     use SoftDeletes;
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (!array_has($array, 'has_voted')) {
+            $array['has_voted'] = false;
+        }
+        if (!array_has($array, 'upvoted')) {
+            $array['upvoted'] = false;
+        }
+        if (!array_has($array, 'upvoted')) {
+            $array['downvoted'] = false;
+        }
+        return $array;
+    }
+
     /***************************************************************************************************
      ** RELATIONS
      ***************************************************************************************************/
@@ -155,11 +171,12 @@ class Question extends Model
         $a_votes = $user->getAnswerVotes($answer_ids);
         foreach ($questions as $question) {
             $question->has_voted = array_has($q_votes, $question->id); // has the user voted
-            $question->is_down_vote = (bool) array_get($q_votes, $question->id, null); // if so, is it a down vote?
+            $question->upvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 1) : false;
+            $question->downvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 0) : false;
 
             if ($question->answer) {
-                $question->answer->has_voted = array_has($a_votes, $question->answer->id);
-                $question->answer->is_down_vote = (bool) array_get($a_votes, $question->answer->id, null);
+                $answer = $question->answer;
+                $question->answer->liked = array_has($a_votes, $answer->id);
             }
             $list[] = $question;
         }

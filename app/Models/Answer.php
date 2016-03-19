@@ -17,6 +17,22 @@ class Answer extends Model
     protected $hidden = ['deleted_at'];
     use SoftDeletes;
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (!array_has($array, 'has_voted')) {
+            $array['has_voted'] = false;
+        }
+        if (!array_has($array, 'upvoted')) {
+            $array['upvoted'] = false;
+        }
+        if (!array_has($array, 'upvoted')) {
+            $array['downvoted'] = false;
+        }
+        return $array;
+    }
+
     /***************************************************************************************************
      ** RELATIONS
      ***************************************************************************************************/
