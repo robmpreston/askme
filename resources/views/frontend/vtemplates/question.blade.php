@@ -8,7 +8,7 @@
         <div class="question container">
             <header>
                 <img :src="question.asker.picture">
-                <p>Derek <span class="faded-text">from</span> Baltimore</p>
+                <p>@{{ question.asker.first_name }} <span class="faded-text">from</span> @{{ question.asker.from }}</p>
             </header>
             <article>
                 <p>@{{ question.text_response }}</p>

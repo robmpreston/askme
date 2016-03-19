@@ -22,11 +22,9 @@
                     question: this.question_text
                 })
                 .then(function (response) {
-                    if (!response.data.success) {
-                    } else {
-                        this.$dispatch('questions-updated', response.data.data);
-                        this.$dispatch('question-asked');
-                    }
+                    this.$dispatch('questions-updated', response.data.data);
+                    this.open = false;
+                    this.question_text = '';
                 }, function (response) {
                     console.log('failed');
                 });
