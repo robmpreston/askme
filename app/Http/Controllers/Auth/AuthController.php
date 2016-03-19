@@ -121,7 +121,7 @@ class AuthController extends Controller
         $user = User::getByEmail($data->email);
         if ($user && $user->facebook_id) {
             Auth::login($user);
-            return $user;
+            return redirect()->intended('/');
         }
 
         // user exists but facebook ID is not saved
@@ -131,7 +131,7 @@ class AuthController extends Controller
             $user->facebook_id = $data->id;
             $user->save();
             Auth::login($user);
-            return $user;
+            return redirect()->intended('/');
         }
 
         // new user
@@ -144,7 +144,7 @@ class AuthController extends Controller
         $user->password = Hash::make($data->id . self::salt());
         $user->save();
         Auth::login($user);
-        return $user;
+        return redirect()->intended('/');
     }
 
     public static function salt()
