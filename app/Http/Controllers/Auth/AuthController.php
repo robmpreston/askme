@@ -71,6 +71,7 @@ class AuthController extends Controller
             return [
                 'success' => true,
                 'data' => Auth::user(),
+                'check' => Auth::check(),
                 'error' => null
             ];
         }
@@ -119,6 +120,7 @@ class AuthController extends Controller
         // Check If User Exists
         $user = User::getByEmail($data->email);
         if ($user && $user->facebook_id) {
+            Auth::login($user);
             return $user;
         }
 
@@ -128,6 +130,7 @@ class AuthController extends Controller
             $user->last_name = $data->user->last_name;
             $user->facebook_id = $data->id;
             $user->save();
+            Auth::login($user);
             return $user;
         }
 
@@ -140,6 +143,7 @@ class AuthController extends Controller
         $user->facebook_id = $data->id;
         $user->password = Hash::make($data->id . self::salt());
         $user->save();
+        Auth::login($user);
         return $user;
     }
 
