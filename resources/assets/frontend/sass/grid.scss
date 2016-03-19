@@ -1,3 +1,10 @@
+.wrapper {
+    max-width:70rem;
+    position:relative;
+    margin:0 auto;
+    @include clear();
+}
+
 .column {
   width: 100%;
   float: left;
@@ -5,7 +12,7 @@
 }
 
 .row {
-    .clear();
+    @include clear();
     .padding {
         padding:0 1rem;
         &:first-child {
@@ -29,36 +36,9 @@
 
 .container {
     position:relative;
+    max-width:40.5rem;
     margin:0 auto;
-    .clear();
-}
-
-.large-container {
-    position:relative;
-    max-width:73.5rem;
-    margin:0 auto;
-    .clear();
-}
-
-.medium-container {
-    position:relative;
-    max-width:46rem;
-    margin:0 auto;
-    .clear();
-}
-
-.small-container {
-    position:relative;
-    max-width:37.5rem;
-    margin:0 auto;
-    .clear();
-}
-
-.vsmall-container {
-    position:relative;
-    max-width:16rem;
-    margin:0 auto;
-    .clear();
+    @include clear();
 }
 
 @media (min-width: 768px) {
@@ -99,7 +79,7 @@
 
 // Mobile containers should be 100% width
 @media screen and (max-width:767px) {
-    .container, .large-container, .medium-container, .small-container, .vsmall-container {
+    .container {
         max-width:none;
         width:100%;
     }

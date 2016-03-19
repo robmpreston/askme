@@ -1,0 +1,30 @@
+.button {
+    margin: 0;
+    padding: 12px 24px 12px 24px;
+    border-radius: 3px;
+    font-size: 1em;
+    background-color: white;
+    outline: none;
+    &:disabled {
+        p {
+            background-color: white;
+            color: $faded-grey;
+        }
+    }
+    p {
+        background-color: white;
+        color: $grey;
+        margin: 0;
+    }
+}
+
+.ghost.button {
+    border: solid 1px $faded-grey;
+    color: $grey;
+    &[disabled]:hover {
+        border: solid 1px $faded-grey;
+    }
+    &:hover {
+        border: solid 1px $grey;
+    }
+}

@@ -1,7 +1,7 @@
 @mixin border-radius($radius) {
-	-webkit-border-radius: $radius;
-	-moz-border-radius:    $radius;
-	border-radius:         $radius;
+	-webkit-border-radius:   $radius;
+	-moz-border-radius:      $radius;
+	border-radius:           $radius;
 
 	-moz-background-clip:    padding;
 	-webkit-background-clip: padding-box;
@@ -14,10 +14,10 @@
     -webkit-box-sizing: border-box;
 }
 
-@mixin all-color(@color) {
-    color: @color;
+@mixin all-color($color) {
+    color: $color;
     &:visited {
-        color:@color;
+        color:$color;
     }
 }
 

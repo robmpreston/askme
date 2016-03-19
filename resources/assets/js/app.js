@@ -6,7 +6,8 @@ var vm = new Vue({
             last_name: "Mckesson",
             location: "Baltimore, MD",
             title: "Mayoral Candidate",
-            description: "Running for Mayor of Baltimore. I am an organizer, activist and educator focused primarily on issues of innovation, equity and justice."
+            description: "Running for Mayor of Baltimore. I am an organizer, activist and educator focused primarily on issues of innovation, equity and justice.",
+            profile_image: "https://pbs.twimg.com/profile_images/708653783291707392/egug702C.jpg"
         },
         questions: [{
             text: "What are your thoughts on Donald Trump?",

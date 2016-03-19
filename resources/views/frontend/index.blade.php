@@ -8,15 +8,15 @@
 <button class="default-btn no-border-btn"><p>Button</p></button>
 -->
 @section('content')
-    <div id="app">
+    <div id="app" class="wrapper">
+        <header>
+            <h1>Soapbox</h1>
+            <button class="ghost button" @click="showLoginModal = true">Login/Signup</button>
+        </header>
         <div class="container">
             <login-modal :show.sync="showLoginModal"></login-modal>
-            <button class="default-btn" @click="showLoginModal = true">Login/Signup</button>
-            <h1>Soapbox</h1>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <feature :user="recipient"></feature>
-                </div>
+            <div>
+                <feature :user="recipient"></feature>
             </div>
             <ask></ask>
             <question v-for="question in questions" :question="question"></question>
