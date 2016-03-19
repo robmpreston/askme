@@ -482,6 +482,27 @@ ul {
   .ghost.button:hover {
     border: solid 1px #607d8b; }
 
+.social.button {
+  font-size: 0.75rem;
+  width: 4.5rem;
+  color: #607d8b;
+  border: solid 1px #c2cdd3;
+  color: #607d8b;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.125rem;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box; }
+  .social.button[disabled]:hover {
+    border: solid 1px #c2cdd3; }
+  .social.button:hover {
+    border: solid 1px #607d8b; }
+
+.social.button.website * {
+  vertical-align: middle; }
+
 body {
   font-family: "Muli", sans-serif;
   font-weight: normal;
@@ -539,13 +560,13 @@ header.top {
     display: inline-block;
     vertical-align: middle;
     margin: auto 0 auto 0; }
-    .featured .info .description {
-      font-size: 1.0em;
-      color: #607d8b; }
+  .featured .description {
+    font-size: 1.0em;
+    color: #607d8b; }
 
 .social-container {
   position: absolute;
-  right: -3rem;
+  right: -5rem;
   top: 0;
   margin: 0; }
   .social-container a {
@@ -588,7 +609,9 @@ header.top {
     width: 100%;
     border: solid 1px #b0bec5;
     outline: 0;
-    padding: 11px 1.5rem 11px 1.5rem; }
+    padding: 11px 1.5rem 11px 1.5rem;
+    border-radius: 0.1875rem;
+    background-clip: padding-box; }
   .ask.container img {
     width: 32px;
     height: 32px;
@@ -605,15 +628,17 @@ header.top {
   padding: 1.5rem; }
 
 .qa-container {
+  position: relative;
   margin-bottom: 1.5rem;
-  border: 1px solid #b0bec5; }
-
-.question.container {
-  background: white; }
+  border: 1px solid #b0bec5;
+  border-radius: 0.1875rem;
+  background-clip: padding-box; }
 
 .answer.container {
   border-top: 1px solid #eceff1;
-  background: #f7f9fa; }
+  background: #f7f9fa;
+  border-radius: 0 0 0.1875rem 0.1875rem;
+  background-clip: padding-box; }
   .answer.container .like-block {
     display: inline-block; }
     .answer.container .like-block .like-btn-outline {

@@ -74,16 +74,16 @@ header.top {
         display: inline-block;
         vertical-align: middle;
         margin: auto 0 auto 0;
-        .description {
-            font-size: 1.0em;
-            color: $grey
-        }
+    }
+    .description {
+        font-size: 1.0em;
+        color: $grey
     }
 }
 
 .social-container {
     position:absolute;
-    right:-3rem;
+    right:-5rem;
     top:0;
     margin:0;
     a {
@@ -139,6 +139,7 @@ header.top {
         border: solid 1px $normal-border;
         outline: 0;
         padding: 11px 1.5rem 11px 1.5rem;
+        @include border-radius(0.1875rem);
     }
     img {
         width: 32px;
@@ -160,17 +161,16 @@ header.top {
 }
 
 .qa-container {
+    position:relative;
     margin-bottom: 1.5rem;
     border: 1px solid $normal-border;
-}
-
-.question.container {
-    background: white;
+    @include border-radius(0.1875rem);
 }
 
 .answer.container {
     border-top: 1px solid $light-border;
     background: $answer-bg;
+    @include border-radius( 0 0 0.1875rem 0.1875rem);
     .like-block {
         display: inline-block;
         .like-btn-outline {
