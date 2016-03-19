@@ -24,9 +24,8 @@ Vue.component('loginModal', {
         emailLogin: function () {
             this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
                 if (!response.data.success) {
-                    console.log('failed');
                 } else {
-                    $parent.user = response.data.user;
+                    this.$dispatch('user-updated', response.data.data);
                 }
             }, function (response) {
                 console.log('failed');
