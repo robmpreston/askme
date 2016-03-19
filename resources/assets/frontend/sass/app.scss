@@ -10,6 +10,7 @@ body {
     font-family: $muli;
     font-weight: normal;
     background: white;
+    line-height:1.35;
 }
 
 h1 {
@@ -58,32 +59,38 @@ header.top {
 
 .featured {
     position:relative;
-    margin: 0px auto 50px auto;
+    margin: 0 auto 2rem auto;
     text-align: center;
-    .avatar {
+    .avatar-container {
         float:left;
         margin-right:1.5rem;
-        border-radius: 50%;
-        width: 3.75rem;
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
+        .avatar {
+            border-radius: 50%;
+            width: 3.75rem;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
-    .info {
-        text-align: left;
-        display: inline-block;
-        vertical-align: middle;
-        margin: auto 0 auto 0;
+    article {
+        margin-left:5.25rem;
+        text-align:left;
+        .info {
+            font-size:16px;
+            display: inline-block;
+            margin: 0 1rem 0 0;
+        }
         .description {
-            font-size: 1.0em;
-            color: $grey
+            font-size: 14px;
+            color: $faded-grey;
+            margin: 0 1rem 0 0;
         }
     }
 }
 
 .social-container {
     position:absolute;
-    right:-3rem;
+    right:-5rem;
     top:0;
     margin:0;
     a {
@@ -128,17 +135,25 @@ header.top {
     }
 }
 
-.ask.container {
+.ask-input.container {
     margin: 0 auto 1.5rem auto;
-    padding: 0;
-    p * {
-        vertical-align:middle;
-    }
+    padding:0;
     input {
         width: 100%;
         border: solid 1px $normal-border;
         outline: 0;
         padding: 11px 1.5rem 11px 1.5rem;
+        @include border-radius(0.1875rem);
+    }
+}
+
+.ask.container {
+    margin: 0 auto 1.5rem auto;
+    padding: 1.5rem;
+    @include border-radius(0.1875rem);
+    border: solid 1px $normal-border;
+    p * {
+        vertical-align:middle;
     }
     img {
         width: 32px;
@@ -146,10 +161,12 @@ header.top {
         border-radius: 50%;
     }
     textarea {
+        margin-top:1rem;
         width: 100%;
         min-height: 30px;
         border: 0px;
         outline: 0;
+        resize: none;
     }
 }
 
@@ -160,19 +177,25 @@ header.top {
 }
 
 .qa-container {
+    position:relative;
     margin-bottom: 1.5rem;
     border: 1px solid $normal-border;
-}
-
-.question.container {
-    background: white;
+    @include border-radius(0.1875rem);
 }
 
 .answer.container {
     border-top: 1px solid $light-border;
     background: $answer-bg;
+    @include border-radius( 0 0 0.1875rem 0.1875rem);
     .like-block {
         display: inline-block;
+        p {
+            margin:0;
+            color:$grey;
+            * {
+                vertical-align:middle;
+            }
+        }
         .like-btn-outline {
             color: $faded-grey;
         }
@@ -224,10 +247,16 @@ header.top {
             border-radius: 3px;
             border: solid 1px $light-grey;
             padding: 11px 1.5rem 11px 1.5rem;
-            margin-bottom: 16px;
+            margin-bottom: 1rem;
             &:focus {
                 outline: 0;
                 border: solid 1px $grey;
+            }
+        }
+        .button {
+            margin-bottom:1rem;
+            &:last-child {
+                margin-bottom:0;
             }
         }
     }

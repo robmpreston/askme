@@ -1,183 +1,249 @@
-Vue.component('ask', {
-    template: '#ask-template',
-    data: function() {
-        return {
-            question: '',
-            open: false
-        };
-    },
-    methods: {
-        toggle: function(holder) {
-            this.open = !this.open;
-            if (this.open) {
-                holder.$$.questionTextArea.focus()
-            } else {
-                holder.$$.questionTextInput.focus()
-            }
-        }
-    }
-});
+(function(){
+    'use strict';
 
-Vue.component('question', {
-    template: '#question-template',
-    props: ['question', 'recipient'],
-    data: function() {
-        return {
-            upvoted: false,
-            downvoted: false
-        };
-    },
-    methods: {
-        upvote: function(questionId) {
-            this.upvoted = !this.upvoted;
-            this.downvoted = false;
-            // GET request
-            this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
-                if (!response.data.success) {
-                    this.upvoted = !this.upvoted;
-                }
-            }, function (response) {
-                this.upvoted = !this.upvoted;
-            });
+    Vue.component('ask', {
+        template: '#ask-template',
+        data: function() {
+            return {
+                question_text: '',
+                open: false
+            };
         },
-        downvote: function(questionId) {
-            this.downvoted = !this.downvoted;
-            this.upvoted = false;
-            // GET request
-            this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
-                if (!response.data.success) {
-                    this.downvoted = !this.downvoted;
-                }
-            }, function (response) {
+        props: [ 'user', 'recipient' ],
+        methods: {
+            toggle: function() {
+                this.open = !this.open;
+            },
+            sendQuestion: function() {
+                this.$http.post('/api/question/store',
+                {
+                    recipient_id: this.recipient.id,
+                    asker_id: this.user.id,
+                    question: this.question_text
+                })
+                .then(function (response) {
+                    this.$dispatch('questions-updated', response.data.data);
+                    this.open = false;
+                    this.question_text = '';
+                }, function (response) {
+                    console.log('failed');
+                });
+            }
+        },
+        events: {
+            'question-asked': function() {
+                this.open = false;
+                this.question_text = '';
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('question', {
+        template: '#question-template',
+        props: ['question', 'recipient'],
+        data: function() {
+            return {
+                upvoted: false,
+                downvoted: false
+            };
+        },
+        methods: {
+            upvote: function(questionId) {
+                this.upvoted = !this.upvoted;
+                this.downvoted = false;
+
+                this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
+                    if (!response.data.success) {
+                        this.upvoted = !this.upvoted;
+                    }
+                }, function (response) {
+                    this.upvoted = !this.upvoted;
+                });
+            },
+            downvote: function(questionId) {
                 this.downvoted = !this.downvoted;
-            });
-        }
-    },
-    computed: {
-        votes: function() {
-            if (this.upvoted) {
-                return this.question.net_votes + 1;
-            } else if (this.downvoted) {
-                return this.question.net_votes - 1;
-            } else {
-                return this.question.net_votes;
-            }
-        }
-    }
-});
+                this.upvoted = false;
 
-Vue.component('answer', {
-    template: '#answer-template',
-    props: ['answer', 'recipient'],
-    data: function() {
-        return {
-            liked: false
-        };
-    },
-    methods: {
-        like: function(answerId) {
-            this.liked = !this.liked;
-            // GET request
-            this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
-                if (!response.data.success) {
-                    this.liked = !this.liked;
+                this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
+                    if (!response.data.success) {
+                        this.downvoted = !this.downvoted;
+                    }
+                }, function (response) {
+                    this.downvoted = !this.downvoted;
+                });
+            }
+        },
+        computed: {
+            votes: function() {
+                if (this.upvoted) {
+                    return this.question.net_votes + 1;
+                } else if (this.downvoted) {
+                    return this.question.net_votes - 1;
+                } else {
+                    return this.question.net_votes;
                 }
-            }, function (response) {
-                this.liked = !this.liked;
-            });
-        }
-    },
-    computed: {
-        votes: function() {
-            if (this.liked) {
-                return this.answer.net_votes + 1;
-            } else {
-                return this.answer.net_votes;
             }
         }
-    }
-});
+    });
 
-Vue.component('feature', {
-    template: '#feature-template',
-    props: ['user'],
-    data: function() {
-    },
-    methods: {
-    },
-    computed: {
-        name: function() {
-            return this.user.first_name + ' ' + this.user.last_name;
-        }
-    }
-});
+})();
 
-Vue.component('modal', {
-    template: '#modal-template',
-    props: ['show', 'onClose'],
-    methods: {
-        close: function () {
-            this.onClose();
+(function(){
+    'use strict';
+
+    Vue.component('answer', {
+        template: '#answer-template',
+        props: ['answer', 'recipient'],
+        data: function() {
+            return {
+                liked: false
+            };
+        },
+        methods: {
+            like: function(answerId) {
+                this.liked = !this.liked;
+                // GET request
+                this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
+                    if (!response.data.success) {
+                        this.liked = !this.liked;
+                    }
+                }, function (response) {
+                    this.liked = !this.liked;
+                });
+            }
+        },
+        computed: {
+            votes: function() {
+                if (this.liked) {
+                    return this.answer.net_votes + 1;
+                } else {
+                    return this.answer.net_votes;
+                }
+            }
         }
-    },
-    ready: function () {
-        document.addEventListener("keydown", (e) => {
-            if (this.show && e.keyCode == 27) {
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('feature', {
+        template: '#feature-template',
+        props: ['user'],
+        data: function() {
+        },
+        methods: {
+        },
+        computed: {
+            name: function() {
+                return this.user.first_name + ' ' + this.user.last_name;
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('modal', {
+        template: '#modal-template',
+        props: ['show', 'onClose'],
+        methods: {
+            close: function () {
                 this.onClose();
             }
-        });
-    }
-});
-
-Vue.component('loginModal', {
-    template: '#login-modal-template',
-    props: ['show'],
-    data: function () {
-        return {
-	        title: '',
-            body: '',
-            login: false,
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
-        };
-    },
-    methods: {
-        close: function () {
-            this.show = false;
-            this.title = '';
-            this.body = '';
         },
-        toggle: function() {
-            this.login = !this.login;
-        },
-        emailLogin: function () {
-            this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
-                this.$dispatch('user-updated', response);
-            }, function (response) {
-                console.log('failed');
+        ready: function () {
+            document.addEventListener("keydown", (e) => {
+                if (this.show && e.keyCode == 27) {
+                    this.onClose();
+                }
             });
-            this.close();
         }
-    }
-});
+    });
 
-var vm = new Vue({
-    el: '#app',
-    data: {
-        showLoginModal: false,
-        recipient: recipient,
-        questions: questions,
-        loggedIn: loggedIn,
-        user: user
-    },
-    events: {
-        'user-updated': function (user) {
-            console.log(user);
-            this.user = user;
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('loginModal', {
+        template: '#login-modal-template',
+        props: ['show'],
+        data: function () {
+            return {
+    	        title: '',
+                body: '',
+                login: false,
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: ''
+            };
+        },
+        methods: {
+            close: function () {
+                this.show = false;
+                this.title = '';
+                this.body = '';
+            },
+            toggle: function() {
+                this.login = !this.login;
+            },
+            emailLogin: function () {
+                this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
+                    if (!response.data.success) {
+                    } else {
+                        this.$dispatch('user-updated', response.data.data);
+                    }
+                }, function (response) {
+                    console.log('failed');
+                });
+                this.close();
+            }
         }
-    }
-})
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            showLoginModal: false,
+            recipient: recipient,
+            questions: questions,
+            loggedIn: loggedIn,
+            user: user
+        },
+        methods: {
+            logout: function () {
+                this.$http.get('/logout').then(function(response) {
+                    this.loggedIn = false;
+                    this.user = null;
+                });
+            }
+        },
+        events: {
+            'user-updated': function (user) {
+                this.user = user;
+                this.loggedIn = true;
+            },
+            'questions-updated': function(questions) {
+                this.questions = questions;
+            }
+        }
+    });
+
+})();
 
 //# sourceMappingURL=app.js.map

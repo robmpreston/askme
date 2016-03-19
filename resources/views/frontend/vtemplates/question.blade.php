@@ -8,12 +8,16 @@
         <div class="question container">
             <header>
                 <img :src="question.asker.picture">
-                <p>Derek <span class="faded-text">from</span> Baltimore</p>
+                <p>@{{ question.asker.first_name }} <span class="faded-text">from</span> @{{ question.asker.from }}</p>
             </header>
             <article>
                 <p>@{{ question.text_response }}</p>
             </article>
         </div>
         <answer v-if="question.answer != null" :answer="question.answer" :recipient="recipient"></answer>
+        <div class="social-container">
+            <a class="social button" href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i> Tweet</a>
+            <a class="social button" href="https://facebook.com" target="_blank"><i class="fa fa-facebook-official"></i> Share</a>
+        </div>
     </div>
 </template>
