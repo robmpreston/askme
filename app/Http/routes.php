@@ -15,6 +15,8 @@ Route::get('/admin', function () {
     return view('backend.index');
 });
 
+// AJAX LOGIN
+Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
 
 // SOCIAL LOGIN
 Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
@@ -42,8 +44,6 @@ Route::post('/api/answer/store', 'AnswerController@store');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    // AJAX LOGIN
-    Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
 
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);

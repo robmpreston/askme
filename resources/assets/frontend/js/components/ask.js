@@ -6,6 +6,7 @@ Vue.component('ask', {
             open: false
         };
     },
+    props: [ 'user' ],
     methods: {
         toggle: function(holder) {
             this.open = !this.open;
