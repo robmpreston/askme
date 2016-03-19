@@ -1,8 +1,16 @@
 <template id="question-template">
     <div class="vote-block">
-        <i class="fa fa-caret-up" @click="upvote(question.id)" :class="{disabled: question.upvoted}"></i>
+        <div class="up vote">
+            <svg class="svg-icon static"><use xlink:href="#up-static-icon"></use></svg>
+            <svg class="svg-icon focus"><use xlink:href="#up-focus-icon"></use></svg>
+            <svg class="svg-icon hover"><use xlink:href="#up-hover-icon"></use></svg>
+        </div>
         <p>@{{ votes }}</p>
-        <i class="fa fa-caret-down" @click="downvote(question.id)" :class="{disabled: question.downvoted}"></i>
+        <div class="down vote">
+            <svg class="svg-icon static"><use xlink:href="#down-static-icon"></use></svg>
+            <svg class="svg-icon focus"><use xlink:href="#down-focus-icon"></use></svg>
+            <svg class="svg-icon hover"><use xlink:href="#down-hover-icon"></use></svg>
+        </div>
     </div>
     <div class="qa-container">
         <div class="question container">

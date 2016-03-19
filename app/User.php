@@ -86,9 +86,9 @@ class User extends Authenticatable
         $questions = $this->questions()->with('asker', 'answer')->orderBy('weight', 'DESC')->take($limit)->get();
 
         // Assign Whether and How The Logged In User Has Voted On Each Question && Answer
-        $question_ids = Question::listIDsFromQuestions($questions);
-        $answer_ids = Question::listAnswerIDsFromQuestions($questions);
         if (Auth::check()) {
+            $question_ids = Question::listIDsFromQuestions($questions);
+            $answer_ids = Question::listAnswerIDsFromQuestions($questions);
             $questions = Question::assignUserVotes($questions, $question_ids, $answer_ids);
         }
         return $questions;
