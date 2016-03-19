@@ -16,7 +16,6 @@
                 this.nextTick( function() {
                     this.$els.questionText.focus();
                 });
-
             },
             sendQuestion: function() {
                 this.$http.post('/api/question/store',
@@ -49,44 +48,42 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient'],
-        data: function() {
-            return {
-                upvoted: false,
-                downvoted: false
-            };
-        },
+        props: ['question', 'recipient', 'loggedIn'],
         methods: {
             upvote: function(questionId) {
-                this.upvoted = !this.upvoted;
-                this.downvoted = false;
+                if (this.loggedIn) {
+                    this.question.upvoted = !this.question.upvoted;
+                    this.question.downvoted = false;
 
-                this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.upvoted = !this.upvoted;
-                    }
-                }, function (response) {
-                    this.upvoted = !this.upvoted;
-                });
+                    this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.question.upvoted = !this.question.upvoted;
+                        }
+                    }, function (response) {
+                        this.question.upvoted = !this.question.upvoted;
+                    });
+                }
             },
             downvote: function(questionId) {
-                this.downvoted = !this.downvoted;
-                this.upvoted = false;
+                if (this.loggedIn) {
+                    this.question.downvoted = !this.question.downvoted;
+                    this.question.upvoted = false;
 
-                this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.downvoted = !this.downvoted;
-                    }
-                }, function (response) {
-                    this.downvoted = !this.downvoted;
-                });
+                    this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.question.downvoted = !this.question.downvoted;
+                        }
+                    }, function (response) {
+                        this.question.downvoted = !this.question.downvoted;
+                    });
+                }
             }
         },
         computed: {
             votes: function() {
-                if (this.upvoted) {
+                if (this.question.upvoted) {
                     return this.question.net_votes + 1;
-                } else if (this.downvoted) {
+                } else if (this.question.downvoted) {
                     return this.question.net_votes - 1;
                 } else {
                     return this.question.net_votes;
@@ -102,7 +99,7 @@
 
     Vue.component('answer', {
         template: '#answer-template',
-        props: ['answer', 'recipient'],
+        props: ['answer', 'recipient', 'loggedIn'],
         data: function() {
             return {
                 liked: false
@@ -110,15 +107,17 @@
         },
         methods: {
             like: function(answerId) {
-                this.liked = !this.liked;
-                // GET request
-                this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.liked = !this.liked;
-                    }
-                }, function (response) {
+                if (this.loggedIn) {
                     this.liked = !this.liked;
-                });
+
+                    this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.liked = !this.liked;
+                        }
+                    }, function (response) {
+                        this.liked = !this.liked;
+                    });
+                }
             }
         },
         computed: {

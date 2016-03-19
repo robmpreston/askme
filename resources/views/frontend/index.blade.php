@@ -22,7 +22,7 @@
             <div v-show="loggedIn">
                 <ask :user.sync="user" :recipient="recipient"></ask>
             </div>
-            <question v-for="question in questions" :question.sync="question" :recipient="recipient"></question>
+            <question v-for="question in questions" :question.sync="question" :recipient="recipient" :logged-in.sync="loggedIn"></question>
         </div>
     </div>
     @include('frontend.vtemplates.question')
