@@ -8,7 +8,7 @@
             return {
     	        title: '',
                 body: '',
-                login: false,
+                login: true,
                 firstName: '',
                 lastName: '',
                 email: '',

@@ -131,7 +131,7 @@ class Question extends Model
      */
     public static function listAnswerIDsFromQuestions($questions)
     {
-        $answer_ids = $questions->map(function ($question) { 
+        $answer_ids = $questions->map(function ($question) {
             if ($question->answer) {
                 return $question->answer->id;
             }
@@ -148,10 +148,11 @@ class Question extends Model
     {
         $list = [];
 
+        $user = Auth::user();
         // User Question Votes ([ 'question_id' => (boolean) is_down_vote ])
-        $q_votes = Auth::user()->getQuestionVotes($question_ids);
+        $q_votes = $user->getQuestionVotes($question_ids);
 
-        $a_votes = Auth::user()->getAnswerVotes($answer_ids);
+        $a_votes = $user->getAnswerVotes($answer_ids);
         foreach ($questions as $question) {
             $question->has_voted = array_has($q_votes, $question->id); // has the user voted
             $question->is_down_vote = (bool) array_get($q_votes, $question->id, null); // if so, is it a down vote?
