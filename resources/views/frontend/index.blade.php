@@ -18,8 +18,8 @@
             <div>
                 <feature :user="recipient"></feature>
             </div>
-            <ask></ask>
-            <question v-for="question in questions" :question="question" :recipient="recipient"></question>
+            <ask :user.sync="user" :recipient="recipient"></ask>
+            <question v-for="question in questions" :question.sync="question" :recipient="recipient"></question>
         </div>
     </div>
     @include('frontend.vtemplates.question')

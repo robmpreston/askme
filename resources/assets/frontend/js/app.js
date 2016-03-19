@@ -13,9 +13,10 @@
         events: {
             'user-updated': function (user) {
                 this.user = user;
-                if (this.user) {
-                    this.loggedIn = true;
-                }
+                this.loggedIn = true;
+            },
+            'questions-updated': function(questions) {
+                this.questions = questions;
             }
         }
     });

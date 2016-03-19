@@ -15,15 +15,13 @@ Route::get('/admin', function () {
     return view('backend.index');
 });
 
+// AJAX LOGIN
+Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
 
 // SOCIAL LOGIN
 Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
 
-// QUESTION
-Route::post('/api/question/store', 'QuestionController@store');
-Route::post('/api/question/upvote', 'QuestionController@upvote');
-Route::post('/api/question/downvote', 'QuestionController@downvote');
 
 // ANSWER
 Route::post('/api/answer/like', 'AnswerController@like');
@@ -42,12 +40,15 @@ Route::post('/api/answer/store', 'AnswerController@store');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    // AJAX LOGIN
-    Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
 
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
 
     Route::get('/{slug}', 'HomeController@index');
     Route::get('/', 'HomeController@index');
+    // QUESTION
+    Route::post('/api/question/store', 'QuestionController@store');
+    Route::post('/api/question/upvote', 'QuestionController@upvote');
+    Route::post('/api/question/downvote', 'QuestionController@downvote');
+
 });
