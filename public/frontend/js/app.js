@@ -154,11 +154,7 @@ Vue.component('loginModal', {
         },
         emailLogin: function () {
             this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
-                if (!response.data.success) {
-                    console.log('failed');
-                } else {
-                    $parent.user = response.data.user;
-                }
+                this.$dispatch('user-updated', response);
             }, function (response) {
                 console.log('failed');
             });
@@ -173,7 +169,14 @@ var vm = new Vue({
         showLoginModal: false,
         recipient: recipient,
         questions: questions,
-        loggedIn: loggedIn
+        loggedIn: loggedIn,
+        user: user
+    },
+    events: {
+        'user-updated': function (user) {
+            console.log(user);
+            this.user = user;
+        }
     }
 })
 

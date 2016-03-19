@@ -67,7 +67,7 @@ class AuthController extends Controller
 
     public function ajaxLogin(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true, true)) {
             return [
                 'success' => true,
                 'data' => Auth::user(),

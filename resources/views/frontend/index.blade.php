@@ -11,10 +11,10 @@
     <div id="app" class="wrapper">
         <header class="top">
             <h1>Soapbox</h1>
-            <button class="ghost button" @click="showLoginModal = true">Login/Signup</button>
+            <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
         </header>
         <div class="container">
-            <login-modal :show.sync="showLoginModal"></login-modal>
+            <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient"></feature>
             </div>
