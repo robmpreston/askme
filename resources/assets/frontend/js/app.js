@@ -1,4 +1,3 @@
-console.log(questions);
 var vm = new Vue({
     el: '#app',
     data: {

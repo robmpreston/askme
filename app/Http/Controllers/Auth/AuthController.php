@@ -7,7 +7,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Contracts\Factory as Socialite;
+
+use Auth;
 
 class AuthController extends Controller
 {
@@ -62,6 +65,22 @@ class AuthController extends Controller
         return 'something went wrong';
     }
 
+    public function ajaxLogin(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
+            return [
+                'success' => true,
+                'data' => Auth::user(),
+                'error' => null
+            ];
+        }
+        return [
+            'success' => true,
+            'data' => null,
+            'error' => null
+        ];
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -90,7 +109,7 @@ class AuthController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'slug' => User::createSlug($data['first_name'], $data['last_name']),            
+            'slug' => User::createSlug($data['first_name'], $data['last_name']),
             'password' => bcrypt($data['password']),
         ]);
     }

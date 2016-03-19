@@ -18,7 +18,7 @@
         <div class="modal-body" v-if="login">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="default-btn full-width-btn">
+            <button class="default-btn full-width-btn" @click="emailLogin">
                 Login
             </button>
             <button class="default-btn full-width-btn">

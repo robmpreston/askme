@@ -31,7 +31,8 @@ class HomeController extends Controller
             return view('frontend.index', [
                 'recipient' => $recipient,
                 'questions' => $questions,
-                'logged_in' => Auth::check()
+                'logged_in' => Auth::check(),
+                'user' => Auth::user()
             ]);
         }
         // return 404 error
