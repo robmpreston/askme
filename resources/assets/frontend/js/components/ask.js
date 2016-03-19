@@ -1,19 +1,25 @@
-Vue.component('ask', {
-    template: '#ask-template',
-    data: function() {
-        return {
-            question: '',
-            open: false
-        };
-    },
-    methods: {
-        toggle: function(holder) {
-            this.open = !this.open;
-            if (this.open) {
-                holder.$$.questionTextArea.focus()
-            } else {
-                holder.$$.questionTextInput.focus()
+(function(){
+    'use strict';
+
+    Vue.component('ask', {
+        template: '#ask-template',
+        data: function() {
+            return {
+                question_text: '',
+                open: false
+            };
+        },
+        methods: {
+            toggle: function(event) {
+                this.open = !this.open;
+                console.log(this.$el);
+                // var self = this;
+                // Vue.nextTick(function () {
+                //
+                //     // self.$$.questionInput.focus();
+                // });
             }
         }
-    }
-});
+    });
+
+})();

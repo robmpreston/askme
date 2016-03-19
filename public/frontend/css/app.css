@@ -466,18 +466,15 @@ ul {
   font-size: 1em;
   background-color: white;
   outline: none; }
-  .button:disabled p {
-    background-color: white;
-    color: #c2cdd3; }
-  .button p {
-    background-color: white;
-    color: #607d8b;
-    margin: 0; }
 
 .ghost.button {
   border: solid 1px #c2cdd3;
   color: #607d8b; }
+  .ghost.button:disabled {
+    background-color: white;
+    color: #c2cdd3; }
   .ghost.button[disabled]:hover {
+    color: #c2cdd3;
     border: solid 1px #c2cdd3; }
   .ghost.button:hover {
     border: solid 1px #607d8b; }
