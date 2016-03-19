@@ -488,6 +488,21 @@ ul {
   .ghost.button:hover {
     border: solid 1px #607d8b; }
 
+.ghost.button.facebook {
+  color: #3b5998; }
+
+.clear.button {
+  border: none;
+  text-decoration: none;
+  color: #607d8b; }
+  .clear.button:disabled {
+    background-color: white;
+    color: #c2cdd3; }
+  .clear.button[disabled]:hover {
+    color: #c2cdd3; }
+  .clear.button:hover {
+    text-decoration: underline; }
+
 .social.button {
   font-size: 0.75rem;
   width: 4.5rem;
