@@ -14,7 +14,7 @@ body {
 
 h1 {
     background-image: linear-gradient(to bottom, #b0bec5, #607d8b);
-    font-size: 24px;
+    font-size: 1.5rem;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
@@ -42,7 +42,7 @@ p {
     color: $faded-grey;
 }
 
-header {
+header.top {
     position:relative;
     margin:1.5rem 0 6rem 0;
     text-align:center;
@@ -112,13 +112,16 @@ header {
 }
 
 .ask-container {
-    margin: 0 auto 24px auto;
+    margin: 0 auto 1.5rem auto;
     padding: 0;
+    p * {
+        vertical-align:middle;
+    }
     input {
         width: 100%;
         border: solid 1px $normal-border;
         outline: 0;
-        padding: 11px 24px 11px 24px;
+        padding: 11px 1.5rem 11px 1.5rem;
     }
     img {
         width: 32px;
@@ -136,31 +139,47 @@ header {
 .ask-open {
     border: 1px solid $grey;
     border-radius: 3px;
-    padding: 24px;
+    padding: 1.5rem;
 }
 
 .qa-container {
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     border: 1px solid $normal-border;
 
     .question-container {
         background: white;
-        padding: 24px;
-        img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+        padding: 1.5rem;
+        header {
+            img {
+                display:inline-block;
+                vertical-align:middle;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+            }
+            p {
+                display:inline-block;
+                vertical-align:middle;
+            }
         }
     }
 
     .answer-container {
         border-top: 1px solid $light-border;
         background: $answer-bg;
-        padding: 24px;
-        img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+        padding: 1.5rem;
+        header {
+            img {
+                display:inline-block;
+                vertical-align:middle;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+            }
+            p {
+                display:inline-block;
+                vertical-align:middle;
+            }
         }
         .like-block {
             display: inline-block;
@@ -203,7 +222,7 @@ header {
 .modal-container {
     width: 336px;
     margin: 40px auto 0;
-    padding: 24px;
+    padding: 1.5rem;
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
@@ -216,7 +235,7 @@ header {
             width: 100%;
             border-radius: 3px;
             border: solid 1px $light-grey;
-            padding: 11px 24px 11px 24px;
+            padding: 11px 1.5rem 11px 1.5rem;
             margin-bottom: 16px;
             &:focus {
                 outline: 0;

@@ -9,7 +9,7 @@
 -->
 @section('content')
     <div id="app" class="wrapper">
-        <header>
+        <header class="top">
             <h1>Soapbox</h1>
             <button class="ghost button" @click="showLoginModal = true">Login/Signup</button>
         </header>

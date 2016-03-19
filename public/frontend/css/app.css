@@ -489,7 +489,7 @@ body {
 
 h1 {
   background-image: linear-gradient(to bottom, #b0bec5, #607d8b);
-  font-size: 24px;
+  font-size: 1.5rem;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -511,14 +511,14 @@ p {
 .faded-text {
   color: #c2cdd3; }
 
-header {
+header.top {
   position: relative;
   margin: 1.5rem 0 6rem 0;
   text-align: center; }
-  header h1 {
+  header.top h1 {
     display: inline-block;
     margin: 0.5rem; }
-  header .button {
+  header.top .button {
     position: absolute;
     right: 0; }
 
@@ -567,13 +567,15 @@ header {
     text-decoration: underline; }
 
 .ask-container {
-  margin: 0 auto 24px auto;
+  margin: 0 auto 1.5rem auto;
   padding: 0; }
+  .ask-container p * {
+    vertical-align: middle; }
   .ask-container input {
     width: 100%;
     border: solid 1px #b0bec5;
     outline: 0;
-    padding: 11px 24px 11px 24px; }
+    padding: 11px 1.5rem 11px 1.5rem; }
   .ask-container img {
     width: 32px;
     height: 32px;
@@ -587,26 +589,36 @@ header {
 .ask-open {
   border: 1px solid #607d8b;
   border-radius: 3px;
-  padding: 24px; }
+  padding: 1.5rem; }
 
 .qa-container {
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   border: 1px solid #b0bec5; }
   .qa-container .question-container {
     background: white;
-    padding: 24px; }
-    .qa-container .question-container img {
-      width: 32px;
-      height: 32px;
+    padding: 1.5rem; }
+    .qa-container .question-container header img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 2rem;
+      height: 2rem;
       border-radius: 50%; }
+    .qa-container .question-container header p {
+      display: inline-block;
+      vertical-align: middle; }
   .qa-container .answer-container {
     border-top: 1px solid #eceff1;
     background: #f7f9fa;
-    padding: 24px; }
-    .qa-container .answer-container img {
-      width: 32px;
-      height: 32px;
+    padding: 1.5rem; }
+    .qa-container .answer-container header img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 2rem;
+      height: 2rem;
       border-radius: 50%; }
+    .qa-container .answer-container header p {
+      display: inline-block;
+      vertical-align: middle; }
     .qa-container .answer-container .like-block {
       display: inline-block; }
       .qa-container .answer-container .like-block .like-btn-outline {
@@ -638,7 +650,7 @@ header {
 .modal-container {
   width: 336px;
   margin: 40px auto 0;
-  padding: 24px;
+  padding: 1.5rem;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
@@ -650,7 +662,7 @@ header {
       width: 100%;
       border-radius: 3px;
       border: solid 1px #b0bec5;
-      padding: 11px 24px 11px 24px;
+      padding: 11px 1.5rem 11px 1.5rem;
       margin-bottom: 16px; }
       .modal-container .modal-body input[type="text"]:focus, .modal-container .modal-body input[type="password"]:focus {
         outline: 0;
