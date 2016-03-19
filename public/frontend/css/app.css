@@ -615,10 +615,15 @@ header {
         color: #607d8b; }
 
 .vote-block {
-  float: right;
+  position: absolute;
+  left: -2.5rem;
   margin-right: 0px; }
+  .vote-block i {
+    font-size: 2.5rem;
+    line-height: 2rem; }
   .vote-block p {
-    margin: 5px auto 5px auto; }
+    margin: 0;
+    text-align: center; }
 
 .modal-mask {
   position: fixed;
