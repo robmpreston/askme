@@ -8,9 +8,9 @@
             <button class="default-btn full-width-btn">
                 Signup
             </button>
-            <button class="default-btn full-width-btn">
+            <a href="{{ url('/social-login/facebook') }}" class="default-btn full-width-btn">
                 Signup using Facebook
-            </button>
+            </a>
             <button class="default-btn no-border-btn full-width-btn" @click="toggle">
                 or Login
             </button>
@@ -21,9 +21,9 @@
             <button class="default-btn full-width-btn" @click="emailLogin">
                 Login
             </button>
-            <button class="default-btn full-width-btn">
+            <a href="{{ url('/social-login/facebook') }}" class="default-btn full-width-btn">
                 Login using Facebook
-            </button>
+            </a>
             <button class="default-btn no-border-btn full-width-btn" @click="toggle">
                 or Signup
             </button>
