@@ -10,6 +10,7 @@ body {
     font-family: $muli;
     font-weight: normal;
     background: white;
+    line-height:1.35;
 }
 
 h1 {
@@ -58,26 +59,32 @@ header.top {
 
 .featured {
     position:relative;
-    margin: 0px auto 50px auto;
+    margin: 0 auto 2rem auto;
     text-align: center;
-    .avatar {
+    .avatar-container {
         float:left;
         margin-right:1.5rem;
-        border-radius: 50%;
-        width: 3.75rem;
-        height: auto;
-        display: inline-block;
-        vertical-align: middle;
+        .avatar {
+            border-radius: 50%;
+            width: 3.75rem;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
-    .info {
-        text-align: left;
-        display: inline-block;
-        vertical-align: middle;
-        margin: auto 0 auto 0;
-    }
-    .description {
-        font-size: 1.0em;
-        color: $grey
+    article {
+        margin-left:5.25rem;
+        text-align:left;
+        .info {
+            font-size:16px;
+            display: inline-block;
+            margin: 0 1rem 0 0;
+        }
+        .description {
+            font-size: 14px;
+            color: $faded-grey;
+            margin: 0 1rem 0 0;
+        }
     }
 }
 
@@ -240,10 +247,16 @@ header.top {
             border-radius: 3px;
             border: solid 1px $light-grey;
             padding: 11px 1.5rem 11px 1.5rem;
-            margin-bottom: 16px;
+            margin-bottom: 1rem;
             &:focus {
                 outline: 0;
                 border: solid 1px $grey;
+            }
+        }
+        .button {
+            margin-bottom:1rem;
+            &:last-child {
+                margin-bottom:0;
             }
         }
     }

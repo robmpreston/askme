@@ -5,13 +5,13 @@
             <input v-model="lastName" type="text" placeholder="Last Name">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="default-btn full-width-btn">
+            <button class="ghost button full-width">
                 Signup
             </button>
-            <a href="{{ url('/social-login/facebook') }}" class="default-btn full-width-btn">
+            <a href="{{ url('/social-login/facebook') }}" class="ghost button full-width">
                 Signup using Facebook
             </a>
-            <button class="default-btn no-border-btn full-width-btn" @click="toggle">
+            <button class="ghost button full-width" @click="toggle">
                 or Login
             </button>
         </div>
@@ -21,10 +21,10 @@
             <button class="default-btn full-width-btn" @click="emailLogin">
                 Login
             </button>
-            <a href="{{ url('/social-login/facebook') }}" class="default-btn full-width-btn">
+            <a href="{{ url('/social-login/facebook') }}" class="ghost button full-width">
                 Login using Facebook
             </a>
-            <button class="default-btn no-border-btn full-width-btn" @click="toggle">
+            <button class="ghost button full-width" @click="toggle">
                 or Signup
             </button>
         </div>

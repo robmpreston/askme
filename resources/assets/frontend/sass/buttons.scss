@@ -7,8 +7,16 @@
     outline: none;
 }
 
+.button.full-width {
+    width:100%;
+    display:block;
+    text-align:center;
+    @include border-box();
+}
+
 .ghost.button {
     border: solid 1px $faded-grey;
+    text-decoration:none;
     color: $grey;
     &:disabled {
         background-color: white;

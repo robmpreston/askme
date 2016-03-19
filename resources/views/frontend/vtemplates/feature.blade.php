@@ -1,11 +1,11 @@
 <template id="feature-template">
     <div class="featured">
         <div class="info">
-            <header>
+            <div class="avatar-container">
                 <img class="avatar" :src="user.picture">
-                <p class="info">I am @{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.from }}</span></p>
-            </header>
+            </div>
             <article>
+                <p class="info">@{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.from }}</span></p>
                 <p class="description">@{{ user.profile.description }}</p>
             </article>
         </div>
