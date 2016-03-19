@@ -23,10 +23,6 @@ Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocial
 Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
 
 
-// ANSWER
-Route::post('/api/answer/like', 'AnswerController@like');
-Route::post('/api/answer/store', 'AnswerController@store');
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -38,6 +34,19 @@ Route::post('/api/answer/store', 'AnswerController@store');
 |
 */
 
+Route::group(['middleware' => ['web', 'auth']], function () {
+    
+    // QUESTION
+    Route::post('/api/question/store', 'QuestionController@store');
+    Route::post('/api/question/upvote', 'QuestionController@upvote');
+    Route::post('/api/question/downvote', 'QuestionController@downvote');
+
+    // ANSWER
+	Route::post('/api/answer/like', 'AnswerController@like');
+	Route::post('/api/answer/store', 'AnswerController@store');
+
+});
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -46,9 +55,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/{slug}', 'HomeController@index');
     Route::get('/', 'HomeController@index');
-    // QUESTION
-    Route::post('/api/question/store', 'QuestionController@store');
-    Route::post('/api/question/upvote', 'QuestionController@upvote');
-    Route::post('/api/question/downvote', 'QuestionController@downvote');
 
 });
