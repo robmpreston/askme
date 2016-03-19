@@ -19,7 +19,7 @@
                 </div>
             </div>
             <ask></ask>
-            <question v-for="question in questions" :question="question"></question>
+            <question v-for="question in questions" :question="question" :recipient="recipient"></question>
         </div>
     </div>
     @include('frontend.vtemplates.question')

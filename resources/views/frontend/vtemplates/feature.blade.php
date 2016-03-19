@@ -2,7 +2,7 @@
     <div class="featured">
         <div class="row">
             <div class="col-md-1 text-right">
-                <img :src="user.profile_image">
+                <img :src="user.picture">
             </div>
             <div class="col-md-11">
                 <div class="info">

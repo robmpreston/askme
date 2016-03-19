@@ -1,6 +1,6 @@
 Vue.component('question', {
     template: '#question-template',
-    props: ['question'],
+    props: ['question', 'recipient'],
     data: function() {
         return {
             upvoted: false,

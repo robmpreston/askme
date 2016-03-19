@@ -12,14 +12,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="question-container">
-                            <p><img :src="question.asker.picture"> Derek From Baltimore</p>
+                            <p><img :src="question.asker.picture"> Derek <span class="faded-text">from</span> Baltimore</p>
                             <p>@{{ question.text_response }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <answer v-if="question.answer != null" :answer="question.answer"></answer>
+                        <answer v-if="question.answer != null" :answer="question.answer" :recipient="recipient"></answer>
                     </div>
                 </div>
             </div>

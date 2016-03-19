@@ -1,6 +1,6 @@
 Vue.component('answer', {
     template: '#answer-template',
-    props: ['answer'],
+    props: ['answer', 'recipient'],
     data: function() {
         return {
             liked: false
