@@ -8,6 +8,7 @@
 <button class="default-btn no-border-btn"><p>Button</p></button>
 -->
 @section('content')
+    @include('frontend.shared.icons')
     <div id="app" class="wrapper">
         <header class="top">
             <h1>Soapbox</h1>

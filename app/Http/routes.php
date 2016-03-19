@@ -27,7 +27,7 @@ Route::get('/admin', function () {
 */
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-    
+
     // QUESTION
     Route::post('/api/question/store', 'QuestionController@store');
     Route::post('/api/question/upvote', 'QuestionController@upvote');

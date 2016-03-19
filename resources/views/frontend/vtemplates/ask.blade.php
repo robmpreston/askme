@@ -7,7 +7,7 @@
             <img :src="user.picture">
             <p>@{{ user.first_name }} <span class="faded-text">from</span> @{{ user.from }}</p>
         </header>
-        <textarea v-model="question_text" v-el="questionInput" placeholder="What do you want to ask @{{ recipient.first_name }}?"></textarea>
+        <textarea v-model="question_text" v-el:question-text placeholder="What do you want to ask @{{ recipient.first_name }}?"></textarea>
         <button class="ghost button" :disabled="question_text == ''" @click="sendQuestion">Submit</button>
     </div>
 </template>
