@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Models\Question;
 use App\Models\Question_Vote;
+use App\User;
 
 class QuestionController extends Controller
 {

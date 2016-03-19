@@ -8,7 +8,7 @@ Vue.component('ask', {
     },
     props: [ 'user', 'recipient' ],
     methods: {
-        toggle: function(holder) {
+        toggle: function() {
             this.open = !this.open;
         },
         sendQuestion: function() {
@@ -22,12 +22,17 @@ Vue.component('ask', {
                 if (!response.data.success) {
                 } else {
                     this.$dispatch('questions-updated', response.data.data);
-                    this.open = false;
-                    this.question_text = '';
+                    this.$dispatch('question-asked');
                 }
             }, function (response) {
                 console.log('failed');
             });
+        }
+    },
+    events: {
+        'question-asked': function() {
+            this.open = false;
+            this.question_text = '';
         }
     }
 });
