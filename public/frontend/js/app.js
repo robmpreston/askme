@@ -225,6 +225,14 @@
             loggedIn: loggedIn,
             user: user
         },
+        methods: {
+            logout: function () {
+                this.$http.get('/logout').then(function(response) {
+                    this.loggedIn = false;
+                    this.user = null;
+                });
+            }
+        },
         events: {
             'user-updated': function (user) {
                 this.user = user;

@@ -12,13 +12,14 @@
         <header class="top">
             <h1>Soapbox</h1>
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
+            <button v-if="loggedIn" class="ghost button" @click="logout">Logout</button>
         </header>
         <div class="main-column">
             <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient"></feature>
             </div>
-            <ask :user.sync="user" :recipient="recipient"></ask>
+            <ask v-show="loggedIn" :user.sync="user" :recipient="recipient"></ask>
             <question v-for="question in questions" :question.sync="question" :recipient="recipient"></question>
         </div>
     </div>
