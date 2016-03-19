@@ -19,7 +19,9 @@
             <div>
                 <feature :user="recipient"></feature>
             </div>
-            <ask v-show="loggedIn" :user.sync="user" :recipient="recipient"></ask>
+            <div v-show="loggedIn">
+                <ask :user.sync="user" :recipient="recipient"></ask>
+            </div>
             <question v-for="question in questions" :question.sync="question" :recipient="recipient"></question>
         </div>
     </div>
