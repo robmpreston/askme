@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\User;
 
 class HomeController extends Controller
@@ -31,7 +31,8 @@ class HomeController extends Controller
             return view('frontend.index', [
                 'recipient' => $recipient,
                 'questions' => $questions,
-                'logged_in' => Auth::check()
+                'logged_in' => Auth::check(),
+                'user' => Auth::user()
             ]);
         }
         // return 404 error

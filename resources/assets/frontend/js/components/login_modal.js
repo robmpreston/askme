@@ -5,7 +5,11 @@ Vue.component('loginModal', {
         return {
 	        title: '',
             body: '',
-            login: false
+            login: false,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
         };
     },
     methods: {
@@ -17,8 +21,15 @@ Vue.component('loginModal', {
         toggle: function() {
             this.login = !this.login;
         },
-        savePost: function () {
-            // Insert AJAX call here...
+        emailLogin: function () {
+            this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
+                if (!response.data.success) {
+                } else {
+                    this.$dispatch('user-updated', response.data.data);
+                }
+            }, function (response) {
+                console.log('failed');
+            });
             this.close();
         }
     }

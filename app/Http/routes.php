@@ -15,12 +15,10 @@ Route::get('/admin', function () {
     return view('backend.index');
 });
 
-// SOCIAL LOGIN 
+
+// SOCIAL LOGIN
 Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
-
-// HOME
-Route::get('/api/home', 'HomeController@index');
 
 // QUESTION
 Route::post('/api/question/store', 'QuestionController@store');
@@ -44,10 +42,12 @@ Route::post('/api/answer/store', 'AnswerController@store');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('/home', 'HomeController@index');
+    // AJAX LOGIN
+    Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
+
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
-});
 
-Route::get('/{slug}', 'HomeController@index');
-Route::get('/', 'HomeController@index');
+    Route::get('/{slug}', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
+});

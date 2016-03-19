@@ -136,7 +136,11 @@ Vue.component('loginModal', {
         return {
 	        title: '',
             body: '',
-            login: false
+            login: false,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
         };
     },
     methods: {
@@ -148,21 +152,31 @@ Vue.component('loginModal', {
         toggle: function() {
             this.login = !this.login;
         },
-        savePost: function () {
-            // Insert AJAX call here...
+        emailLogin: function () {
+            this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
+                this.$dispatch('user-updated', response);
+            }, function (response) {
+                console.log('failed');
+            });
             this.close();
         }
     }
 });
 
-console.log(questions);
 var vm = new Vue({
     el: '#app',
     data: {
         showLoginModal: false,
         recipient: recipient,
         questions: questions,
-        loggedIn: loggedIn
+        loggedIn: loggedIn,
+        user: user
+    },
+    events: {
+        'user-updated': function (user) {
+            console.log(user);
+            this.user = user;
+        }
     }
 })
 

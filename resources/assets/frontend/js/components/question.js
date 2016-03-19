@@ -11,7 +11,7 @@ Vue.component('question', {
         upvote: function(questionId) {
             this.upvoted = !this.upvoted;
             this.downvoted = false;
-            // GET request
+            
             this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.upvoted = !this.upvoted;
@@ -23,7 +23,7 @@ Vue.component('question', {
         downvote: function(questionId) {
             this.downvoted = !this.downvoted;
             this.upvoted = false;
-            // GET request
+
             this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.downvoted = !this.downvoted;
