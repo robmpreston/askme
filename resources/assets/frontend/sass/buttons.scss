@@ -30,5 +30,26 @@
 }
 
 .social.button {
-    
+    font-size:0.75rem;
+    width:4.5rem;
+    color: $grey;
+    border: solid 1px $faded-grey;
+    color: $grey;
+    text-decoration:none;
+    text-align:center;
+    padding:0.125rem;
+    margin-bottom:0.5rem;
+    @include border-box();
+    &[disabled]:hover {
+        border: solid 1px $faded-grey;
+    }
+    &:hover {
+        border: solid 1px $grey;
+    }
+}
+
+.social.button.website {
+    * {
+        vertical-align:middle;
+    }
 }

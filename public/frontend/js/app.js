@@ -31,7 +31,7 @@ Vue.component('question', {
         upvote: function(questionId) {
             this.upvoted = !this.upvoted;
             this.downvoted = false;
-            // GET request
+            
             this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.upvoted = !this.upvoted;
@@ -43,7 +43,7 @@ Vue.component('question', {
         downvote: function(questionId) {
             this.downvoted = !this.downvoted;
             this.upvoted = false;
-            // GET request
+
             this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.downvoted = !this.downvoted;
@@ -154,7 +154,10 @@ Vue.component('loginModal', {
         },
         emailLogin: function () {
             this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
-                this.$dispatch('user-updated', response);
+                if (!response.data.success) {
+                } else {
+                    this.$dispatch('user-updated', response.data.data);
+                }
             }, function (response) {
                 console.log('failed');
             });
@@ -174,8 +177,10 @@ var vm = new Vue({
     },
     events: {
         'user-updated': function (user) {
-            console.log(user);
             this.user = user;
+            if (this.user) {
+                this.loggedIn = true;
+            }
         }
     }
 })

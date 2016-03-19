@@ -15,5 +15,9 @@
             </article>
         </div>
         <answer v-if="question.answer != null" :answer="question.answer" :recipient="recipient"></answer>
+        <div class="social-container">
+            <a class="social button" href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i> Tweet</a>
+            <a class="social button" href="https://facebook.com" target="_blank"><i class="fa fa-facebook-official"></i> Share</a>
+        </div>
     </div>
 </template>
