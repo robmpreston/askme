@@ -467,8 +467,17 @@ ul {
   background-color: white;
   outline: none; }
 
+.button.full-width {
+  width: 100%;
+  display: block;
+  text-align: center;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box; }
+
 .ghost.button {
   border: solid 1px #c2cdd3;
+  text-decoration: none;
   color: #607d8b; }
   .ghost.button:disabled {
     background-color: white;
@@ -503,7 +512,8 @@ ul {
 body {
   font-family: "Muli", sans-serif;
   font-weight: normal;
-  background: white; }
+  background: white;
+  line-height: 1.35; }
 
 h1 {
   background-image: linear-gradient(to bottom, #b0bec5, #607d8b);
@@ -542,24 +552,28 @@ header.top {
 
 .featured {
   position: relative;
-  margin: 0px auto 50px auto;
+  margin: 0 auto 2rem auto;
   text-align: center; }
-  .featured .avatar {
+  .featured .avatar-container {
     float: left;
-    margin-right: 1.5rem;
-    border-radius: 50%;
-    width: 3.75rem;
-    height: auto;
-    display: inline-block;
-    vertical-align: middle; }
-  .featured .info {
-    text-align: left;
-    display: inline-block;
-    vertical-align: middle;
-    margin: auto 0 auto 0; }
-  .featured .description {
-    font-size: 1.0em;
-    color: #607d8b; }
+    margin-right: 1.5rem; }
+    .featured .avatar-container .avatar {
+      border-radius: 50%;
+      width: 3.75rem;
+      height: auto;
+      display: inline-block;
+      vertical-align: middle; }
+  .featured article {
+    margin-left: 5.25rem;
+    text-align: left; }
+    .featured article .info {
+      font-size: 16px;
+      display: inline-block;
+      margin: 0 1rem 0 0; }
+    .featured article .description {
+      font-size: 14px;
+      color: #c2cdd3;
+      margin: 0 1rem 0 0; }
 
 .social-container {
   position: absolute;
@@ -694,10 +708,14 @@ header.top {
       border-radius: 3px;
       border: solid 1px #b0bec5;
       padding: 11px 1.5rem 11px 1.5rem;
-      margin-bottom: 16px; }
+      margin-bottom: 1rem; }
       .modal-container .modal-body input[type="text"]:focus, .modal-container .modal-body input[type="password"]:focus {
         outline: 0;
         border: solid 1px #607d8b; }
+    .modal-container .modal-body .button {
+      margin-bottom: 1rem; }
+      .modal-container .modal-body .button:last-child {
+        margin-bottom: 0; }
 
 .modal-enter, .modal-leave {
   opacity: 0; }
