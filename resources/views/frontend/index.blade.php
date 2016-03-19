@@ -13,7 +13,7 @@
             <h1>Soapbox</h1>
             <button class="ghost button" @click="showLoginModal = true">Login/Signup</button>
         </header>
-        <div class="container">
+        <div class="main-column">
             <login-modal :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient"></feature>

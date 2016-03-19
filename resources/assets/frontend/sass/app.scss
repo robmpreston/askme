@@ -57,6 +57,7 @@ header.top {
 }
 
 .featured {
+    position:relative;
     margin: 0px auto 50px auto;
     text-align: center;
     .avatar {
@@ -69,27 +70,25 @@ header.top {
         vertical-align: middle;
     }
     .info {
-        max-width:35.25rem;
         text-align: left;
         display: inline-block;
         vertical-align: middle;
         margin: auto 0 auto 0;
-        h1 {
-            font-size: 1.3em;
-            margin: 0;
-        }
-        h2 {
-            font-size: 1.1em;
-            margin: 0;
-        }
-        p {
-            font-size: 1.1em;
-            margin: 0;
-        }
         .description {
             font-size: 1.0em;
             color: $grey
         }
+    }
+}
+
+.social-container {
+    position:absolute;
+    right:-3rem;
+    top:0;
+    margin:0;
+    a {
+        display:block;
+        margin:0;
     }
 }
 
@@ -111,7 +110,25 @@ header.top {
     }
 }
 
-.ask-container {
+.container {
+    padding:1.5rem;
+    header {
+        img {
+            display:inline-block;
+            vertical-align:middle;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+        }
+        p {
+            display:inline-block;
+            vertical-align:middle;
+            margin:0;
+        }
+    }
+}
+
+.ask.container {
     margin: 0 auto 1.5rem auto;
     padding: 0;
     p * {
@@ -145,53 +162,24 @@ header.top {
 .qa-container {
     margin-bottom: 1.5rem;
     border: 1px solid $normal-border;
+}
 
-    .question-container {
-        background: white;
-        padding: 1.5rem;
-        header {
-            img {
-                display:inline-block;
-                vertical-align:middle;
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-            }
-            p {
-                display:inline-block;
-                vertical-align:middle;
-            }
+.question.container {
+    background: white;
+}
+
+.answer.container {
+    border-top: 1px solid $light-border;
+    background: $answer-bg;
+    .like-block {
+        display: inline-block;
+        .like-btn-outline {
+            color: $faded-grey;
+        }
+        .like-btn {
+            color: $grey;
         }
     }
-
-    .answer-container {
-        border-top: 1px solid $light-border;
-        background: $answer-bg;
-        padding: 1.5rem;
-        header {
-            img {
-                display:inline-block;
-                vertical-align:middle;
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-            }
-            p {
-                display:inline-block;
-                vertical-align:middle;
-            }
-        }
-        .like-block {
-            display: inline-block;
-            .like-btn-outline {
-                color: $faded-grey;
-            }
-            .like-btn {
-                color: $grey;
-            }
-        }
-    }
-
 }
 
 .vote-block {

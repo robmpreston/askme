@@ -1,5 +1,5 @@
 <template id="answer-template">
-    <div class="answer-container">
+    <div class="answer container">
         <header>
             <img :src="recipient.picture">
             <p><span class="faded-text">Reply from</span> @{{ recipient.first_name }}</p>
