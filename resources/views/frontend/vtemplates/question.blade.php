@@ -5,7 +5,7 @@
         <i class="fa fa-caret-down" @click="downvote(question.id)" :class="{disabled: downvoted}"></i>
     </div>
     <div class="qa-container">
-        <div class="question-container">
+        <div class="question container">
             <header>
                 <img :src="question.asker.picture">
                 <p>Derek <span class="faded-text">from</span> Baltimore</p>

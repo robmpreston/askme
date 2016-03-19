@@ -393,11 +393,11 @@ ul {
   .row.padding:last-child {
     margin-bottom: 0; }
 
-.container {
+.main-column {
   position: relative;
   max-width: 40.5rem;
   margin: 0 auto; }
-  .container:after {
+  .main-column:after {
     content: "";
     display: table;
     clear: both; }
@@ -523,6 +523,7 @@ header.top {
     right: 0; }
 
 .featured {
+  position: relative;
   margin: 0px auto 50px auto;
   text-align: center; }
   .featured .avatar {
@@ -534,23 +535,22 @@ header.top {
     display: inline-block;
     vertical-align: middle; }
   .featured .info {
-    max-width: 35.25rem;
     text-align: left;
     display: inline-block;
     vertical-align: middle;
     margin: auto 0 auto 0; }
-    .featured .info h1 {
-      font-size: 1.3em;
-      margin: 0; }
-    .featured .info h2 {
-      font-size: 1.1em;
-      margin: 0; }
-    .featured .info p {
-      font-size: 1.1em;
-      margin: 0; }
     .featured .info .description {
       font-size: 1.0em;
       color: #607d8b; }
+
+.social-container {
+  position: absolute;
+  right: -3rem;
+  top: 0;
+  margin: 0; }
+  .social-container a {
+    display: block;
+    margin: 0; }
 
 .full-width-btn {
   width: 100%;
@@ -566,21 +566,34 @@ header.top {
     border: 0px;
     text-decoration: underline; }
 
-.ask-container {
+.container {
+  padding: 1.5rem; }
+  .container header img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%; }
+  .container header p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0; }
+
+.ask.container {
   margin: 0 auto 1.5rem auto;
   padding: 0; }
-  .ask-container p * {
+  .ask.container p * {
     vertical-align: middle; }
-  .ask-container input {
+  .ask.container input {
     width: 100%;
     border: solid 1px #b0bec5;
     outline: 0;
     padding: 11px 1.5rem 11px 1.5rem; }
-  .ask-container img {
+  .ask.container img {
     width: 32px;
     height: 32px;
     border-radius: 50%; }
-  .ask-container textarea {
+  .ask.container textarea {
     width: 100%;
     min-height: 30px;
     border: 0px;
@@ -594,37 +607,19 @@ header.top {
 .qa-container {
   margin-bottom: 1.5rem;
   border: 1px solid #b0bec5; }
-  .qa-container .question-container {
-    background: white;
-    padding: 1.5rem; }
-    .qa-container .question-container header img {
-      display: inline-block;
-      vertical-align: middle;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%; }
-    .qa-container .question-container header p {
-      display: inline-block;
-      vertical-align: middle; }
-  .qa-container .answer-container {
-    border-top: 1px solid #eceff1;
-    background: #f7f9fa;
-    padding: 1.5rem; }
-    .qa-container .answer-container header img {
-      display: inline-block;
-      vertical-align: middle;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%; }
-    .qa-container .answer-container header p {
-      display: inline-block;
-      vertical-align: middle; }
-    .qa-container .answer-container .like-block {
-      display: inline-block; }
-      .qa-container .answer-container .like-block .like-btn-outline {
-        color: #c2cdd3; }
-      .qa-container .answer-container .like-block .like-btn {
-        color: #607d8b; }
+
+.question.container {
+  background: white; }
+
+.answer.container {
+  border-top: 1px solid #eceff1;
+  background: #f7f9fa; }
+  .answer.container .like-block {
+    display: inline-block; }
+    .answer.container .like-block .like-btn-outline {
+      color: #c2cdd3; }
+    .answer.container .like-block .like-btn {
+      color: #607d8b; }
 
 .vote-block {
   position: absolute;
