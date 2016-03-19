@@ -31,6 +31,26 @@
     }
 }
 
+.ghost.button.facebook {
+    color: $facebook-blue;
+}
+
+.clear.button {
+    border: none;
+    text-decoration:none;
+    color: $grey;
+    &:disabled {
+        background-color: white;
+        color: $faded-grey;
+    }
+    &[disabled]:hover {
+        color: $faded-grey;
+    }
+    &:hover {
+        text-decoration:underline;
+    }
+}
+
 .social.button {
     font-size:0.75rem;
     width:4.5rem;
