@@ -31,6 +31,11 @@ class Answer extends Model
         return $this->belongsTo('App\Models\Question', 'question_id');
     }
 
+    public function likes()
+    {
+        return $this->hasMany('App\Models\Answer_Vote')->where('is_down_vote', '=', false);
+    }
+
     /***************************************************************************************************
      ** GENERAL METHODS
      ***************************************************************************************************/
@@ -68,4 +73,5 @@ class Answer extends Model
         DB::table('answers')->where('id', '=', $answer_id)->update(['net_votes' => $count]);
         return $count;
     }
+
 }

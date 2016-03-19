@@ -64,21 +64,14 @@ class Question extends Model
         $question = new Question;
         $question->to_user_id = $request->recipient_id;
         $question->from_user_id = Auth::user() ? Auth::user()->id : 1;
-        $question->user_from = $request->user_from;
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
         $question->save();
-        return $question;
-    }
 
-    /**
-     * GET QUESTIONS FOR RESPONDENT
-     * @param (int) Respondent Id
-     * @return (array of objects) Question
-     */
-    public static function getForRespondent($respondent_id)
-    {
-        return self::with('votes', 'asker', 'answer')->where('to_user_id', '=', $respondent_id)->get();
+        if ($request->user_from && Auth::user()) {
+            Auth::user()->setFrom($request->user_from);
+        }
+        return $question;
     }
 
     public function getWeight()
@@ -115,5 +108,63 @@ class Question extends Model
         DB::table('questions')->where('id', '=', $question_id)->update(['net_votes' => $net_votes]);
         return $net_votes;
     }
+
+    /***************************************************************************************************
+     ** PAGE LIST OPTIMIZATION FUNCTIONS
+     ***************************************************************************************************/
+
+    /**
+     * LIST IDS FOR GROUP OF QUESTIONS
+     * @param (collection) Questions
+     * @return (array) Ids of Questions
+     */
+    public static function listIDsFromQuestions($questions)
+    {
+        $question_ids = $questions->map(function ($question) { return $question->id; });
+        return $question_ids;
+    }
+
+    /**
+     * LIST IDS OF ANSWERS FOR GROUP OF QUESTIONS
+     * @param (collection) Questions
+     * @return (array) Ids of Answers (if exist)
+     */
+    public static function listAnswerIDsFromQuestions($questions)
+    {
+        $answer_ids = $questions->map(function ($question) { 
+            if ($question->answer) {
+                return $question->answer->id;
+            }
+        });
+        return $answer_ids;
+    }
+
+    /**
+     * ADD TO EACH QUESTION WHETHER THE LOGGED IN USER HAS VOTED
+     * @param (collection) Questions.Answers, (array) Question IDs w/ Votes, (array) Answer IDs w/ Votes
+     * @return (collection) Questions.Answers (with has_voted assigned);
+     */
+    public static function assignUserVotes($questions, $question_ids, $answer_ids)
+    {
+        $list = [];
+
+        // User Question Votes ([ 'question_id' => (boolean) is_down_vote ])
+        $q_votes = Auth::user()->getQuestionVotes($question_ids);
+
+        $a_votes = Auth::user()->getAnswerVotes($answer_ids);
+        foreach ($questions as $question) {
+            $question->has_voted = array_has($q_votes, $question->id); // has the user voted
+            $question->is_down_vote = (bool) array_get($q_votes, $question->id, null); // if so, is it a down vote?
+
+            if ($question->answer) {
+                $question->answer->has_voted = array_has($a_votes, $question->answer->id);
+                $question->answer->is_down_vote = (bool) array_get($a_votes, $question->answer->id, null);
+            }
+            $list[] = $question;
+        }
+        return $list;
+    }
+
+
 
 }

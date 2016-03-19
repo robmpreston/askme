@@ -19,8 +19,8 @@ class Question_Vote extends Model
 
     /**
      * CREATE AN UP OR DOWN VOTE ON Question
-     * @param (int) Answer ID, (boolean) Is it a down vote
-     * @return (object) Answer_Vote
+     * @param (int) Question ID, (boolean) Is it a down vote
+     * @return (object) Question_Vote
      */
     public static function makeOne($question_id, $down_vote = false)
     {
