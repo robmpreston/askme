@@ -13,6 +13,9 @@
         methods: {
             toggle: function() {
                 this.open = !this.open;
+                if (this.open) {
+                    this.$els.questionText.focus();
+                }
             },
             sendQuestion: function() {
                 this.$http.post('/api/question/store',
