@@ -26,6 +26,29 @@ class User extends Authenticatable
         'password', 'remember_token', 'created_at', 'updated_at', 'deleted_at',
     ];
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        // UPLOADED PIC
+        if ($this->picture) {
+            $aws_url = ''; // ? 
+            $array['picture'] = $aws_url . '/' . $this->picture;
+        }
+
+        // FACEBOOK PIC
+        if (!$this->picture && $this->facebook_id) {
+            $array['picture'] = 'https://graph.facebook.com/' . $this->facebook_id . '/picture?type=square';
+        }
+
+        // DEFAULT PIC
+        if (!$this->picture && !$this->facebook_id) {
+            $aws_url = ''; // ? 
+            $array['picture'] = $aws_url . '/default_profile_pic.jpg';
+        }
+        return $array;
+    }
+
     /***************************************************************************************************
      ** RELATIONS
      ***************************************************************************************************/
