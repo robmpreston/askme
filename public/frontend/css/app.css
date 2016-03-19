@@ -600,27 +600,36 @@ header.top {
     vertical-align: middle;
     margin: 0; }
 
-.ask.container {
+.ask-input.container {
   margin: 0 auto 1.5rem auto;
   padding: 0; }
-  .ask.container p * {
-    vertical-align: middle; }
-  .ask.container input {
+  .ask-input.container input {
     width: 100%;
     border: solid 1px #b0bec5;
     outline: 0;
     padding: 11px 1.5rem 11px 1.5rem;
     border-radius: 0.1875rem;
     background-clip: padding-box; }
+
+.ask.container {
+  margin: 0 auto 1.5rem auto;
+  padding: 1.5rem;
+  border-radius: 0.1875rem;
+  background-clip: padding-box;
+  border: solid 1px #b0bec5; }
+  .ask.container p * {
+    vertical-align: middle; }
   .ask.container img {
     width: 32px;
     height: 32px;
     border-radius: 50%; }
   .ask.container textarea {
+    margin-top: 1rem;
     width: 100%;
     min-height: 30px;
     border: 0px;
-    outline: 0; }
+    outline: 0;
+    resize: none; }
 
 .ask-open {
   border: 1px solid #607d8b;
@@ -641,6 +650,11 @@ header.top {
   background-clip: padding-box; }
   .answer.container .like-block {
     display: inline-block; }
+    .answer.container .like-block p {
+      margin: 0;
+      color: #607d8b; }
+      .answer.container .like-block p * {
+        vertical-align: middle; }
     .answer.container .like-block .like-btn-outline {
       color: #c2cdd3; }
     .answer.container .like-block .like-btn {

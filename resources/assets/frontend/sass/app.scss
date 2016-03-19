@@ -128,12 +128,9 @@ header.top {
     }
 }
 
-.ask.container {
+.ask-input.container {
     margin: 0 auto 1.5rem auto;
-    padding: 0;
-    p * {
-        vertical-align:middle;
-    }
+    padding:0;
     input {
         width: 100%;
         border: solid 1px $normal-border;
@@ -141,16 +138,28 @@ header.top {
         padding: 11px 1.5rem 11px 1.5rem;
         @include border-radius(0.1875rem);
     }
+}
+
+.ask.container {
+    margin: 0 auto 1.5rem auto;
+    padding: 1.5rem;
+    @include border-radius(0.1875rem);
+    border: solid 1px $normal-border;
+    p * {
+        vertical-align:middle;
+    }
     img {
         width: 32px;
         height: 32px;
         border-radius: 50%;
     }
     textarea {
+        margin-top:1rem;
         width: 100%;
         min-height: 30px;
         border: 0px;
         outline: 0;
+        resize: none;
     }
 }
 
@@ -173,6 +182,13 @@ header.top {
     @include border-radius( 0 0 0.1875rem 0.1875rem);
     .like-block {
         display: inline-block;
+        p {
+            margin:0;
+            color:$grey;
+            * {
+                vertical-align:middle;
+            }
+        }
         .like-btn-outline {
             color: $faded-grey;
         }
