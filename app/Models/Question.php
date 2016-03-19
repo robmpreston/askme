@@ -64,7 +64,6 @@ class Question extends Model
         $question = new Question;
         $question->to_user_id = $request->recipient_id;
         $question->from_user_id = Auth::user() ? Auth::user()->id : 1;
-        $question->user_from = $request->user_from;
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
         $question->save();

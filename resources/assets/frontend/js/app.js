@@ -11,6 +11,9 @@ var vm = new Vue({
         'user-updated': function (user) {
             this.user = user;
             this.loggedIn = true;
+        },
+        'questions-updated': function(questions) {
+            this.questions = questions;
         }
     }
 })

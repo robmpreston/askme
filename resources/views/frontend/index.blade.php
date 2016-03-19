@@ -18,7 +18,7 @@
             <div>
                 <feature :user="recipient"></feature>
             </div>
-            <ask :user="user"></ask>
+            <ask :user="user" :recipient="recipient"></ask>
             <question v-for="question in questions" :question="question" :recipient="recipient"></question>
         </div>
     </div>

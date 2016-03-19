@@ -2,18 +2,32 @@ Vue.component('ask', {
     template: '#ask-template',
     data: function() {
         return {
-            question: '',
+            question_text: '',
             open: false
         };
     },
+    props: [ 'user', 'recipient' ],
     methods: {
         toggle: function(holder) {
             this.open = !this.open;
-            if (this.open) {
-                holder.$$.questionTextArea.focus()
-            } else {
-                holder.$$.questionTextInput.focus()
-            }
+        },
+        sendQuestion: function() {
+            this.$http.post('/api/question/store',
+            {
+                recipient_id: this.recipient.id,
+                asker_id: this.user.id,
+                question: this.question_text
+            })
+            .then(function (response) {
+                if (!response.data.success) {
+                } else {
+                    this.$dispatch('questions-updated', response.data.data);
+                    this.open = false;
+                    this.question_text = '';
+                }
+            }, function (response) {
+                console.log('failed');
+            });
         }
     }
 });
@@ -31,7 +45,7 @@ Vue.component('question', {
         upvote: function(questionId) {
             this.upvoted = !this.upvoted;
             this.downvoted = false;
-            // GET request
+            
             this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.upvoted = !this.upvoted;
@@ -43,7 +57,7 @@ Vue.component('question', {
         downvote: function(questionId) {
             this.downvoted = !this.downvoted;
             this.upvoted = false;
-            // GET request
+
             this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                 if (!response.data.success) {
                     this.downvoted = !this.downvoted;
@@ -154,7 +168,10 @@ Vue.component('loginModal', {
         },
         emailLogin: function () {
             this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
-                this.$dispatch('user-updated', response);
+                if (!response.data.success) {
+                } else {
+                    this.$dispatch('user-updated', response.data.data);
+                }
             }, function (response) {
                 console.log('failed');
             });
@@ -174,8 +191,11 @@ var vm = new Vue({
     },
     events: {
         'user-updated': function (user) {
-            console.log(user);
             this.user = user;
+            this.loggedIn = true;
+        },
+        'questions-updated': function(questions) {
+            this.questions = questions;
         }
     }
 })

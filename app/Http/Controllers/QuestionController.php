@@ -36,12 +36,27 @@ class QuestionController extends Controller
     {
         $this->validate($request, [
             'recipient_id' => 'required|integer',
+            'asker_id' => 'required|integer',
             'question' => 'required|max:255',
-            'user_from' => 'required|max:100',
         ]);
+
         $question = Question::makeOne($request);
 
-        // return view
+        if ($question) {
+            $recipient = User::find($question->to_user_id);
+
+            return [
+                'successs' => true,
+                'error' => null,
+                'data' => $recipient->listQuestions(20)
+            ];
+        }
+
+        return [
+            'success' => false,
+            'error' => 'Failed to submit question',
+            'data' => null
+        ];
     }
 
     /*
