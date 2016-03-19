@@ -511,7 +511,7 @@ ul {
   color: #607d8b;
   text-decoration: none;
   text-align: center;
-  padding: 0.125rem;
+  padding: 0.1875rem 0.0625rem 0.0625rem 0.0625rem;
   margin-bottom: 0.5rem;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
