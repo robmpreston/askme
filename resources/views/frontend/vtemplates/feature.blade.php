@@ -2,7 +2,7 @@
     <div class="featured">
         <div class="row">
             <div class="col-md-1 text-right">
-                <img v-bind:src="user.profile_image">
+                <img :src="user.profile_image">
             </div>
             <div class="col-md-11">
                 <div class="info">
