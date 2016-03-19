@@ -1,6 +1,6 @@
 <template id="answer-template">
     <div class="answer-container">
-        <p><img src="/"> Reply From </p>
+        <p><img :src="recipient.picture"> <span class="faded-text">Reply from</span> @{{ recipient.first_name }}</p>
         <p>@{{ answer.text_response }}</p>
         <div class="like-block">
             <p>

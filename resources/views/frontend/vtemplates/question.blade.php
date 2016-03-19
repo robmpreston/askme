@@ -5,18 +5,10 @@
         <i class="fa fa-caret-down" @click="downvote(question.id)" :class="{disabled: downvoted}"></i>
     </div>
     <div class="qa-container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="question-container">
-                    <p><img src="/"> Derek From Baltimore</p>
-                    <p>@{{ question.text_response }}</p>
-                </div>
-            </div>
+        <div class="question-container">
+            <p><img :src="question.asker.picture"> Derek <span class="faded-text">from</span> Baltimore</p>
+            <p>@{{ question.text_response }}</p>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <answer v-if="question.answer != null" :answer="question.answer"></answer>
-            </div>
-        </div>
+        <answer v-if="question.answer != null" :answer="question.answer" :recipient="recipient"></answer>
     </div>
 </template>

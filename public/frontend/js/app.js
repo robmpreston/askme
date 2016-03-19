@@ -20,7 +20,7 @@ Vue.component('ask', {
 
 Vue.component('question', {
     template: '#question-template',
-    props: ['question'],
+    props: ['question', 'recipient'],
     data: function() {
         return {
             upvoted: false,
@@ -68,7 +68,7 @@ Vue.component('question', {
 
 Vue.component('answer', {
     template: '#answer-template',
-    props: ['answer'],
+    props: ['answer', 'recipient'],
     data: function() {
         return {
             liked: false

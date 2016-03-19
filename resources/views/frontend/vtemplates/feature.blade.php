@@ -1,6 +1,6 @@
 <template id="feature-template">
     <div class="featured">
-        <img class="avatar" v-bind:src="user.profile_image">
+        <img class="avatar" :src="user.picture">
         <div class="info container">
             <p>I am @{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.from }}</span></p>
             <p class="description">@{{ user.profile.description }}</p>
