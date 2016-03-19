@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Contracts\Factory as Socialite;
 
 class AuthController extends Controller
 {
@@ -35,9 +36,30 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Socialite $socialite = null)
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->socialite = $socialite;
+    }
+
+    public function getSocialAuth($provider=null)
+    {
+        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+        return $this->socialite->with($provider)->redirect();
+    }
+
+    public function getSocialAuthCallback($provider=null)
+    {
+        $user = $this->socialite->with($provider)->user();
+        if ($user) {
+            if ($provider == 'facebook') {
+                return $this->facebookCreateOrLogin($user);
+            }
+        }
+        if($user = $this->socialite->with($provider)->user()){
+            dd($user);
+        }
+        return 'something went wrong';
     }
 
     /**
@@ -49,7 +71,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -64,9 +87,45 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'slug' => User::createSlug($data['first_name'], $data['last_name']),            
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function facebookCreateOrLogin($data)
+    {
+        // Check If User Exists
+        $user = User::getByEmail($data->email);
+        if ($user && $user->facebook_id) {
+            return $user;
+        }
+
+        // user exists but facebook ID is not saved
+        if ($user && !$user->facebook_id) {
+            $user->first_name = $data->user->first_name;
+            $user->last_name = $data->user->last_name;
+            $user->facebook_id = $data->id;
+            $user->save();
+            return $user;
+        }
+
+        // new user
+        $user = new User;
+        $user->first_name = $data->user->first_name;
+        $user->last_name = $data->user->last_name;
+        $user->email = $data->email;
+        $user->slug = User::createSlug($data->user->first_name, $data->user->last_name);
+        $user->facebook_id = $data->id;
+        $user->password = Hash::make($data->id . self::salt());
+        $user->save();
+        return $user;
+    }
+
+    public static function salt()
+    {
+        return 'JRobKeepYourDayJob';
     }
 }

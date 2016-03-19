@@ -5,19 +5,22 @@ namespace App\Events;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Models\Answer;
 
-class SomeEvent extends Event
+class AnswerWasGiven extends Event
 {
     use SerializesModels;
+
+    public $answer;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Answer $answer)
     {
-        //
+        $this->answer = $answer;
     }
 
     /**

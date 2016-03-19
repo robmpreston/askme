@@ -3,6 +3,8 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Auth;
 use Event;
 
 class Question extends Model
@@ -60,11 +62,11 @@ class Question extends Model
     public static function makeOne(Request $request)
     {
         $question = new Question;
-        $question->to_user_id = $request->respondent_id;
-        $question->asker()->attach($auth->user());
+        $question->to_user_id = $request->recipient_id;
+        $question->from_user_id = Auth::user() ? Auth::user()->id : 1;
         $question->user_from = $request->user_from;
         $question->text_response = $request->question;
-        $question->weight = $this->getWeight();
+        $question->weight = $question->getWeight();
         $question->save();
         return $question;
     }
@@ -76,7 +78,7 @@ class Question extends Model
      */
     public static function getForRespondent($respondent_id)
     {
-        return self::with('votes', 'asker', 'answer')->get();
+        return self::with('votes', 'asker', 'answer')->where('to_user_id', '=', $respondent_id)->get();
     }
 
     public function getWeight()
@@ -105,6 +107,13 @@ class Question extends Model
         $downs = DB::table('question_votes')->where('question_id', '=', $question_id)->where('is_down_vote', '=', true)->count();
         $net = $ups - $downs;
         return $net;
+    }
+
+    public static function updateNetVotes($question_id)
+    {
+        $net_votes = self::getNetVoteCount($question_id);
+        DB::table('questions')->where('id', '=', $question_id)->update(['net_votes' => $net_votes]);
+        return $net_votes;
     }
 
 }

@@ -11,11 +11,11 @@
     <div id="app">
         <div class="container">
             <login-modal :show.sync="showLoginModal"></login-modal>
-            <button class="default-btn" @click="showLoginModal = true">Login</button>
+            <button class="default-btn" @click="showLoginModal = true">Login/Signup</button>
             <h1>Soapbox</h1>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <feature :user="user"></feature>
+                    <feature :user="recipient"></feature>
                 </div>
             </div>
             <ask></ask>

@@ -5778,7 +5778,7 @@ p {
   color: #607d8b; }
 
 .faded-text {
-  color: #cfd8dc; }
+  color: #c2cdd3; }
 
 .featured {
   margin: 0px auto 50px auto;
@@ -5809,25 +5809,29 @@ p {
       color: #607d8b; }
 
 .default-btn {
-  margin: 10px;
+  margin: 0;
   padding: 12px 24px 12px 24px;
   border-radius: 3px;
-  border: solid 1px #cfd8dc;
+  border: solid 1px #c2cdd3;
   color: #607d8b;
   font-size: 1em;
   background-color: white;
   outline: none; }
   .default-btn:disabled p {
     background-color: white;
-    color: #cfd8dc; }
+    color: #c2cdd3; }
   .default-btn[disabled]:hover {
-    border: solid 1px #cfd8dc; }
+    border: solid 1px #c2cdd3; }
   .default-btn:hover {
     border: solid 1px #607d8b; }
   .default-btn p {
     background-color: white;
     color: #607d8b;
     margin: 0; }
+
+.full-width-btn {
+  width: 100%;
+  margin: 0 0 16px 0; }
 
 .no-border-btn {
   border: 0px;
@@ -5847,6 +5851,20 @@ p {
     border: solid 1px #b0bec5;
     outline: 0;
     padding: 11px 24px 11px 24px; }
+  .ask-container img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; }
+  .ask-container textarea {
+    width: 100%;
+    min-height: 30px;
+    border: 0px;
+    outline: 0; }
+
+.ask-open {
+  border: 1px solid #607d8b;
+  border-radius: 3px;
+  padding: 24px; }
 
 .qa-container {
   margin-bottom: 24px;
@@ -5854,14 +5872,22 @@ p {
   .qa-container .question-container {
     background: white;
     padding: 24px; }
+    .qa-container .question-container img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%; }
   .qa-container .answer-container {
     border-top: 1px solid #eceff1;
     background: #f7f9fa;
     padding: 24px; }
+    .qa-container .answer-container img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%; }
     .qa-container .answer-container .like-block {
       display: inline-block; }
       .qa-container .answer-container .like-block .like-btn-outline {
-        color: #cfd8dc; }
+        color: #c2cdd3; }
       .qa-container .answer-container .like-block .like-btn {
         color: #607d8b; }
 
@@ -5909,5 +5935,18 @@ p {
 .modal-leave .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1); }
+
+/* Social Icons */
+.fa-facebook-official, .fa-facebook-square {
+  color: #3b5998; }
+
+.fa-twitter, .fa-twitter-square {
+  color: #00aced; }
+
+.editable {
+  display: inline-block;
+  border: 0;
+  min-height: 100px;
+  width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

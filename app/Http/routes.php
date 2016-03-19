@@ -11,17 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
-
 Route::get('/admin', function () {
     return view('backend.index');
 });
 
-Route::get('/api/question/upvote', 'QuestionController@upvote');
-Route::get('/api/question/downvote', 'QuestionController@downvote');
-Route::get('/api/answer/like', 'AnswerController@like');
+// SOCIAL LOGIN 
+Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+
+// HOME
+Route::get('/api/home', 'HomeController@index');
+
+// QUESTION
+Route::post('/api/question/store', 'QuestionController@store');
+Route::post('/api/question/upvote', 'QuestionController@upvote');
+Route::post('/api/question/downvote', 'QuestionController@downvote');
+
+// ANSWER
+Route::post('/api/answer/like', 'AnswerController@like');
+Route::post('/api/answer/store', 'AnswerController@store');
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +42,12 @@ Route::get('/api/answer/like', 'AnswerController@like');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+    Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
 });
+
+Route::get('/{slug}', 'HomeController@index');
+Route::get('/', 'HomeController@index');

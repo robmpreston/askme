@@ -7,7 +7,7 @@
 $open-sans: 'Open Sans', sans-serif;
 $muli: 'Muli', sans-serif;
 
-$faded-grey: #cfd8dc;
+$faded-grey: #c2cdd3;
 $light-grey: #b0bec5;
 $grey: #607d8b;
 $dark-grey: #263238;
@@ -87,7 +87,7 @@ p {
 }
 
 .default-btn {
-    margin: 10px;
+    margin: 0;
     padding: 12px 24px 12px 24px;
     border-radius: 3px;
     border: solid 1px $faded-grey;
@@ -114,6 +114,11 @@ p {
     }
 }
 
+.full-width-btn {
+    width: 100%;
+    margin: 0 0 16px 0;
+}
+
 .no-border-btn {
     border: 0px;
     padding: 12px;
@@ -136,6 +141,23 @@ p {
         outline: 0;
         padding: 11px 24px 11px 24px;
     }
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+    textarea {
+        width: 100%;
+        min-height: 30px;
+        border: 0px;
+        outline: 0;
+    }
+}
+
+.ask-open {
+    border: 1px solid $grey;
+    border-radius: 3px;
+    padding: 24px;
 }
 
 .qa-container {
@@ -145,12 +167,22 @@ p {
     .question-container {
         background: white;
         padding: 24px;
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
     }
 
     .answer-container {
         border-top: 1px solid $light-border;
         background: $answer-bg;
         padding: 24px;
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
         .like-block {
             display: inline-block;
             .like-btn-outline {
@@ -217,4 +249,23 @@ p {
 .modal-leave .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+}
+
+/* Social Icons */
+.fa-facebook-official, .fa-facebook-square {
+    color: #3b5998
+}
+.fa-twitter, .fa-twitter-square {
+    color: #00aced
+}
+
+.fa-external-link {
+
+}
+
+.editable {
+    display:inline-block;
+    border: 0;
+    min-height: 100px;
+    width: 100%;
 }

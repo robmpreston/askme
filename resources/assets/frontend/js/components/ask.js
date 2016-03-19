@@ -7,8 +7,13 @@ Vue.component('ask', {
         };
     },
     methods: {
-        toggle: function() {
+        toggle: function(holder) {
             this.open = !this.open;
+            if (this.open) {
+                holder.$$.questionTextArea.focus()
+            } else {
+                holder.$$.questionTextInput.focus()
+            }
         }
     }
 });
