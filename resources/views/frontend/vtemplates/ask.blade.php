@@ -1,5 +1,5 @@
 <template id="ask-template">
-    <div class="ask container" v-show="!open">
+    <div class="ask-input container" v-show="!open">
         <input type="text" placeholder="What do you want to ask DeRay?" v-model="question" @click="toggle">
     </div>
     <div class="ask container open" v-show="open">
