@@ -16,7 +16,6 @@
                 this.nextTick( function() {
                     this.$els.questionText.focus();
                 });
-
             },
             sendQuestion: function() {
                 this.$http.post('/api/question/store',

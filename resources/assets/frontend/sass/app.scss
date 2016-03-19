@@ -90,7 +90,7 @@ header.top {
 
 .social-container {
     position:absolute;
-    right:-5rem;
+    right:-5.5rem;
     top:0;
     margin:0;
     a {
@@ -289,4 +289,43 @@ header.top {
     border: 0;
     min-height: 100px;
     width: 100%;
+}
+
+//SVG STUFF
+
+.vote .svg-icon {
+    height:15px;
+    width:22px;
+    cursor:pointer;
+}
+
+.up.vote {
+    margin-bottom:4px;
+}
+
+.down.vote {
+    margin-top:4px;
+}
+
+.vote .focus,
+.vote .hover {
+    display:none;
+}
+
+.vote:hover {
+    .static, .focus {
+        display:none;
+    }
+    .hover {
+        display:block;
+    }
+}
+
+.vote:active {
+    .static, .hover {
+        display:none !important;
+    }
+    .focus {
+        display:block !important;
+    }
 }

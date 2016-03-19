@@ -504,8 +504,8 @@ ul {
     text-decoration: underline; }
 
 .social.button {
-  font-size: 0.75rem;
-  width: 4.5rem;
+  font-size: 0.73rem;
+  width: 5rem;
   color: #607d8b;
   border: solid 1px #c2cdd3;
   color: #607d8b;
@@ -592,7 +592,7 @@ header.top {
 
 .social-container {
   position: absolute;
-  right: -5rem;
+  right: -5.5rem;
   top: 0;
   margin: 0; }
   .social-container a {
@@ -752,5 +752,32 @@ header.top {
   border: 0;
   min-height: 100px;
   width: 100%; }
+
+.vote .svg-icon {
+  height: 15px;
+  width: 22px;
+  cursor: pointer; }
+
+.up.vote {
+  margin-bottom: 4px; }
+
+.down.vote {
+  margin-top: 4px; }
+
+.vote .focus,
+.vote .hover {
+  display: none; }
+
+.vote:hover .static, .vote:hover .focus {
+  display: none; }
+
+.vote:hover .hover {
+  display: block; }
+
+.vote:active .static, .vote:active .hover {
+  display: none !important; }
+
+.vote:active .focus {
+  display: block !important; }
 
 /*# sourceMappingURL=app.css.map */
