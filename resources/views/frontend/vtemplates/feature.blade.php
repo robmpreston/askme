@@ -25,7 +25,7 @@
             <article>
                 <input type="text" v-model="user.first_name" placeholder="First name"><input type="text" v-model="user.last_name" placeholder="Last name">
                 <input type="text" v-model="user.profile.i_am_a" placeholder="I am a">
-                <textarea v-model="user.profile.description" placeholder="Description">
+                <input type="text" v-model="user.profile.description" placeholder="Description">
             </article>
         </div>
         <div class="social-container">
