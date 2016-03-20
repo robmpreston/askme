@@ -13,7 +13,7 @@
         methods: {
             toggle: function() {
                 this.open = !this.open;
-                this.nextTick( function() {
+                this.$nextTick( function() {
                     this.$els.questionText.focus();
                 });
             },
@@ -25,9 +25,11 @@
                     question: this.question_text
                 })
                 .then(function (response) {
-                    this.$dispatch('questions-updated', response.data.data);
-                    this.open = false;
-                    this.question_text = '';
+                    if (response.data.success) {
+                        this.$dispatch('questions-updated', response.data.data);
+                        this.open = false;
+                        this.question_text = '';
+                    }
                 }, function (response) {
                     console.log('failed');
                 });

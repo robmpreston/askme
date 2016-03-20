@@ -55,7 +55,7 @@ class QuestionController extends Controller
             $list = $recipient->listQuestions(20, [$question->id]);
             array_unshift($list, $question);
             return [
-                'successs' => true,
+                'success' => true,
                 'error' => null,
                 'data' => $list,
             ];

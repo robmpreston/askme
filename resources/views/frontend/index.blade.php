@@ -7,7 +7,7 @@
         <header class="top">
             <!--<h1>Soapbox</h1> -->
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
-            <button v-if="loggedIn" class="ghost button button-logout" @click="logout">Logout</button>
+            <button v-if="loggedIn" class="clear button button-logout" @click="logout">@{{ user.first_name }}</button>
             <div v-if="loggedIn" >
             <div class="image-upload">
                 <label for="file-input">
