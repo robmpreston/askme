@@ -5,8 +5,20 @@
         template: '#feature-template',
         props: ['user', 'isAdmin'],
         data: function() {
+            return {
+                editing: false
+            }
         },
         methods: {
+            editProfile: function() {
+                this.editing = true;
+            },
+            saveProfile: function() {
+
+            },
+            cancel: function() {
+                this.editing = false;
+            }
         },
         computed: {
             name: function() {

@@ -577,7 +577,13 @@ header.top {
       width: 3.75rem;
       height: auto;
       display: inline-block;
-      vertical-align: middle; }
+      vertical-align: middle;
+      position: relative; }
+    .featured .avatar-container .edit-text {
+      position: absolute;
+      left: 0;
+      text-align: center;
+      top: 1.75rem; }
   .featured article {
     margin-left: 5.25rem;
     text-align: left; }

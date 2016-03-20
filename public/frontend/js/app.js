@@ -77,6 +77,14 @@
                         this.question.downvoted = !this.question.downvoted;
                     });
                 }
+            },
+            hide: function() {
+                if (this.loggedIn && this.isAdmin) {
+                    this.$http.post('/api/question/hide', { question_id: this.question.id })
+                        .then(function (response) {
+
+                        });
+                }
             }
         },
         computed: {
@@ -135,8 +143,20 @@
         template: '#feature-template',
         props: ['user', 'isAdmin'],
         data: function() {
+            return {
+                editing: false
+            }
         },
         methods: {
+            editProfile: function() {
+                this.editing = true;
+            },
+            saveProfile: function() {
+
+            },
+            cancel: function() {
+                this.editing = false;
+            }
         },
         computed: {
             name: function() {

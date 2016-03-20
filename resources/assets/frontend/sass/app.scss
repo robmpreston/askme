@@ -70,6 +70,13 @@ header.top {
             height: auto;
             display: inline-block;
             vertical-align: middle;
+            position: relative;
+        }
+        .edit-text {
+            position: absolute;
+            left: 0;
+            text-align: center;
+            top: 1.75rem;
         }
     }
     article {

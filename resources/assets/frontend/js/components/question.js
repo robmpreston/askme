@@ -36,9 +36,9 @@
             hide: function() {
                 if (this.loggedIn && this.isAdmin) {
                     this.$http.post('/api/question/hide', { question_id: this.question.id })
-                        .then(function (response)) {
-                                
-                        }
+                        .then(function (response) {
+
+                        });
                 }
             }
         },
