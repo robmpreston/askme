@@ -8,11 +8,17 @@
             <p>@{{ answer.text_response }}</p>
         </article>
         <div class="like-block">
-            <p>
-                <svg class="svg-icon thumbs-up" style="margin-right:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-static-icon"></use></svg>
-                <svg class="svg-icon thumbs-up" style="margin-left:1px" @click="like(answer.id)" v-show="!answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
-                @{{ answer.net_votes }}
-                <a class="social button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
+                <p class="like-icon">
+                    <span v-show="!answer.upvoted">
+                        <svg class="svg-icon thumbs-up static" style="margin-right:1px" @click="like(answer.id)" ><use xlink:href="#like-static-icon"></use></svg>
+                        <svg class="svg-icon thumbs-up hover" style="margin-left:1px" @click="like(answer.id)"><use xlink:href="#like-hover-icon"></use></svg>
+                    </span>
+                    <svg class="svg-icon thumbs-up active" style="margin-left:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
+                </p>
+                <p class="votes">@{{ answer.net_votes }}</p>
+                <p class="edit">
+                    <a class="small ghost button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
+                </p>
             </p>
         </div>
     </div>

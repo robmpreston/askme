@@ -25,6 +25,10 @@ class Question_Vote extends Model
     public static function makeOne($question_id, $down_vote = false)
     {
         $vote = self::getForUser($question_id);
+        if ($vote && $vote->is_down_vote == $down_vote) {
+            $vote->delete();
+            return true;
+        } 
         if (!$vote) {
             $vote = new Question_Vote;
             $vote->question_id = $question_id;

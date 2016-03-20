@@ -1,5 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
-@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
+@import url(../fonts/AvenirNext-Medium.eot);
+@import url(../fonts/AvenirNext-Medium.woff);
+@import url(../fonts/AvenirNext-Medium.woff2);
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -478,9 +479,9 @@ ul {
 .ghost.button {
   border: solid 1px #c2cdd3;
   text-decoration: none;
-  color: #607d8b; }
+  color: #607d8b;
+  background-color: transparent; }
   .ghost.button:disabled {
-    background-color: white;
     color: #c2cdd3; }
   .ghost.button[disabled]:hover {
     color: #c2cdd3;
@@ -490,6 +491,10 @@ ul {
 
 .ghost.button.facebook {
   color: #3b5998; }
+
+.small.button {
+  padding: 3px 12px;
+  font-size: 0.75rem; }
 
 .clear.button {
   border: none;
@@ -525,7 +530,7 @@ ul {
   vertical-align: middle; }
 
 body {
-  font-family: "Muli", sans-serif;
+  font-family: "AvenirNext-Medium", sans-serif;
   font-weight: normal;
   background: white;
   line-height: 1.35; }
@@ -553,6 +558,9 @@ p {
 
 .faded-text {
   color: #c2cdd3; }
+
+article p {
+  margin: 0.5rem 0; }
 
 header.top {
   position: relative;
@@ -613,7 +621,7 @@ header.top {
 .social-container {
   position: absolute;
   right: -5.5rem;
-  top: 0;
+  top: -1px;
   margin: 0; }
   .social-container a {
     display: block;
@@ -696,19 +704,33 @@ header.top {
   background-clip: padding-box; }
   .answer.container .like-block {
     display: inline-block; }
+    .answer.container .like-block * {
+      vertical-align: middle; }
     .answer.container .like-block svg {
       cursor: pointer;
       height: 1.5rem;
       width: 1.375rem; }
+    .answer.container .like-block svg.static {
+      padding-left: 1px; }
+    .answer.container .like-block svg.hover {
+      padding-right: 1px;
+      display: none; }
+    .answer.container .like-block svg.active {
+      padding: 0 0 0 1px; }
     .answer.container .like-block p {
       margin: 0;
-      color: #607d8b; }
-      .answer.container .like-block p * {
-        vertical-align: middle; }
+      color: #607d8b;
+      display: inline-block; }
+    .answer.container .like-block .like-icon:hover svg.static {
+      display: none; }
+    .answer.container .like-block .like-icon:hover svg.hover {
+      display: inline-block; }
     .answer.container .like-block .like-btn-outline {
       color: #c2cdd3; }
     .answer.container .like-block .like-btn {
       color: #607d8b; }
+    .answer.container .like-block .edit {
+      margin-left: 1.5rem; }
   .answer.container textarea {
     background: #f7f9fa;
     margin-top: 1rem;

@@ -139,6 +139,7 @@
                         if (!response.data.success) {
                             this.answer.upvoted = !this.answer.upvoted;
                         } else {
+                            console.log('hi');
                             this.answer.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {

@@ -23,7 +23,7 @@
                     <p>@{{ question.text_response }}</p>
                 </article>
                 <article>
-                    <a class="social button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
+                    <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
                 </article>
             </div>
             <answer v-if="question.answer != null" :answer="question.answer"
@@ -45,7 +45,7 @@
             <div class="social-container">
                 <tweet :link="shareUrl" text="Ask me"></tweet>
                 <fbshare :link="shareUrl" text="Ask me"></fbshare>
-                <a class="social button" v-if="isAdmin" @click="hide" href="#">Hide</a>
+                <a class="small ghost button" v-if="isAdmin" @click="hide" href="#">Hide</a>
             </div>
         </div>
     </div>
