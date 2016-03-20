@@ -13,7 +13,7 @@
         methods: {
             toggle: function() {
                 this.open = !this.open;
-                this.nextTick( function() {
+                this.$nextTick( function() {
                     this.$els.questionText.focus();
                 });
             },
