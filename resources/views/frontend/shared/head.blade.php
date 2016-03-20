@@ -11,5 +11,6 @@
         var loggedIn = <?php echo json_encode($logged_in); ?>;
         var user = <?php echo json_encode($user); ?>;
         var isAdmin = <?php echo json_encode($is_admin); ?>;
+        var baseUrl = <?php echo json_encode($base_url); ?>;
     </script>
 </head>

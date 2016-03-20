@@ -9,7 +9,8 @@
             questions: questions,
             loggedIn: loggedIn,
             user: user,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+            baseUrl: baseUrl
         },
         methods: {
             logout: function () {

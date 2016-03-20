@@ -3,7 +3,7 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient', 'loggedIn', 'isAdmin'],
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl'],
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
@@ -51,6 +51,9 @@
                 } else {
                     return this.question.net_votes;
                 }
+            },
+            shareUrl: function() {
+                return this.baseUrl + '/question-' + this.question.id;
             }
         }
     });
