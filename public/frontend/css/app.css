@@ -671,8 +671,6 @@ header.top {
   border-radius: 0.1875rem;
   background-clip: padding-box;
   border: solid 1px #b0bec5; }
-  .ask.container p * {
-    vertical-align: middle; }
   .ask.container img {
     width: 32px;
     height: 32px;
