@@ -38,7 +38,7 @@
                 </article>
                 <div class="like-block">
                     <p>
-                        <a class="social button" @click="submitAnswer" href="#">Submit</a>
+                        <a class="small ghost button" @click="submitAnswer" href="#">Submit</a>
                     </p>
                 </div>
             </div>
