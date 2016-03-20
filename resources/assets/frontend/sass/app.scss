@@ -274,6 +274,17 @@ header.top {
     }
 }
 
+.container {
+    header {
+        p {
+            color:$grey;
+        }
+        img {
+            margin-right:0.5rem;
+        }
+    }
+}
+
 .vote-block {
     position:absolute;
     left:-2.5rem;
