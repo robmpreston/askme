@@ -23,17 +23,23 @@
                 <p class="edit-text">Change</p>
             </div>
             <article>
-                <input type="text" v-model="user.first_name" placeholder="First name"><input type="text" v-model="user.last_name" placeholder="Last name">
+                <div class="row">
+                    <div class="half column padding">
+                        <input type="text" v-model="user.first_name" placeholder="First name">
+                    </div>
+                    <div class="half column padding">
+                        <input class="fifty" type="text" v-model="user.last_name" placeholder="Last name">
+                    </div>
+                </div>
                 <input type="text" v-model="user.profile.i_am_a" placeholder="I am a">
-                <input type="text" v-model="user.profile.description" placeholder="Description">
+                <textarea v-model="user.profile.description" placeholder="Description"></textarea>
             </article>
         </div>
         <div class="social-container">
-            <input type="text" v-model="user.profile.website_url" placeholder="Website">
-            <input type="text" v-model="user.profile.twitter_url" placeholder="Twitter">
-            <input type="text" v-model="user.profile.facebook_url" placeholder="Facebook">
+            <a class="social button website" v-if="user.profile.website_url != ''" :href="user.profile.website_url" target="_blank"><i class="fa fa-external-link"></i> Website</a>
+            <a class="social button" v-if="user.profile.twitter_url != ''" :href="user.profile.twitter_url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
+            <a class="social button" v-if="user.profile.facebook_url != ''" :href="user.profile.facebook_url" target="_blank"><i class="fa fa-facebook-official"></i> Facebook</a>
             <a class="social button" v-if="isAdmin" @click="saveProfile" href="#">Save Profile</a>
         </div>
     </div>
-
 </template>

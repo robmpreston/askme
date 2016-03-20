@@ -102,7 +102,12 @@ header.top {
             position: absolute;
             left: 0;
             text-align: center;
-            top: 1.75rem;
+            top: 2.75rem;
+            color:$grey;
+            cursor:pointer;
+            &:hover {
+                border-bottom:1px solid $grey;
+            }
         }
     }
     article {
@@ -117,6 +122,23 @@ header.top {
             font-size: 14px;
             color: $faded-grey;
             margin: 0 1rem 0 0;
+        }
+        input {
+            width:100%;
+            color:$grey;
+            @include border-box();
+        }
+        textarea {
+            margin-top:1rem;
+            border: solid 1px #b0bec5;
+            color:$grey;
+            outline: 0;
+            padding: 11px 1.5rem 11px 1.5rem;
+            background-clip: padding-box;
+            width:100%;
+            height:8.5rem;
+            @include border-box();
+            @include border-radius(0.1875rem);
         }
     }
 }
@@ -168,15 +190,19 @@ header.top {
     }
 }
 
+input[type='text'] {
+    border: solid 1px #b0bec5;
+    outline: 0;
+    padding: 11px 1.5rem 11px 1.5rem;
+    background-clip: padding-box;
+    @include border-radius(0.1875rem);
+}
+
 .ask-input.container {
     margin: 0 auto 1.5rem auto;
     padding:0;
     input {
         width: 100%;
-        border: solid 1px $normal-border;
-        outline: 0;
-        padding: 11px 1.5rem 11px 1.5rem;
-        @include border-radius(0.1875rem);
     }
 }
 
