@@ -13,6 +13,7 @@
             <a class="social button website" v-if="user.profile.website_url != ''" :href="user.profile.website_url" target="_blank"><i class="fa fa-external-link"></i> Website</a>
             <a class="social button" v-if="user.profile.twitter_url != ''" :href="user.profile.twitter_url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
             <a class="social button" v-if="user.profile.facebook_url != ''" :href="user.profile.facebook_url" target="_blank"><i class="fa fa-facebook-official"></i> Facebook</a>
+            <a class="social button" v-if="isAdmin" @click="editProfile" href="#">Edit Profile</a>
         </div>
     </div>
 </template>

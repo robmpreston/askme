@@ -3,7 +3,7 @@
 
     Vue.component('feature', {
         template: '#feature-template',
-        props: ['user'],
+        props: ['user', 'isAdmin'],
         data: function() {
         },
         methods: {

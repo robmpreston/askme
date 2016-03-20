@@ -48,7 +48,7 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient', 'loggedIn'],
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
@@ -99,7 +99,7 @@
 
     Vue.component('answer', {
         template: '#answer-template',
-        props: ['answer', 'recipient', 'loggedIn'],
+        props: ['answer', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             like: function(answerId) {
                 if (this.loggedIn) {
@@ -133,7 +133,7 @@
 
     Vue.component('feature', {
         template: '#feature-template',
-        props: ['user'],
+        props: ['user', 'isAdmin'],
         data: function() {
         },
         methods: {
@@ -221,7 +221,8 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
-            user: user
+            user: user,
+            isAdmin: isAdmin
         },
         methods: {
             logout: function () {

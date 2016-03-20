@@ -3,7 +3,7 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient', 'loggedIn'],
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
@@ -31,6 +31,14 @@
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
                     });
+                }
+            },
+            hide: function() {
+                if (this.loggedIn && this.isAdmin) {
+                    this.$http.post('/api/question/hide', { question_id: this.question.id })
+                        .then(function (response)) {
+                                
+                        }
                 }
             }
         },

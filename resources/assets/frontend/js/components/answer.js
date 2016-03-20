@@ -3,7 +3,7 @@
 
     Vue.component('answer', {
         template: '#answer-template',
-        props: ['answer', 'recipient', 'loggedIn'],
+        props: ['answer', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             like: function(answerId) {
                 if (this.loggedIn) {

@@ -10,5 +10,6 @@
         var questions = <?php echo json_encode($questions); ?>;
         var loggedIn = <?php echo json_encode($logged_in); ?>;
         var user = <?php echo json_encode($user); ?>;
+        var isAdmin = <?php echo json_encode($is_admin); ?>;
     </script>
 </head>
