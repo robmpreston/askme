@@ -70,7 +70,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true, true)) {
             return [
                 'success' => true,
-                'data' => Auth::user(),
+                'data' => [ 'user' => Auth::user() ],
                 'check' => Auth::check(),
                 'error' => null
             ];

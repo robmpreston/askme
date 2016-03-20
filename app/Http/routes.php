@@ -53,6 +53,9 @@ Route::group(['middleware' => 'web'], function () {
     // AJAX LOGIN
     Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
 
+    // AJAX SIGNUP
+    Route::post('/api/user/store', 'UserController@store');
+
     // SOCIAL LOGIN
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
     Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);

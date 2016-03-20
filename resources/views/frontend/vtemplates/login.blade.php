@@ -5,7 +5,7 @@
             <input v-model="lastName" type="text" placeholder="Last Name">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="ghost button full-width">
+            <button class="ghost button full-width" @click="emailSignup">
                 Signup
             </button>
             <a href="{{ url('/social-login/facebook') }}" class="ghost button facebook full-width">

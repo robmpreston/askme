@@ -21,7 +21,33 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * AJAX REQUEST
+     * If Validation Fails Json Response w/ Errors
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+        ]);
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'slug' => User::createSlug($request->first_name, $request->last_name),
+            'password' => bcrypt($request->password),
+        ]);
+
+        Auth::loginUsingId($user->id);
+        
+        return response()->json(['success' => true, 'error' => null, 'data' => ['user' => $user]]);
+    }
+
+    /**
+     * Upload a user's picture
      *
      * @return \Illuminate\Http\Response
      */
