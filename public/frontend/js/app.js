@@ -48,46 +48,50 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient'],
-        data: function() {
-            return {
-                upvoted: false,
-                downvoted: false
-            };
-        },
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             upvote: function(questionId) {
-                this.upvoted = !this.upvoted;
-                this.downvoted = false;
-                console.log(this.upvoted);
+                if (this.loggedIn) {
+                    this.question.upvoted = !this.question.upvoted;
+                    this.question.downvoted = false;
 
-                this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.upvoted = !this.upvoted;
-                    }
-                }, function (response) {
-                    // this.upvoted = !this.upvoted;
-                });
+                    this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.question.upvoted = !this.question.upvoted;
+                        }
+                    }, function (response) {
+                        this.question.upvoted = !this.question.upvoted;
+                    });
+                }
             },
             downvote: function(questionId) {
-                this.downvoted = !this.downvoted;
-                this.upvoted = false;
-                console.log(this.downvoted);
+                if (this.loggedIn) {
+                    this.question.downvoted = !this.question.downvoted;
+                    this.question.upvoted = false;
 
-                this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.downvoted = !this.downvoted;
-                    }
-                }, function (response) {
-                    // this.downvoted = !this.downvoted;
-                });
+                    this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.question.downvoted = !this.question.downvoted;
+                        }
+                    }, function (response) {
+                        this.question.downvoted = !this.question.downvoted;
+                    });
+                }
+            },
+            hide: function() {
+                if (this.loggedIn && this.isAdmin) {
+                    this.$http.post('/api/question/hide', { question_id: this.question.id })
+                        .then(function (response) {
+
+                        });
+                }
             }
         },
         computed: {
             votes: function() {
-                if (this.upvoted) {
+                if (this.question.upvoted) {
                     return this.question.net_votes + 1;
-                } else if (this.downvoted) {
+                } else if (this.question.downvoted) {
                     return this.question.net_votes - 1;
                 } else {
                     return this.question.net_votes;
@@ -103,28 +107,25 @@
 
     Vue.component('answer', {
         template: '#answer-template',
-        props: ['answer', 'recipient'],
-        data: function() {
-            return {
-                liked: false
-            };
-        },
+        props: ['answer', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             like: function(answerId) {
-                this.liked = !this.liked;
-                // GET request
-                this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.liked = !this.liked;
-                    }
-                }, function (response) {
-                    this.liked = !this.liked;
-                });
+                if (this.loggedIn) {
+                    this.answer.upvoted = !this.answer.upvoted;
+
+                    this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.answer.upvoted = !this.answer.upvoted;
+                        }
+                    }, function (response) {
+                        this.answer.upvoted = !this.answer.upvoted;
+                    });
+                }
             }
         },
         computed: {
             votes: function() {
-                if (this.liked) {
+                if (this.answer.upvoted) {
                     return this.answer.net_votes + 1;
                 } else {
                     return this.answer.net_votes;
@@ -140,10 +141,22 @@
 
     Vue.component('feature', {
         template: '#feature-template',
-        props: ['user'],
+        props: ['user', 'isAdmin'],
         data: function() {
+            return {
+                editing: false
+            }
         },
         methods: {
+            editProfile: function() {
+                this.editing = true;
+            },
+            saveProfile: function() {
+
+            },
+            cancel: function() {
+                this.editing = false;
+            }
         },
         computed: {
             name: function() {
@@ -228,7 +241,8 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
-            user: user
+            user: user,
+            isAdmin: isAdmin
         },
         methods: {
             logout: function () {

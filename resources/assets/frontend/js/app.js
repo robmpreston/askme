@@ -8,7 +8,8 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
-            user: user
+            user: user,
+            isAdmin: isAdmin
         },
         methods: {
             logout: function () {

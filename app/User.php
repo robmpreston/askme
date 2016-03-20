@@ -26,6 +26,29 @@ class User extends Authenticatable
         'password', 'remember_token', 'created_at', 'updated_at', 'deleted_at',
     ];
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        // UPLOADED PIC
+        if ($this->picture) {
+            $aws_url = ''; // ?
+            $array['picture'] = $this->picture;
+        }
+
+        // FACEBOOK PIC
+        if (!$this->picture && $this->facebook_id) {
+            $array['picture'] = 'https://graph.facebook.com/' . $this->facebook_id . '/picture?type=square';
+        }
+
+        // DEFAULT PIC
+        if (!$this->picture && !$this->facebook_id) {
+            $aws_url = ''; // ?
+            $array['picture'] = $aws_url . '/default_profile_pic.jpg';
+        }
+        return $array;
+    }
+
     /***************************************************************************************************
      ** RELATIONS
      ***************************************************************************************************/
@@ -86,9 +109,9 @@ class User extends Authenticatable
         $questions = $this->questions()->with('asker', 'answer')->orderBy('weight', 'DESC')->take($limit)->get();
 
         // Assign Whether and How The Logged In User Has Voted On Each Question && Answer
-        $question_ids = Question::listIDsFromQuestions($questions);
-        $answer_ids = Question::listAnswerIDsFromQuestions($questions);
         if (Auth::check()) {
+            $question_ids = Question::listIDsFromQuestions($questions);
+            $answer_ids = Question::listAnswerIDsFromQuestions($questions);
             $questions = Question::assignUserVotes($questions, $question_ids, $answer_ids);
         }
         return $questions;

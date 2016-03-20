@@ -3,28 +3,25 @@
 
     Vue.component('answer', {
         template: '#answer-template',
-        props: ['answer', 'recipient'],
-        data: function() {
-            return {
-                liked: false
-            };
-        },
+        props: ['answer', 'recipient', 'loggedIn', 'isAdmin'],
         methods: {
             like: function(answerId) {
-                this.liked = !this.liked;
-                // GET request
-                this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
-                    if (!response.data.success) {
-                        this.liked = !this.liked;
-                    }
-                }, function (response) {
-                    this.liked = !this.liked;
-                });
+                if (this.loggedIn) {
+                    this.answer.upvoted = !this.answer.upvoted;
+
+                    this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
+                        if (!response.data.success) {
+                            this.answer.upvoted = !this.answer.upvoted;
+                        }
+                    }, function (response) {
+                        this.answer.upvoted = !this.answer.upvoted;
+                    });
+                }
             }
         },
         computed: {
             votes: function() {
-                if (this.liked) {
+                if (this.answer.upvoted) {
                     return this.answer.net_votes + 1;
                 } else {
                     return this.answer.net_votes;
