@@ -1,5 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
-@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
+@import url(../fonts/AvenirNext-Medium.eot);
+@import url(../fonts/AvenirNext-Medium.woff);
+@import url(../fonts/AvenirNext-Medium.woff2);
 @import "variables.scss";
 @import "normalize.scss";
 @import "mixins.scss";
@@ -7,7 +8,7 @@
 @import "buttons.scss";
 
 body {
-    font-family: $muli;
+    font-family: $font;
     font-weight: normal;
     background: white;
     line-height:1.35;
@@ -41,6 +42,12 @@ p {
 
 .faded-text {
     color: $faded-grey;
+}
+
+article {
+    p {
+        margin:0.5rem 0;
+    }
 }
 
 header.top {
@@ -117,7 +124,7 @@ header.top {
 .social-container {
     position:absolute;
     right:-5.5rem;
-    top:0;
+    top:-1px;
     margin:0;
     a {
         display:block;
@@ -213,11 +220,6 @@ header.top {
     border-top: 1px solid $light-border;
     background: $answer-bg;
     @include border-radius( 0 0 0.1875rem 0.1875rem);
-    article {
-        p {
-            margin:0.5rem 0;
-        }
-    }
     .like-block {
         display: inline-block;
         * {
