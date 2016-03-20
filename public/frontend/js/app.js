@@ -99,10 +99,12 @@
                         });
                 }
             },
-            reply: function() {
+            reply: function(e) {
+                e.preventDefault();
                 this.replyOpen = true;
             },
-            submitAnswer: function() {
+            submitAnswer: function(e) {
+                e.preventDefault();
                 if (this.loggedIn && this.isAdmin) {
                     this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
                         .then(function (response) {
@@ -113,6 +115,10 @@
                             }
                         });
                 }
+            },
+            cancelAnswer: function(e) {
+                e.preventDefault();
+                this.replyOpen = false;
             }
         },
         computed: {
