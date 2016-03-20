@@ -709,6 +709,14 @@ header.top {
       color: #c2cdd3; }
     .answer.container .like-block .like-btn {
       color: #607d8b; }
+  .answer.container textarea {
+    background: #f7f9fa;
+    margin-top: 1rem;
+    width: 100%;
+    min-height: 30px;
+    border: 0px;
+    outline: 0;
+    resize: none; }
 
 .vote-block {
   position: absolute;

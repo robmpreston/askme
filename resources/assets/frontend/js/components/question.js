@@ -4,6 +4,12 @@
     Vue.component('question', {
         template: '#question-template',
         props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl'],
+        data: function() {
+            return {
+                replyOpen: false,
+                answerText: ''
+            }
+        },
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
@@ -40,6 +46,12 @@
 
                         });
                 }
+            },
+            reply: function() {
+                this.replyOpen = true;
+            },
+            submitAnswer: function() {
+
             }
         },
         computed: {

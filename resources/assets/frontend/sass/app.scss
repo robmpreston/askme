@@ -234,6 +234,15 @@ header.top {
             color: $grey;
         }
     }
+    textarea {
+        background: $answer-bg;
+        margin-top:1rem;
+        width: 100%;
+        min-height: 30px;
+        border: 0px;
+        outline: 0;
+        resize: none;
+    }
 }
 
 .vote-block {
