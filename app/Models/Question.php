@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Auth;
 use Event;
+use Carbon\Carbon;
 
 class Question extends Model
 {
@@ -79,15 +80,20 @@ class Question extends Model
     {
         $question = new Question;
         $question->to_user_id = $request->recipient_id;
-        $question->from_user_id = Auth::user()->id;
+        $question->asker()->associate(Auth::user());
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
         $question->save();
 
         if ($request->user_from && Auth::user()) {
-            Auth::user()->setFrom($request->user_from);
+            Auth::user()->setFrom($request->user_from); 
         }
         return $question;
+    }
+
+    public static function latencyMinutes()
+    {
+        return 3;
     }
 
     public function getWeight()
@@ -124,6 +130,7 @@ class Question extends Model
         DB::table('questions')->where('id', '=', $question_id)->update(['net_votes' => $net_votes]);
         return $net_votes;
     }
+
 
     /***************************************************************************************************
      ** PAGE LIST OPTIMIZATION FUNCTIONS

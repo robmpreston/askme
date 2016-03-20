@@ -41,15 +41,23 @@ class QuestionController extends Controller
             'question' => 'required|max:255',
         ]);
 
-        $question = Question::makeOne($request);
+        if (Auth::user()->justAsked($request->recipient_id)) {
+            return [
+                'successs' => false,
+                'error' => 'To prevent spam. You have to wait ' . Question::latencyMinutes() . ' minutes between posting questions.',
+                'data' => null,
+            ];
+        }
 
+        $question = Question::makeOne($request);
         if ($question) {
             $recipient = User::find($question->to_user_id);
-
+            $list = $recipient->listQuestions(20, [$question->id]);
+            array_unshift($list, $question);
             return [
                 'successs' => true,
                 'error' => null,
-                'data' => $recipient->listQuestions(20)
+                'data' => $list,
             ];
         }
 

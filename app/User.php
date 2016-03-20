@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Question;
 use App\Models\Answer;
 use Auth;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -77,6 +78,11 @@ class User extends Authenticatable
         return User::where('email', '=', $email)->first();
     }
 
+    public function getLastQuestionForRecipient($recipient_id)
+    {
+        return Question::where('to_user_id', '=', $recipient_id)->where('from_user_id', '=', $this->id)->orderBy('created_at', 'DESC')->first();
+    }
+
     /***************************************************************************************************
      ** GENERAL METHODS
      ***************************************************************************************************/
@@ -103,10 +109,23 @@ class User extends Authenticatable
         return User::where('slug', '=', $slug)->exists();
     }
 
-    public function listQuestions($limit)
+    public function justAsked($recipient_id)
+    {
+        $question = $this->getLastQuestionForRecipient($recipient_id);
+        if ($question && Carbon::now()->subMinute(Question::latencyMinutes()) < $question->created_at->toDateTimeString()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function listQuestions($limit, $skip_ids = [])
     {
         // Collect the Questions w/ Answers By Weight
-        $questions = $this->questions()->with('asker', 'answer')->orderBy('weight', 'DESC')->take($limit)->get();
+        $questions = $this->questions()->with('asker', 'answer');
+        if (count($skip_ids)) {
+            $questions->whereNotIn('id', $skip_ids);
+        }
+        $questions = $questions->orderBy('weight', 'DESC')->take($limit)->get();
 
         // Assign Whether and How The Logged In User Has Voted On Each Question && Answer
         if (Auth::check()) {

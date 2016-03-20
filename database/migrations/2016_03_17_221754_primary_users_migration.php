@@ -21,7 +21,7 @@ class PrimaryUsersMigration extends Migration
             ['first_name' => 'John',    'last_name' => 'Sparwasser',    'slug' => 'john-sparwasser',    'email' => 'johnspar1@gmail.com',           'password' => Hash::make('DerayOnTheRise'),     'from' => 'Canton',      'facebook_id' => null,                  'respondant' => false,      'created_at' => Carbon::now()->toDateTimeString(),      'updated_at' => Carbon::now()->toDateTimeString()],
 
             // Respondants
-            ['first_name' => 'Deray',   'last_name' => 'Mckesson',      'slug' => 'deray-mckesson',     'email' => 'deray@derayformayor.com',       'password' => Hash::make('DerayOnTheRise'),    'from' => 'Baltimore, MD',       'facebook_id' => null,                  'respondant' => true,       'created_at' => Carbon::now()->toDateTimeString(),      'updated_at' => Carbon::now()->toDateTimeString()], // user_id = 5
+            ['first_name' => 'DeRay',   'last_name' => 'Mckesson',      'slug' => 'deray-mckesson',     'email' => 'deray@derayformayor.com',       'password' => Hash::make('DerayOnTheRise'),    'from' => 'Baltimore, MD',       'facebook_id' => null,                  'respondant' => true,       'created_at' => Carbon::now()->toDateTimeString(),      'updated_at' => Carbon::now()->toDateTimeString()], // user_id = 5
         ]);
 
         DB::table('profiles')->insert([
