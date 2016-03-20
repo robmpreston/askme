@@ -59,25 +59,27 @@
             upvote: function(questionId) {
                 this.upvoted = !this.upvoted;
                 this.downvoted = false;
+                console.log(this.upvoted);
 
                 this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
                     if (!response.data.success) {
                         this.upvoted = !this.upvoted;
                     }
                 }, function (response) {
-                    this.upvoted = !this.upvoted;
+                    // this.upvoted = !this.upvoted;
                 });
             },
             downvote: function(questionId) {
                 this.downvoted = !this.downvoted;
                 this.upvoted = false;
+                console.log(this.downvoted);
 
                 this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                     if (!response.data.success) {
                         this.downvoted = !this.downvoted;
                     }
                 }, function (response) {
-                    this.downvoted = !this.downvoted;
+                    // this.downvoted = !this.downvoted;
                 });
             }
         },
