@@ -466,7 +466,8 @@ ul {
   border-radius: 3px;
   font-size: 1em;
   background-color: white;
-  outline: none; }
+  outline: none;
+  text-align: center; }
 
 .button.full-width {
   width: 100%;
