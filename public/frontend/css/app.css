@@ -556,8 +556,9 @@ p {
 
 header.top {
   position: relative;
-  margin: 1.5rem 0 6rem 0;
-  text-align: center; }
+  margin: 1.5rem 0 1.5rem 0;
+  text-align: center;
+  height: 3.5rem; }
   header.top h1 {
     display: inline-block;
     margin: 0.5rem; }
