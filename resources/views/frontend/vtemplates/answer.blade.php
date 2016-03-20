@@ -9,11 +9,11 @@
         </article>
         <div class="like-block">
                 <p class="like-icon">
-                    <span v-show="!answer.upvoted">
+                    <span v-show="!answer.liked">
                         <svg class="svg-icon thumbs-up static" style="margin-right:1px" @click="like(answer.id)" ><use xlink:href="#like-static-icon"></use></svg>
                         <svg class="svg-icon thumbs-up hover" style="margin-left:1px" @click="like(answer.id)"><use xlink:href="#like-hover-icon"></use></svg>
                     </span>
-                    <svg class="svg-icon thumbs-up active" style="margin-left:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
+                    <svg class="svg-icon thumbs-up active" style="margin-left:1px" @click="like(answer.id)" v-show="answer.liked"><use xlink:href="#like-focus-icon"></use></svg>
                 </p>
                 <p class="votes">@{{ answer.net_votes }}</p>
                 <p class="edit">
