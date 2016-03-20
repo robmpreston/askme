@@ -83,8 +83,7 @@
                         if (!response.data.success) {
                             this.question.downvoted = !this.question.downvoted;
                         } else {
-                            console.log(response);
-                            this.question.net_votes = response.data.net_votes;
+                            this.question.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
