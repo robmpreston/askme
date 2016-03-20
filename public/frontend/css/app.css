@@ -683,6 +683,10 @@ header.top {
   background-clip: padding-box; }
   .answer.container .like-block {
     display: inline-block; }
+    .answer.container .like-block svg {
+      cursor: pointer;
+      height: 1.5rem;
+      width: 1.375rem; }
     .answer.container .like-block p {
       margin: 0;
       color: #607d8b; }
