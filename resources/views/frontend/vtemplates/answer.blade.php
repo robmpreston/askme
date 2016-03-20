@@ -9,9 +9,9 @@
         </article>
         <div class="like-block">
             <p>
-                <svg class="svg-icon thumbs-up" style="margin-right:1px" @click="like(answer.id)" v-show="!answer.upvoted"><use xlink:href="#like-static-icon"></use></svg>
-                <svg class="svg-icon thumbs-up" style="margin-left:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
-                @{{ votes }}
+                <svg class="svg-icon thumbs-up" style="margin-right:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-static-icon"></use></svg>
+                <svg class="svg-icon thumbs-up" style="margin-left:1px" @click="like(answer.id)" v-show="!answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
+                @{{ answer.net_votes }}
                 <a class="social button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
             </p>
         </div>

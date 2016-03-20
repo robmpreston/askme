@@ -6,7 +6,8 @@
         data: function() {
             return {
                 question_text: '',
-                open: false
+                open: false,
+                asked: false
             };
         },
         props: [ 'user', 'recipient' ],
@@ -29,6 +30,7 @@
                         this.$dispatch('questions-updated', response.data.data);
                         this.open = false;
                         this.question_text = '';
+                        this.asked = true;
                     }
                 }, function (response) {
                     console.log('failed');
@@ -63,7 +65,6 @@
                     this.question.upvoted = !this.question.upvoted;
                     this.question.downvoted = false;
                     this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
-                        console.log(response);
                         if (!response.data.success) {
                             this.question.upvoted = !this.question.upvoted;
                         } else {
@@ -102,7 +103,16 @@
                 this.replyOpen = true;
             },
             submitAnswer: function() {
-
+                if (this.loggedIn && this.isAdmin) {
+                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
+                        .then(function (response) {
+                            if (response.data.success) {
+                                this.replyOpen = false;
+                                this.answerText = '';
+                                this.question.answer = response.data.data.answer;
+                            }
+                        });
+                }
             }
         },
         computed: {
@@ -128,6 +138,8 @@
                     this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
                         if (!response.data.success) {
                             this.answer.upvoted = !this.answer.upvoted;
+                        } else {
+                            this.answer.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.answer.upvoted = !this.answer.upvoted;
@@ -136,13 +148,6 @@
             }
         },
         computed: {
-            votes: function() {
-                if (this.answer.upvoted) {
-                    return this.answer.net_votes + 1;
-                } else {
-                    return this.answer.net_votes;
-                }
-            }
         }
     });
 

@@ -6,7 +6,8 @@
         data: function() {
             return {
                 question_text: '',
-                open: false
+                open: false,
+                asked: false
             };
         },
         props: [ 'user', 'recipient' ],
@@ -29,6 +30,7 @@
                         this.$dispatch('questions-updated', response.data.data);
                         this.open = false;
                         this.question_text = '';
+                        this.asked = true;
                     }
                 }, function (response) {
                     console.log('failed');

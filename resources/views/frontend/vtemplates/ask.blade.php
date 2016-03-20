@@ -1,7 +1,12 @@
 <template id="ask-template">
     <div id="ask-container">
-        <div class="ask-input container" v-show="!open">
+        <div class="ask-input container" v-show="!open && !asked">
             <input type="text" placeholder="What do you want to ask @{{ recipient.first_name }}?" v-model="question" @click="toggle">
+        </div>
+        <div class="asked">
+            <header>
+                <p v-show="asked">Your question has been submitted!</p>
+            </header>
         </div>
         <div class="ask container open" v-show="open">
             <header>
@@ -9,6 +14,7 @@
                 <p>@{{ user.first_name }} <span class="faded-text">from</span> @{{ user.from }}</p>
             </header>
             <textarea v-model="question_text" v-el:question-text placeholder="What do you want to ask @{{ recipient.first_name }}?"></textarea>
+            <p v-if="errorMsg != ''">@{{ errorMsg }}</p>
             <button class="ghost button" :disabled="question_text == ''" @click="sendQuestion">Submit</button>
         </div>
     </div>

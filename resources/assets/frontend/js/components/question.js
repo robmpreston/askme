@@ -16,7 +16,6 @@
                     this.question.upvoted = !this.question.upvoted;
                     this.question.downvoted = false;
                     this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
-                        console.log(response);
                         if (!response.data.success) {
                             this.question.upvoted = !this.question.upvoted;
                         } else {
@@ -55,7 +54,16 @@
                 this.replyOpen = true;
             },
             submitAnswer: function() {
-
+                if (this.loggedIn && this.isAdmin) {
+                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
+                        .then(function (response) {
+                            if (response.data.success) {
+                                this.replyOpen = false;
+                                this.answerText = '';
+                                this.question.answer = response.data.data.answer;
+                            }
+                        });
+                }
             }
         },
         computed: {
