@@ -178,8 +178,8 @@ class Question extends Model
         $a_votes = $user->getAnswerVotes($answer_ids);
         foreach ($questions as $question) {
             $question->has_voted = array_has($q_votes, $question->id); // has the user voted
-            $question->upvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 1) : false;
-            $question->downvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 0) : false;
+            $question->upvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 0) : false;
+            $question->downvoted = $question->has_voted ? (bool) (array_get($q_votes, $question->id) == 1) : false;
 
             if ($question->answer) {
                 $answer = $question->answer;

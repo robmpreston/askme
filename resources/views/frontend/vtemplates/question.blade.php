@@ -6,7 +6,7 @@
                 <svg class="svg-icon focus"><use xlink:href="#up-focus-icon"></use></svg>
                 <svg class="svg-icon hover"><use xlink:href="#up-hover-icon"></use></svg>
             </div>
-            <p>@{{ votes }}</p>
+            <p>@{{ question.net_votes }}</p>
             <div class="down vote" @click="downvote(question.id)" v-bind:class="{disabled: question.downvoted}">
                 <svg class="svg-icon static"><use xlink:href="#down-static-icon"></use></svg>
                 <svg class="svg-icon focus"><use xlink:href="#down-focus-icon"></use></svg>
@@ -23,11 +23,25 @@
                     <p>@{{ question.text_response }}</p>
                 </article>
                 <article>
-                    <a class="small ghost button" v-if="isAdmin" @click="editProfile" href="#">Reply</a>
+                    <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
                 </article>
             </div>
             <answer v-if="question.answer != null" :answer="question.answer"
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"></answer>
+            <div v-if="replyOpen" class="answer container">
+                <header>
+                    <img :src="recipient.picture">
+                    <p><span class="faded-text">Reply from</span> @{{ recipient.first_name }}</p>
+                </header>
+                <article>
+                    <textarea v-model="answerText" placeholder="Type your response"></textarea>
+                </article>
+                <div class="like-block">
+                    <p>
+                        <a class="social button" @click="submitAnswer" href="#">Submit</a>
+                    </p>
+                </div>
+            </div>
             <div class="social-container">
                 <tweet :link="shareUrl" text="Ask me"></tweet>
                 <fbshare :link="shareUrl" text="Ask me"></fbshare>

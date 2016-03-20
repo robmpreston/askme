@@ -4,15 +4,23 @@
     Vue.component('question', {
         template: '#question-template',
         props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl'],
+        data: function() {
+            return {
+                replyOpen: false,
+                answerText: ''
+            }
+        },
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
                     this.question.upvoted = !this.question.upvoted;
                     this.question.downvoted = false;
-
                     this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
+                        console.log(response);
                         if (!response.data.success) {
                             this.question.upvoted = !this.question.upvoted;
+                        } else {
+                            this.question.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
@@ -27,6 +35,8 @@
                     this.$http.post('/api/question/downvote', { question_id: questionId }).then(function (response) {
                         if (!response.data.success) {
                             this.question.downvoted = !this.question.downvoted;
+                        } else {
+                            this.question.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
@@ -40,18 +50,15 @@
 
                         });
                 }
+            },
+            reply: function() {
+                this.replyOpen = true;
+            },
+            submitAnswer: function() {
+
             }
         },
         computed: {
-            votes: function() {
-                if (this.question.upvoted) {
-                    return this.question.net_votes + 1;
-                } else if (this.question.downvoted) {
-                    return this.question.net_votes - 1;
-                } else {
-                    return this.question.net_votes;
-                }
-            },
             shareUrl: function() {
                 return this.baseUrl + '/' + this.question.id;
             }
