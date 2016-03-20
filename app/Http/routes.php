@@ -37,6 +37,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::post('/api/answer/like', 'AnswerController@like');
 	Route::post('/api/answer/store', 'AnswerController@store');
 
+    // profile
+    Route::post('/api/user/picture', 'UserController@uploadPicture');
 });
 
 Route::group(['middleware' => 'web'], function () {

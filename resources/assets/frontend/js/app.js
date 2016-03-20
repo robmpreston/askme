@@ -10,13 +10,22 @@
             loggedIn: loggedIn,
             user: user,
             isAdmin: isAdmin,
-            baseUrl: baseUrl
+            baseUrl: baseUrl,
+            profileFormUpload:new FormData(),
         },
         methods: {
             logout: function () {
                 this.$http.get('/logout').then(function(response) {
                     this.loggedIn = false;
                     this.user = null;
+                });
+            },
+            bindFile: function() {
+                this.profileFormUpload.append('file', this.$els.fileinput.files[0]);
+                this.$http.post('/api/user/picture', this.profileFormUpload, function(data){
+                    this.user = data.data;
+                }).error(function (data, status, request) {
+                    //error handling here
                 });
             }
         },

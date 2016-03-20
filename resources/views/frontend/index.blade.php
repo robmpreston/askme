@@ -8,12 +8,13 @@
             <!--<h1>Soapbox</h1> -->
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
             <button v-if="loggedIn" class="ghost button button-logout" @click="logout">Logout</button>
+            <div v-if="loggedIn" >
             <div class="image-upload">
                 <label for="file-input">
                     <img :src="user.picture"/>
                 </label>
 
-                <input id="file-input" type="file"/>
+                <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
             </div>
         </header>
         <div class="main-column">

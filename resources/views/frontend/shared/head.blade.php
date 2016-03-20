@@ -5,6 +5,7 @@
     <script src="bower_components/vue/dist/vue.min.js"></script>
     <script src="bower_components/vue-resource/dist/vue-resource.min.js"></script>
     <script src="bower_components/vue-router/dist/vue-router.min.js"></script>
+    <script src="bower_components/vue-validator/vue-validator.min.js"></script>
     <script>
         var recipient = <?php echo json_encode($recipient); ?>;
         var questions = <?php echo json_encode($questions); ?>;

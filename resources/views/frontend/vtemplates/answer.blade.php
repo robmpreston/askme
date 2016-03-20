@@ -9,8 +9,9 @@
         </article>
         <div class="like-block">
             <p>
-                <i class="fa fa-thumbs-o-up fa-2x like-btn-outline" @click="like(answer.id)" v-show="!answer.upvoted"></i>
-                <i class="fa fa-thumbs-up fa-2x like-btn" @click="like(answer.id)" v-show="answer.upvoted"></i> @{{ votes }}
+                <svg class="svg-icon thumbs-up" style="margin-right:1px" @click="like(answer.id)" v-show="!answer.upvoted"><use xlink:href="#like-static-icon"></use></svg>
+                <svg class="svg-icon thumbs-up" style="margin-left:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
+                @{{ votes }}
                 <a class="social button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
             </p>
         </div>

@@ -32,8 +32,8 @@ class User extends Authenticatable
 
         // UPLOADED PIC
         if ($this->picture) {
-            $aws_url = ''; // ?
-            $array['picture'] = $this->picture;
+            $aws_url = env('S3_URL') . 'profile-pictures/'; // ?
+            $array['picture'] = $aws_url . $this->picture;
         }
 
         // FACEBOOK PIC
