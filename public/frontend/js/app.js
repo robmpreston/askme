@@ -98,7 +98,7 @@
                 }
             },
             shareUrl: function() {
-                return this.baseUrl + '/question-' + this.question.id;
+                return this.baseUrl + '/' + this.question.id;
             }
         }
     });
