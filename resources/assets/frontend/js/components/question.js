@@ -16,10 +16,11 @@
                     this.question.upvoted = !this.question.upvoted;
                     this.question.downvoted = false;
                     this.$http.post('/api/question/upvote', { question_id: questionId }).then(function (response) {
+                        console.log(response);
                         if (!response.data.success) {
                             this.question.upvoted = !this.question.upvoted;
                         } else {
-                            this.question.net_votes = response.data.net_votes;
+                            this.question.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
@@ -35,7 +36,7 @@
                         if (!response.data.success) {
                             this.question.downvoted = !this.question.downvoted;
                         } else {
-                            this.question.net_votes = response.data.net_votes;
+                            this.question.net_votes = response.data.data.net_votes;
                         }
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
