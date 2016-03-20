@@ -7,7 +7,8 @@
             return {
                 question_text: '',
                 open: false,
-                asked: false
+                asked: false,
+                errorMsg: ''
             };
         },
         props: [ 'user', 'recipient' ],

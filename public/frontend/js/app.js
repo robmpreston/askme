@@ -7,7 +7,8 @@
             return {
                 question_text: '',
                 open: false,
-                asked: false
+                asked: false,
+                errorMsg: ''
             };
         },
         props: [ 'user', 'recipient' ],
@@ -139,16 +140,16 @@
         methods: {
             like: function(answerId) {
                 if (this.loggedIn) {
-                    this.answer.upvoted = !this.answer.upvoted;
+                    this.answer.liked = !this.answer.liked;
 
                     this.$http.post('/api/answer/like', { answer_id: answerId }).then(function (response) {
                         if (!response.data.success) {
-                            this.answer.upvoted = !this.answer.upvoted;
+                            this.answer.liked = !this.answer.liked;
                         } else {
-                            this.answer.count = response.data.data.count;
+                            this.answer.net_votes = response.data.data.count;
                         }
                     }, function (response) {
-                        this.answer.upvoted = !this.answer.upvoted;
+                        this.answer.liked = !this.answer.liked;
                     });
                 }
             }
@@ -242,7 +243,19 @@
                 this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
                     } else {
-                        this.$dispatch('user-updated', response.data.data);
+                        this.$dispatch('user-updated', response.data.data.user);
+                    }
+                }, function (response) {
+                    console.log('failed');
+                });
+                this.close();
+            },
+            emailSignup: function () {
+                this.$http.post('/api/user/store',
+                { first_name: this.firstName, last_name: this.lastName, email: this.email, password: this.password }).then(function (response) {
+                    if (!response.data.success) {
+                    } else {
+                        this.$dispatch('user-updated', response.data.data.user);
                     }
                 }, function (response) {
                     console.log('failed');
