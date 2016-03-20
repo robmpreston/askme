@@ -185,9 +185,6 @@ header.top {
     padding: 1.5rem;
     @include border-radius(0.1875rem);
     border: solid 1px $normal-border;
-    p * {
-        vertical-align:middle;
-    }
     img {
         width: 32px;
         height: 32px;
@@ -271,6 +268,17 @@ header.top {
         border: 0px;
         outline: 0;
         resize: none;
+    }
+}
+
+.container {
+    header {
+        p {
+            color:$grey;
+        }
+        img {
+            margin-right:0.5rem;
+        }
     }
 }
 

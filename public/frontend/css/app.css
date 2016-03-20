@@ -671,8 +671,6 @@ header.top {
   border-radius: 0.1875rem;
   background-clip: padding-box;
   border: solid 1px #b0bec5; }
-  .ask.container p * {
-    vertical-align: middle; }
   .ask.container img {
     width: 32px;
     height: 32px;
@@ -739,6 +737,12 @@ header.top {
     border: 0px;
     outline: 0;
     resize: none; }
+
+.container header p {
+  color: #607d8b; }
+
+.container header img {
+  margin-right: 0.5rem; }
 
 .vote-block {
   position: absolute;
