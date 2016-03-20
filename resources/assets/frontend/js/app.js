@@ -24,6 +24,9 @@
                 this.profileFormUpload.append('file', this.$els.fileinput.files[0]);
                 this.$http.post('/api/user/picture', this.profileFormUpload, function(data){
                     this.user = data.data;
+                    if (this.user.id == this.recipient.id) {
+                        this.recipient.picture = this.user.picture;
+                    }
                 }).error(function (data, status, request) {
                     //error handling here
                 });
