@@ -786,4 +786,10 @@ header.top {
 .vote:active .focus {
   display: block !important; }
 
+.vote.disabled .static, .vote.disabled .hover {
+  display: none !important; }
+
+.vote.disabled .focus {
+  display: block !important; }
+
 /*# sourceMappingURL=app.css.map */

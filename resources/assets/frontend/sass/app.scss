@@ -336,3 +336,12 @@ header.top {
         display:block !important;
     }
 }
+
+.vote.disabled {
+    .static, .hover {
+        display:none !important;
+    }
+    .focus {
+        display:block !important;
+    }
+}
