@@ -48,7 +48,7 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient', 'loggedIn', 'isAdmin'],
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl'],
         methods: {
             upvote: function(questionId) {
                 if (this.loggedIn) {
@@ -96,6 +96,9 @@
                 } else {
                     return this.question.net_votes;
                 }
+            },
+            shareUrl: function() {
+                return this.baseUrl + '/question-' + this.question.id;
             }
         }
     });
@@ -234,6 +237,26 @@
 (function(){
     'use strict';
 
+    Vue.component('fbshare', {
+        template: '#fbshare-template',
+        props: [ 'link', 'text' ]
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('tweet', {
+        template: '#tweet-template',
+        props: [ 'link', 'text' ]
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     var vm = new Vue({
         el: '#app',
         data: {
@@ -242,7 +265,8 @@
             questions: questions,
             loggedIn: loggedIn,
             user: user,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+            baseUrl: baseUrl
         },
         methods: {
             logout: function () {

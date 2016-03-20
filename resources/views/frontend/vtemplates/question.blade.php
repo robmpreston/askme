@@ -29,8 +29,8 @@
             <answer v-if="question.answer != null" :answer="question.answer"
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"></answer>
             <div class="social-container">
-                <a class="social button" href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i> Tweet</a>
-                <a class="social button" href="https://facebook.com" target="_blank"><i class="fa fa-facebook-official"></i> Share</a>
+                <tweet :link="shareUrl" text="Ask me"></tweet>
+                <fbshare :link="shareUrl" text="Ask me"></fbshare>
                 <a class="social button" v-if="isAdmin" @click="hide" href="#">Hide</a>
             </div>
         </div>
