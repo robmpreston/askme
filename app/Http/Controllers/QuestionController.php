@@ -47,7 +47,7 @@ class QuestionController extends Controller
             $recipient = User::find($question->to_user_id);
 
             return [
-                'successs' => true,
+                'success' => true,
                 'error' => null,
                 'data' => $recipient->listQuestions(20)
             ];

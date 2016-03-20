@@ -62,6 +62,9 @@ header.top {
         img {
             border-radius: 50%;
             width: 3.75rem;
+            &:hover {
+                cursor: pointer;
+            }
         }
         &> input {
             display: none;

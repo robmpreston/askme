@@ -571,6 +571,8 @@ header.top {
     header.top .image-upload img {
       border-radius: 50%;
       width: 3.75rem; }
+      header.top .image-upload img:hover {
+        cursor: pointer; }
     header.top .image-upload > input {
       display: none; }
   header.top .button-logout {
