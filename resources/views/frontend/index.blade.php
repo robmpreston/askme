@@ -7,7 +7,14 @@
         <header class="top">
             <!--<h1>Soapbox</h1> -->
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
-            <button v-if="loggedIn" class="ghost button" @click="logout">Logout</button>
+            <button v-if="loggedIn" class="ghost button button-logout" @click="logout">Logout</button>
+            <div class="image-upload">
+                <label for="file-input">
+                    <img :src="user.picture"/>
+                </label>
+
+                <input id="file-input" type="file"/>
+            </div>
         </header>
         <div class="main-column">
             <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>

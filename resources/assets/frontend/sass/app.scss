@@ -56,6 +56,20 @@ header.top {
         position:absolute;
         right:0;
     }
+    .image-upload {
+        position: absolute;
+        right: 0;
+        img {
+            border-radius: 50%;
+        }
+        &> input {
+            display: none;
+        }
+    }
+    .button-logout {
+        position: absolute;
+        right: 100px;
+    }
 }
 
 .featured {

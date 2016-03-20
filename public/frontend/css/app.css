@@ -565,6 +565,16 @@ header.top {
   header.top .button {
     position: absolute;
     right: 0; }
+  header.top .image-upload {
+    position: absolute;
+    right: 0; }
+    header.top .image-upload img {
+      border-radius: 50%; }
+    header.top .image-upload > input {
+      display: none; }
+  header.top .button-logout {
+    position: absolute;
+    right: 100px; }
 
 .featured {
   position: relative;
