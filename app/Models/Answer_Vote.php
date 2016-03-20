@@ -30,6 +30,10 @@ class Answer_Vote extends Model
     public static function makeOne($answer_id, $down_vote = false)
     {
         $vote = self::getForUser($answer_id);
+        if ($vote && $vote->is_down_vote == $down_vote) {
+            $vote->delete();
+            return true;
+        } 
         if (!$vote) {
             $vote = new Answer_Vote;
             $vote->answer_id = $answer_id;
