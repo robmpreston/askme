@@ -15,7 +15,7 @@
                     </span>
                     <svg class="svg-icon thumbs-up active" style="margin-left:1px" @click="like(answer.id)" v-show="answer.upvoted"><use xlink:href="#like-focus-icon"></use></svg>
                 </p>
-                <p class="votes">@{{ votes }}</p>
+                <p class="votes">@{{ answer.net_votes }}</p>
                 <p class="edit">
                     <a class="small ghost button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
                 </p>
