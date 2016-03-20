@@ -18,8 +18,8 @@
     border: solid 1px $faded-grey;
     text-decoration:none;
     color: $grey;
+    background-color: transparent;
     &:disabled {
-        background-color: white;
         color: $faded-grey;
     }
     &[disabled]:hover {
@@ -33,6 +33,11 @@
 
 .ghost.button.facebook {
     color: $facebook-blue;
+}
+
+.small.button {
+    padding:3px 12px;
+    font-size:0.75rem;
 }
 
 .clear.button {

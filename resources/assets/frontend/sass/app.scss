@@ -213,18 +213,42 @@ header.top {
     border-top: 1px solid $light-border;
     background: $answer-bg;
     @include border-radius( 0 0 0.1875rem 0.1875rem);
+    article {
+        p {
+            margin:0.5rem 0;
+        }
+    }
     .like-block {
         display: inline-block;
+        * {
+            vertical-align:middle;
+        }
         svg {
             cursor:pointer;
             height:1.5rem;
             width:1.375rem;
         }
+        svg.static {
+            padding-left:1px;
+        }
+        svg.hover {
+            padding-right:1px;
+            display:none;
+        }
+        svg.active {
+            padding:0 0 0 1px;
+        }
         p {
             margin:0;
             color:$grey;
-            * {
-                vertical-align:middle;
+            display:inline-block;
+        }
+        .like-icon:hover {
+            svg.static {
+                display:none;
+            }
+            svg.hover {
+                display:inline-block;
             }
         }
         .like-btn-outline {
@@ -232,6 +256,9 @@ header.top {
         }
         .like-btn {
             color: $grey;
+        }
+        .edit {
+            margin-left:1.5rem;
         }
     }
 }
