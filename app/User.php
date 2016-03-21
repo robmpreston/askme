@@ -95,6 +95,14 @@ class User extends Authenticatable
         }
     }
 
+    public function isRecipient($id)
+    {
+        if ($this->id == $id) {
+            return true;
+        }
+        return false;
+    }
+
     public static function createSlug($first_name, $last_name)
     {
         $slug = substr($first_name . '-' . $last_name, 0, 20);
@@ -118,12 +126,15 @@ class User extends Authenticatable
         return false;
     }
 
-    public function listQuestions($limit, $skip_ids = [])
+    public function listQuestions($limit, $skip_ids = [], $show_hidden = false)
     {
         // Collect the Questions w/ Answers By Weight
         $questions = $this->questions()->with('asker', 'answer');
         if (count($skip_ids)) {
             $questions->whereNotIn('id', $skip_ids);
+        }
+        if (!$show_hidden) {
+            $questions->where('hidden', '=', false);
         }
         $questions = $questions->orderBy('weight', 'DESC')->take($limit)->get();
 

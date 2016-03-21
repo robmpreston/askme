@@ -83,6 +83,8 @@ class Question extends Model
         $question->asker()->associate(Auth::user());
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
+        $question->net_votes = 0;
+        $question->hidden = 0;
         $question->save();
 
         if ($request->user_from && Auth::user()) {
@@ -94,6 +96,18 @@ class Question extends Model
     public static function latencyMinutes()
     {
         return 3;
+    }
+
+    public function hide()
+    {
+        $this->hidden = true;
+        $this->save();
+    }
+
+    public function show()
+    {
+        $this->hidden = false;
+        $this->save();
     }
 
     public function getWeight()

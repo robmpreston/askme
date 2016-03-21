@@ -29,6 +29,40 @@ class QuestionController extends Controller
         return ['success' => false, 'error' => null];
     }
 
+    public function hideQuestion(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->respondant) {
+            $question = Question::find($request->question_id);
+            if ($user->id = $question->to_user_id) {
+                $question->hide();
+                return [
+                    'success' => true,
+                    'error' => null,
+                    'data' => $recipient->listQuestions(20),
+                ];
+            }
+        }
+        return ['success' => false, 'error' => 'Action not allowed', 'data' => null];
+    }
+
+    public function showQuestion(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->respondant) {
+            $question = Question::find($request->question_id);
+            if ($user->id = $question->to_user_id) {
+                $question->show();
+                return [
+                    'success' => true,
+                    'error' => null,
+                    'data' => $recipient->listQuestions(20),
+                ];
+            }
+        }
+        return ['success' => false, 'error' => 'Action not allowed', 'data' => null];
+    }
+
     /**
      * AJAX REQUEST
      * If Validation Fails Json Response w/ Errors
