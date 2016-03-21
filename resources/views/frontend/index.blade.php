@@ -7,7 +7,7 @@
         <header class="top">
             <!--<h1>Soapbox</h1> -->
             <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
-            <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
+            <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
                 <label for="file-input">
