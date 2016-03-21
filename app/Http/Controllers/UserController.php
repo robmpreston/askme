@@ -42,10 +42,25 @@ class UserController extends Controller
         ]);
 
         Auth::loginUsingId($user->id);
-        
+
         return response()->json(['success' => true, 'error' => null, 'data' => ['user' => $user]]);
     }
 
+    public function updateProfile(Request $request)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'i_am_a' => 'required|max:255',
+            'from' => 'required|max:255',
+            'description' => 'required'
+        ]);
+
+        $user = Auth::user();
+        $user->updateProfile($request);
+
+        return response()->json(['success' => true, 'error' => null, 'data' => ['user' => $user]]);
+    }
     /**
      * Upload a user's picture
      *

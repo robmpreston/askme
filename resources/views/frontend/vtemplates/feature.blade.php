@@ -31,7 +31,14 @@
                         <input class="fifty" type="text" v-model="user.last_name" placeholder="Last name">
                     </div>
                 </div>
-                <input type="text" v-model="user.profile.i_am_a" placeholder="I am a">
+                <div class="row">
+                    <div class="half column padding">
+                        <input type="text" v-model="user.profile.i_am_a" placeholder="I am a">
+                    </div>
+                    <div class="half column padding">
+                        <input class="fifty" type="text" v-model="user.from" placeholder="I am from">
+                    </div>
+                </div>
                 <textarea v-model="user.profile.description" placeholder="Description"></textarea>
             </article>
         </div>
