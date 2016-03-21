@@ -222,7 +222,7 @@
             }
         },
         ready: function () {
-            document.addEventListener("keydown", (e) => {
+            document.addEventListener("keydown", function (e) {
                 if (this.show && e.keyCode == 27) {
                     this.onClose();
                 }
