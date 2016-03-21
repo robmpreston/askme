@@ -5,7 +5,7 @@
             <input v-model="lastName" type="text" placeholder="Last Name">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="ghost button full-width" @click="emailSignup">
+            <button class="ghost button full-width" @click="emailSignup" :disabled="!signupValidated">
                 Signup
             </button>
             <a href="{{ url('/social-login/facebook') }}" class="ghost button facebook full-width">
@@ -18,7 +18,7 @@
         <div class="modal-body" v-if="login">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="ghost button full-width" @click="emailLogin">
+            <button class="ghost button full-width" @click="emailLogin" :disabled="!loginValidated">
                 Login
             </button>
             <a href="{{ url('/social-login/facebook') }}" class="ghost button facebook full-width">

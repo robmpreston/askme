@@ -46,6 +46,14 @@
                 }, function (response) {
                 });
             }
+        },
+        computed: {
+            loginValidated: function () {
+                return (this.email != '' && this.password != '');
+            },
+            signupValidated: function() {
+                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+            }
         }
     });
 

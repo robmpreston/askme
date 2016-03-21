@@ -20,6 +20,7 @@
                 });
             },
             sendQuestion: function() {
+                this.errorMsg = '';
                 this.$http.post('/api/question/store',
                 {
                     recipient_id: this.recipient.id,
@@ -32,6 +33,8 @@
                         this.open = false;
                         this.question_text = '';
                         this.asked = true;
+                    } else {
+                        this.errorMsg = response.data.error;
                     }
                 }, function (response) {
                     console.log('failed');
@@ -258,13 +261,13 @@
             emailLogin: function () {
                 this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
+
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
-                    console.log('failed');
                 });
-                this.close();
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
@@ -272,11 +275,18 @@
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
-                    console.log('failed');
                 });
-                this.close();
+            }
+        },
+        computed: {
+            loginValidated: function () {
+                return (this.email != '' && this.password != '');
+            },
+            signupValidated: function() {
+                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
             }
         }
     });
@@ -309,11 +319,11 @@
                 .then(function (response) {
                     if (response.data.success) {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
                     console.log('failed');
                 });
-                this.close();
             }
         },
         computed: {
