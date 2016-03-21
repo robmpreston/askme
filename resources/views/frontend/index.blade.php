@@ -5,6 +5,7 @@
     @include('frontend.shared.icons')
     <div id="app" class="wrapper">
         <header class="top">
+            <input class="file-input" id="file-input" type="file" @change.stop="bindFile" v-el:file-input/>
             <!--<h1>Soapbox</h1> -->
             <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
             <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
@@ -13,11 +14,10 @@
                 <label for="file-input">
                     <img :src="user.picture"/>
                 </label>
-                <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
                 <i class="dropdown-toggle fa fa-angle-down"></i>
                 <ul class="dropdown">
                     <li @click="showEditModal = true">Edit Profile</li>
-                    <li>Change Picture</li>
+                    <li @click="openFile">Change Picture</li>
                     <li @click="logout">Logout</li>
                 </ul>
             </div>

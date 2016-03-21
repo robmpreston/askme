@@ -110,14 +110,18 @@
             submitAnswer: function(e) {
                 e.preventDefault();
                 if (this.loggedIn && this.isAdmin) {
-                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
-                        .then(function (response) {
-                            if (response.data.success) {
-                                this.replyOpen = false;
-                                this.answerText = '';
-                                this.question.answer = response.data.data.answer;
-                            }
-                        });
+                    this.$http.post('/api/answer/store',
+                    {
+                        question_id: this.question.id,
+                        text_response: this.answerText,
+                        video_url: this.answerVideo
+                    }).then(function (response) {
+                        if (response.data.success) {
+                            this.replyOpen = false;
+                            this.answerText = '';
+                            this.question.answer = response.data.data.answer;
+                        }
+                    });
                 }
             },
             cancelAnswer: function(e) {
@@ -390,7 +394,7 @@
                 });
             },
             bindFile: function() {
-                this.profileFormUpload.append('file', this.$els.fileinput.files[0]);
+                this.profileFormUpload.append('file', this.$els.fileInput.files[0]);
                 this.$http.post('/api/user/picture', this.profileFormUpload, function(data){
                     this.user = data.data;
                     if (this.user.id == this.recipient.id) {
@@ -399,6 +403,9 @@
                 }).error(function (data, status, request) {
                     //error handling here
                 });
+            },
+            openFile: function() {
+                this.$els.fileInput.click();
             }
         },
         events: {

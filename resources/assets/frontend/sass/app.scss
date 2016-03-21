@@ -50,6 +50,14 @@ article {
     }
 }
 
+.file-input {
+    position: absolute;
+    opacity: 0;
+    left: -100px;
+    width: 0px;
+    height: 0px;
+}
+
 header.top {
     position: relative;
     margin: 1.5rem 0 1.5rem 0;
@@ -80,9 +88,6 @@ header.top {
         }
         .button:hover {
             text-decoration:none;
-        }
-        &> input {
-            display: none;
         }
         i {
             color:$grey;

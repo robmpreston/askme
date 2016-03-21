@@ -564,6 +564,13 @@ p {
 article p {
   margin: 0.5rem 0; }
 
+.file-input {
+  position: absolute;
+  opacity: 0;
+  left: -100px;
+  width: 0px;
+  height: 0px; }
+
 header.top {
   position: relative;
   margin: 1.5rem 0 1.5rem 0;
@@ -590,8 +597,6 @@ header.top {
         cursor: pointer; }
     header.top .user-menu-button .button:hover {
       text-decoration: none; }
-    header.top .user-menu-button > input {
-      display: none; }
     header.top .user-menu-button i {
       color: #607d8b; }
     header.top .user-menu-button label {
