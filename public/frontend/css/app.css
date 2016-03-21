@@ -568,18 +568,21 @@ header.top {
   position: relative;
   margin: 1.5rem 0 1.5rem 0;
   text-align: center;
-  height: 3.5rem; }
+  height: 3.5rem;
+  z-index: 5; }
   header.top h1 {
     display: inline-block;
     margin: 0.5rem; }
   header.top .login.button {
     position: absolute;
-    right: 0; }
+    right: 0;
+    margin-right: 1rem; }
   header.top .user-menu-button {
     position: absolute;
     top: 0;
     right: 0;
-    padding-bottom: 7rem; }
+    padding-bottom: 7rem;
+    padding-right: 1rem; }
     header.top .user-menu-button img {
       border-radius: 50%;
       width: 2rem; }
@@ -595,6 +598,7 @@ header.top {
       margin-left: -2px;
       margin-right: 8px; }
     header.top .user-menu-button .dropdown {
+      background-color: #fff;
       display: none;
       position: absolute;
       top: 3rem;
