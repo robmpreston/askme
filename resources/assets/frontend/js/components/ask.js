@@ -20,6 +20,7 @@
                 });
             },
             sendQuestion: function() {
+                this.errorMsg = '';
                 this.$http.post('/api/question/store',
                 {
                     recipient_id: this.recipient.id,
@@ -32,6 +33,8 @@
                         this.open = false;
                         this.question_text = '';
                         this.asked = true;
+                    } else {
+                        this.errorMsg = response.data.error;
                     }
                 }, function (response) {
                     console.log('failed');
