@@ -572,22 +572,45 @@ header.top {
   header.top h1 {
     display: inline-block;
     margin: 0.5rem; }
-  header.top .button {
+  header.top .login.button {
     position: absolute;
     right: 0; }
-  header.top .image-upload {
+  header.top .user-menu-button {
     position: absolute;
-    right: 0; }
-    header.top .image-upload img {
+    right: 0;
+    padding-bottom: 7rem; }
+    header.top .user-menu-button img {
       border-radius: 50%;
-      width: 3.75rem; }
-      header.top .image-upload img:hover {
+      width: 2rem; }
+      header.top .user-menu-button img:hover {
         cursor: pointer; }
-    header.top .image-upload > input {
+    header.top .user-menu-button > input {
       display: none; }
-  header.top .button-logout {
-    position: absolute;
-    right: 100px; }
+    header.top .user-menu-button i {
+      color: #607d8b; }
+    header.top .user-menu-button label {
+      margin-left: -2px;
+      margin-right: 8px; }
+    header.top .user-menu-button .dropdown {
+      display: none;
+      position: absolute;
+      top: 3rem;
+      right: 0;
+      padding: 0rem;
+      border: solid 1px #b0bec5;
+      font-size: 0.75rem;
+      cursor: pointer;
+      width: 7rem;
+      border-radius: 3px;
+      background-clip: padding-box; }
+      header.top .user-menu-button .dropdown li {
+        padding: 0.25rem; }
+        header.top .user-menu-button .dropdown li:hover {
+          background-color: #eef1f3; }
+    header.top .user-menu-button * {
+      vertical-align: middle; }
+  header.top .user-menu-button:hover > .dropdown {
+    display: inline-block; }
 
 .featured {
   position: relative;
@@ -884,5 +907,16 @@ input[type='text'] {
 
 .vote.disabled .focus {
   display: block !important; }
+
+footer {
+  max-width: 40.5rem;
+  margin: 3rem auto 1rem auto;
+  text-align: center; }
+  footer a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #607d8b; }
+    footer a:visited {
+      color: #607d8b; }
 
 /*# sourceMappingURL=app.css.map */

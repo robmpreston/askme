@@ -59,16 +59,17 @@ header.top {
         display:inline-block;
         margin:0.5rem;
     }
-    .button {
+    .login.button {
         position:absolute;
         right:0;
     }
-    .image-upload {
+    .user-menu-button {
         position: absolute;
         right: 0;
+        padding-bottom:7rem;
         img {
             border-radius: 50%;
-            width: 3.75rem;
+            width: 2rem;
             &:hover {
                 cursor: pointer;
             }
@@ -76,10 +77,37 @@ header.top {
         &> input {
             display: none;
         }
+        i {
+            color:$grey;
+        }
+        label {
+            margin-left:-2px;
+            margin-right:8px;
+        }
+        .dropdown {
+            display:none;
+            position:absolute;
+            top:3rem;
+            right:0;
+            padding:0rem;
+            border: solid 1px #b0bec5;
+            font-size:0.75rem;
+            cursor:pointer;
+            width:7rem;
+            @include border-radius(3px);
+            li {
+                padding:0.25rem;
+                &:hover {
+                    background-color:lighten($faded-grey,15);
+                }
+            }
+        }
+        * {
+            vertical-align:middle;
+        }
     }
-    .button-logout {
-        position: absolute;
-        right: 100px;
+    .user-menu-button:hover > .dropdown {
+        display:inline-block;
     }
 }
 
@@ -456,5 +484,19 @@ input[type='text'] {
     }
     .focus {
         display:block !important;
+    }
+}
+
+footer {
+    max-width:40.5rem;
+    margin:3rem auto 1rem auto;
+    text-align:center;
+    a {
+        text-decoration:none;
+        font-size:1rem;
+        color:$grey;
+        &:visited {
+            color:$grey;
+        }
     }
 }

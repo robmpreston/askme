@@ -6,15 +6,20 @@
     <div id="app" class="wrapper">
         <header class="top">
             <!--<h1>Soapbox</h1> -->
-            <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
-            <button v-if="loggedIn" class="clear button button-logout" @click="logout">@{{ user.first_name }}</button>
+            <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div v-if="loggedIn" >
-            <div class="image-upload">
+            <div class="user-menu-button">
+                <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
                 <label for="file-input">
                     <img :src="user.picture"/>
                 </label>
-
                 <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
+                <i class="dropdown-toggle fa fa-angle-down"></i>
+                <ul class="dropdown">
+                    <li>Edit Profile</li>
+                    <li>Change Picture</li>
+                    <li @click="logout">Logout</li>
+                </ul>
             </div>
         </header>
         <div class="main-column">
@@ -29,6 +34,9 @@
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                 :base-url="baseUrl"></question>
         </div>
+        <footer>
+            <a href="http://madewithloveinbaltimore.org">Made with &hearts; in Baltimore</a>
+        </footer>
     </div>
     @include('frontend.vtemplates.question')
     @include('frontend.vtemplates.answer')
