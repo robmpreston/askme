@@ -5,7 +5,7 @@
             <input v-model="user.last_name" type="text" placeholder="Last Name">
             <input v-model="user.email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
-            <button class="ghost button full-width" :disabled="!validated">
+            <button class="ghost button full-width" :disabled="!validated" @click="updateUser">
                 Update
             </button>
         </div>

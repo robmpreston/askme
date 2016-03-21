@@ -18,7 +18,7 @@
             </div>
         </header>
         <div class="main-column">
-            <edit-user-modal v-if="loggedIn" :show.sync="showEditModal"></login-modal>
+            <edit-user-modal v-if="loggedIn" :user="user" :show.sync="showEditModal"></edit-user-modal>
             <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient" :is-admin="isAdmin"></feature>

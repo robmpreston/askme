@@ -186,6 +186,7 @@
                 }).then(function (response) {
                     if (!response.data.success) {
                     } else {
+                        console.log(response.data.data.user);
                         this.$dispatch('user-updated', response.data.data.user);
                     }
                 }, function (response) {
@@ -303,6 +304,16 @@
                 this.body = '';
             },
             updateUser: function() {
+                this.$http.post('/api/user/update',
+                { first_name: this.user.first_name, last_name: this.user.last_name, email: this.user.email, password: this.password })
+                .then(function (response) {
+                    if (response.data.success) {
+                        this.$dispatch('user-updated', response.data.data.user);
+                    }
+                }, function (response) {
+                    console.log('failed');
+                });
+                this.close();
             }
         },
         computed: {

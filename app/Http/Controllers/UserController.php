@@ -46,16 +46,21 @@ class UserController extends Controller
         return response()->json(['success' => true, 'error' => null, 'data' => ['user' => $user]]);
     }
 
-    public function updateProfile(Request $request)
+    public function update(Request $request)
     {
-        $this->validate($request, [
+        $user = Auth::user();
+
+        $validation = [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ]);
+            'password' => 'min:6',
+        ];
 
-        $user = Auth::user();
+        if ($user->email != $request->email) {
+            $validation['email'] = 'required|email|max:255|unique:users';
+        }
+        $this->validate($request, $validation);
+
         $user->updateDetails($request);
 
         return response()->json(['success' => true, 'error' => null, 'data' => ['user' => $user]]);
