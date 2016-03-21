@@ -462,7 +462,7 @@ ul {
 
 .button {
   margin: 0;
-  padding: 12px 24px 12px 24px;
+  padding: .5rem 1rem .5rem 1rem;
   border-radius: 3px;
   font-size: 1em;
   background-color: white;
@@ -577,6 +577,7 @@ header.top {
     right: 0; }
   header.top .user-menu-button {
     position: absolute;
+    top: 0;
     right: 0;
     padding-bottom: 7rem; }
     header.top .user-menu-button img {
@@ -584,6 +585,8 @@ header.top {
       width: 2rem; }
       header.top .user-menu-button img:hover {
         cursor: pointer; }
+    header.top .user-menu-button .button:hover {
+      text-decoration: none; }
     header.top .user-menu-button > input {
       display: none; }
     header.top .user-menu-button i {

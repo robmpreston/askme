@@ -65,6 +65,7 @@ header.top {
     }
     .user-menu-button {
         position: absolute;
+        top:0;
         right: 0;
         padding-bottom:7rem;
         img {
@@ -73,6 +74,9 @@ header.top {
             &:hover {
                 cursor: pointer;
             }
+        }
+        .button:hover {
+            text-decoration:none;
         }
         &> input {
             display: none;

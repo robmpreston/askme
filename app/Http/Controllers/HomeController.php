@@ -27,9 +27,10 @@ class HomeController extends Controller
     {
         $recipient = User::getBySlug($slug);
         if ($recipient) {
-            $questions = $recipient->listQuestions(20);
             $loggedIn = Auth::check();
             $user = Auth::user();
+            $show_hidden = $user && $user->isRecipient($recipient->id) ? true : false;
+            $questions = $recipient->listQuestions(20, [], $show_hidden);
             $isAdmin = false;
             if ($user && $user->id == $recipient->id) {
                 $isAdmin = true;

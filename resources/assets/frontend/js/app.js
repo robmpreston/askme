@@ -5,6 +5,7 @@
         el: '#app',
         data: {
             showLoginModal: false,
+            showEditModal: false,
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,

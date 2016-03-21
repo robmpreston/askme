@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Event;
 use Carbon\Carbon;
+use Log;
 
 class Question extends Model
 {
@@ -83,6 +84,8 @@ class Question extends Model
         $question->asker()->associate(Auth::user());
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
+        $question->net_votes = 0;
+        $question->hide = 0;
         $question->save();
 
         if ($request->user_from && Auth::user()) {
@@ -94,6 +97,18 @@ class Question extends Model
     public static function latencyMinutes()
     {
         return 3;
+    }
+
+    public function hide()
+    {
+        $this->hide = true;
+        $this->save();
+    }
+
+    public function show()
+    {
+        $this->hide = false;
+        $this->save();
     }
 
     public function getWeight()

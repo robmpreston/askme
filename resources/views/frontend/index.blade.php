@@ -6,9 +6,9 @@
     <div id="app" class="wrapper">
         <header class="top">
             <!--<h1>Soapbox</h1> -->
-            <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
-            <div v-if="loggedIn" >
-            <div class="user-menu-button">
+            <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
+            <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
+            <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
                 <label for="file-input">
                     <img :src="user.picture"/>
@@ -16,13 +16,14 @@
                 <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
                 <i class="dropdown-toggle fa fa-angle-down"></i>
                 <ul class="dropdown">
-                    <li>Edit Profile</li>
+                    <li @click="showEditModal = true">Edit Profile</li>
                     <li>Change Picture</li>
                     <li @click="logout">Logout</li>
                 </ul>
             </div>
         </header>
         <div class="main-column">
+            <edit-user-modal v-if="loggedIn" :user="user" :show.sync="showEditModal"></edit-user-modal>
             <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient" :is-admin="isAdmin"></feature>
@@ -46,5 +47,6 @@
     @include('frontend.vtemplates.login')
     @include('frontend.vtemplates.fbshare')
     @include('frontend.vtemplates.tweet')
+    @include('frontend.vtemplates.edituser')
     <script src="frontend/js/app.js"></script>
 @endsection

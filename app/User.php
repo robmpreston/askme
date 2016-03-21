@@ -33,7 +33,7 @@ class User extends Authenticatable
 
         // UPLOADED PIC
         if ($this->picture) {
-            $aws_url = env('S3_URL') . 'profile-pictures/'; // ?
+            $aws_url = env('S3_URL') . 'profile-pictures/';
             $array['picture'] = $aws_url . $this->picture;
         }
 
@@ -44,7 +44,7 @@ class User extends Authenticatable
 
         // DEFAULT PIC
         if (!$this->picture && !$this->facebook_id) {
-            $aws_url = ''; // ?
+            $aws_url = env('S3_URL') . 'images/';
             $array['picture'] = $aws_url . '/default_profile_pic.jpg';
         }
         return $array;
@@ -95,6 +95,14 @@ class User extends Authenticatable
         }
     }
 
+    public function isRecipient($id)
+    {
+        if ($this->id == $id) {
+            return true;
+        }
+        return false;
+    }
+
     public static function createSlug($first_name, $last_name)
     {
         $slug = substr($first_name . '-' . $last_name, 0, 20);
@@ -118,12 +126,15 @@ class User extends Authenticatable
         return false;
     }
 
-    public function listQuestions($limit, $skip_ids = [])
+    public function listQuestions($limit, $skip_ids = [], $show_hidden = false)
     {
         // Collect the Questions w/ Answers By Weight
         $questions = $this->questions()->with('asker', 'answer');
         if (count($skip_ids)) {
             $questions->whereNotIn('id', $skip_ids);
+        }
+        if (!$show_hidden) {
+            $questions->where('hide', '=', false);
         }
         $questions = $questions->orderBy('weight', 'DESC')->take($limit)->get();
 
@@ -134,6 +145,30 @@ class User extends Authenticatable
             $questions = Question::assignUserVotes($questions, $question_ids, $answer_ids);
         }
         return $questions;
+    }
+
+    public function updateDetails($request)
+    {
+        $this->first_name = $request->first_name;
+        $this->last_name = $request->last_name;
+        $this->email = $request->email;
+        if ($request->password && $request->password != '') {
+            $this->password = bcrypt($request->password);
+        }
+        $this->save();
+
+        return true;
+    }
+
+    public function updateProfile($request)
+    {
+        $this->first_name = $request->first_name;
+        $this->last_name = $request->last_name;
+        $this->from = $request->from;
+        $this->profile->updateProfile($request);
+        $this->save();
+
+        return true;
     }
 
     /**

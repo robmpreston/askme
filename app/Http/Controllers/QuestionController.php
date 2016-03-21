@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Models\Question;
 use App\Models\Question_Vote;
 use App\User;
+use Log;
 
 class QuestionController extends Controller
 {
@@ -27,6 +28,40 @@ class QuestionController extends Controller
             return ['success' => true, 'error' => null, 'data' => ['net_votes' => $net_votes]];
         }
         return ['success' => false, 'error' => null];
+    }
+
+    public function hideQuestion(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->respondant) {
+            $question = Question::find($request->question_id);
+            if ($user->id = $question->to_user_id) {
+                $question->hide();
+                return [
+                    'success' => true,
+                    'error' => null,
+                    'data' => $user->listQuestions(20),
+                ];
+            }
+        }
+        return ['success' => false, 'error' => 'Action not allowed', 'data' => null];
+    }
+
+    public function showQuestion(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->respondant) {
+            $question = Question::find($request->question_id);
+            if ($user->id = $question->to_user_id) {
+                $question->show();
+                return [
+                    'success' => true,
+                    'error' => null,
+                    'data' => $user->listQuestions(20),
+                ];
+            }
+        }
+        return ['success' => false, 'error' => 'Action not allowed', 'data' => null];
     }
 
     /**

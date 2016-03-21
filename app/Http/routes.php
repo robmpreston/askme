@@ -32,6 +32,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('/api/question/store', 'QuestionController@store');
     Route::post('/api/question/upvote', 'QuestionController@upvote');
     Route::post('/api/question/downvote', 'QuestionController@downvote');
+    Route::post('/api/question/hide', 'QuestionController@hideQuestion');
+    Route::post('/api/question/show', 'QuestionController@showQuestion');
 
     // ANSWER
 	Route::post('/api/answer/like', 'AnswerController@like');
@@ -39,6 +41,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     // profile
     Route::post('/api/user/picture', 'UserController@uploadPicture');
+    Route::post('/api/user/update', 'UserController@update');
+    Route::post('/api/user/profile/update', 'UserController@updateProfile');
 });
 
 Route::group(['middleware' => 'web'], function () {

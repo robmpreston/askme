@@ -24,4 +24,12 @@ class Profile extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function updateProfile($request)
+    {
+        $this->i_am_a = $request->i_am_a;
+        $this->description = $request->description;
+        $this->save();
+
+        return true;
+    }
 }

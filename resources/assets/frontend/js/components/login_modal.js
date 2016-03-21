@@ -27,13 +27,13 @@
             emailLogin: function () {
                 this.$http.post('/api/login', { email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
+
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
-                    console.log('failed');
                 });
-                this.close();
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
@@ -41,11 +41,18 @@
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
-                    console.log('failed');
                 });
-                this.close();
+            }
+        },
+        computed: {
+            loginValidated: function () {
+                return (this.email != '' && this.password != '');
+            },
+            signupValidated: function() {
+                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
             }
         }
     });
