@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Models\Question;
 use App\Models\Question_Vote;
 use App\User;
+use Log;
 
 class QuestionController extends Controller
 {
@@ -31,7 +32,7 @@ class QuestionController extends Controller
 
     public function hideQuestion(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::user() ? $user : User::find(5);
         if ($user->respondant) {
             $question = Question::find($request->question_id);
             if ($user->id = $question->to_user_id) {
@@ -39,7 +40,7 @@ class QuestionController extends Controller
                 return [
                     'success' => true,
                     'error' => null,
-                    'data' => $recipient->listQuestions(20),
+                    'data' => $user->listQuestions(20),
                 ];
             }
         }
@@ -48,7 +49,7 @@ class QuestionController extends Controller
 
     public function showQuestion(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::user() ? $user : User::find(5);
         if ($user->respondant) {
             $question = Question::find($request->question_id);
             if ($user->id = $question->to_user_id) {
@@ -56,7 +57,7 @@ class QuestionController extends Controller
                 return [
                     'success' => true,
                     'error' => null,
-                    'data' => $recipient->listQuestions(20),
+                    'data' => $user->listQuestions(20),
                 ];
             }
         }

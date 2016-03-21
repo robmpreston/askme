@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Event;
 use Carbon\Carbon;
+use Log;
 
 class Question extends Model
 {
@@ -84,7 +85,7 @@ class Question extends Model
         $question->text_response = $request->question;
         $question->weight = $question->getWeight();
         $question->net_votes = 0;
-        $question->hidden = 0;
+        $question->hide = 0;
         $question->save();
 
         if ($request->user_from && Auth::user()) {
@@ -100,13 +101,13 @@ class Question extends Model
 
     public function hide()
     {
-        $this->hidden = true;
+        $this->hide = true;
         $this->save();
     }
 
     public function show()
     {
-        $this->hidden = false;
+        $this->hide = false;
         $this->save();
     }
 

@@ -13,7 +13,7 @@ class HideQuestions extends Migration
     public function up()
     {
         Schema::table('questions', function(Blueprint $table) {
-            $table->boolean('hidden')->default(0)->after('net_votes');
+            $table->boolean('hide')->default(0)->after('net_votes');
         });
     }
 
@@ -25,7 +25,7 @@ class HideQuestions extends Migration
     public function down()
     {
         Schema::table('questions', function(Blueprint $table) {
-            $table->dropColumn('hidden');
+            $table->dropColumn('hide');
         });
     }
 }

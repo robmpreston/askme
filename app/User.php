@@ -134,7 +134,7 @@ class User extends Authenticatable
             $questions->whereNotIn('id', $skip_ids);
         }
         if (!$show_hidden) {
-            $questions->where('hidden', '=', false);
+            $questions->where('hide', '=', false);
         }
         $questions = $questions->orderBy('weight', 'DESC')->take($limit)->get();
 
