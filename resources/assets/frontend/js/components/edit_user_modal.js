@@ -24,11 +24,11 @@
                 .then(function (response) {
                     if (response.data.success) {
                         this.$dispatch('user-updated', response.data.data.user);
+                        this.close();
                     }
                 }, function (response) {
                     console.log('failed');
                 });
-                this.close();
             }
         },
         computed: {
