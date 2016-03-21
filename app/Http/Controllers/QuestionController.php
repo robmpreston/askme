@@ -32,7 +32,7 @@ class QuestionController extends Controller
 
     public function hideQuestion(Request $request)
     {
-        $user = Auth::user() ? $user : User::find(5);
+        $user = Auth::user();
         if ($user->respondant) {
             $question = Question::find($request->question_id);
             if ($user->id = $question->to_user_id) {
@@ -49,7 +49,7 @@ class QuestionController extends Controller
 
     public function showQuestion(Request $request)
     {
-        $user = Auth::user() ? $user : User::find(5);
+        $user = Auth::user();
         if ($user->respondant) {
             $question = Question::find($request->question_id);
             if ($user->id = $question->to_user_id) {

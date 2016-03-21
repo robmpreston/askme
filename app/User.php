@@ -33,7 +33,7 @@ class User extends Authenticatable
 
         // UPLOADED PIC
         if ($this->picture) {
-            $aws_url = env('S3_URL') . 'profile-pictures/'; // ?
+            $aws_url = env('S3_URL') . 'profile-pictures/';
             $array['picture'] = $aws_url . $this->picture;
         }
 
@@ -44,7 +44,7 @@ class User extends Authenticatable
 
         // DEFAULT PIC
         if (!$this->picture && !$this->facebook_id) {
-            $aws_url = ''; // ?
+            $aws_url = env('S3_URL') . 'images/';
             $array['picture'] = $aws_url . '/default_profile_pic.jpg';
         }
         return $array;
