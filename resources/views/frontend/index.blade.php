@@ -8,13 +8,15 @@
             <!--<h1>Soapbox</h1> -->
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
             <button v-if="loggedIn" class="clear button button-logout" @click="showEditModal = true">@{{ user.first_name }}</button>
-            <div v-if="loggedIn" >
-            <div class="image-upload">
-                <label for="file-input">
-                    <img :src="user.picture"/>
-                </label>
+            <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
+            <div v-if="loggedIn">
+                <div class="image-upload">
+                    <label for="file-input">
+                        <img :src="user.picture"/>
+                    </label>
 
-                <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
+                    <input id="file-input" type="file" @change.stop="bindFile" v-el:fileInput/>
+                </div>
             </div>
         </header>
         <div class="main-column">
