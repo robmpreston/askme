@@ -301,6 +301,9 @@ input[type='text'] {
     border-top: 1px solid $light-border;
     background: $answer-bg;
     @include border-radius( 0 0 0.1875rem 0.1875rem);
+    .video-embed {
+        margin: .5rem .5rem .5rem .5rem;
+    }
     .like-block {
         display: inline-block;
         * {
@@ -352,6 +355,10 @@ input[type='text'] {
         border: 0px;
         outline: 0;
         resize: none;
+    }
+    input {
+        padding: .5rem 1.0rem .5rem 1.0rem;
+        width: 100%;
     }
 }
 
