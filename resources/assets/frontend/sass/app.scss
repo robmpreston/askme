@@ -226,6 +226,23 @@ input[type='text'] {
     }
 }
 
+.answer.container, .ask.container, .question.container {
+    header {
+        margin: 0 0 0.5rem 0;
+    }
+    article{
+        p {
+            margin:0;
+        }
+    }
+    .like-block {
+        margin-top:0.5rem;
+    }
+    .reply {
+        margin-top:0.75rem;
+    }
+}
+
 .ask-open {
     border: 1px solid $grey;
     border-radius: 3px;

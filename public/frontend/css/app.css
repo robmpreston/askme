@@ -712,6 +712,18 @@ input[type='text'] {
     outline: 0;
     resize: none; }
 
+.answer.container header, .ask.container header, .question.container header {
+  margin: 0 0 0.5rem 0; }
+
+.answer.container article p, .ask.container article p, .question.container article p {
+  margin: 0; }
+
+.answer.container .like-block, .ask.container .like-block, .question.container .like-block {
+  margin-top: 0.5rem; }
+
+.answer.container .reply, .ask.container .reply, .question.container .reply {
+  margin-top: 0.75rem; }
+
 .ask-open {
   border: 1px solid #607d8b;
   border-radius: 3px;

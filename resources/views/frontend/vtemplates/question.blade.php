@@ -22,7 +22,7 @@
                 <article>
                     <p>@{{ question.text_response }}</p>
                 </article>
-                <article>
+                <article class="reply">
                     <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
                 </article>
             </div>
