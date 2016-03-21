@@ -176,7 +176,23 @@
                 this.editing = true;
             },
             saveProfile: function() {
-
+                this.$http.post('/api/user/profile/update',
+                {
+                    first_name: this.user.first_name,
+                    last_name: this.user.last_name,
+                    i_am_a: this.user.profile.i_am_a,
+                    from: this.user.from,
+                    description: this.user.profile.description
+                }).then(function (response) {
+                    if (!response.data.success) {
+                    } else {
+                        console.log(response.data.data.user);
+                        this.$dispatch('user-updated', response.data.data.user);
+                    }
+                }, function (response) {
+                    console.log('failed');
+                });
+                this.editing = false;
             },
             cancel: function() {
                 this.editing = false;
@@ -270,6 +286,49 @@
 (function(){
     'use strict';
 
+    Vue.component('editUserModal', {
+        template: '#edit-user-modal-template',
+        props: ['show', 'user'],
+        data: function () {
+            return {
+    	        title: '',
+                body: '',
+                password: '',
+                validationError: ''
+            };
+        },
+        methods: {
+            close: function () {
+                this.show = false;
+                this.title = '';
+                this.body = '';
+            },
+            updateUser: function() {
+                this.$http.post('/api/user/update',
+                { first_name: this.user.first_name, last_name: this.user.last_name, email: this.user.email, password: this.password })
+                .then(function (response) {
+                    if (response.data.success) {
+                        this.$dispatch('user-updated', response.data.data.user);
+                    }
+                }, function (response) {
+                    console.log('failed');
+                });
+                this.close();
+            }
+        },
+        computed: {
+            validated: function() {
+                return (this.user.first_name != '' && this.user.last_name != ''
+                    && this.user.email != '');
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     Vue.component('fbshare', {
         template: '#fbshare-template',
         props: [ 'link', 'text' ]
@@ -294,6 +353,7 @@
         el: '#app',
         data: {
             showLoginModal: false,
+            showEditModal: false,
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,

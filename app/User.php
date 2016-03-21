@@ -136,6 +136,30 @@ class User extends Authenticatable
         return $questions;
     }
 
+    public function updateDetails($request)
+    {
+        $this->first_name = $request->first_name;
+        $this->last_name = $request->last_name;
+        $this->email = $request->email;
+        if ($request->password && $request->password != '') {
+            $this->password = bcrypt($request->password);
+        }
+        $this->save();
+
+        return true;
+    }
+
+    public function updateProfile($request)
+    {
+        $this->first_name = $request->first_name;
+        $this->last_name = $request->last_name;
+        $this->from = $request->from;
+        $this->profile->updateProfile($request);
+        $this->save();
+
+        return true;
+    }
+
     /**
      * GET VOTE ID && UP or DOWN FOR QUESTION VOTES
      * @param (array) Question IDs

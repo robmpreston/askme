@@ -23,7 +23,7 @@
                 { first_name: this.user.first_name, last_name: this.user.last_name, email: this.user.email, password: this.password })
                 .then(function (response) {
                     if (response.data.success) {
-                        this.$dispatch('user-updated', response.data.data);
+                        this.$dispatch('user-updated', response.data.data.user);
                     }
                 }, function (response) {
                     console.log('failed');
