@@ -285,6 +285,39 @@
 (function(){
     'use strict';
 
+    Vue.component('editUserModal', {
+        template: '#edit-user-modal-template',
+        props: ['show', 'user'],
+        data: function () {
+            return {
+    	        title: '',
+                body: '',
+                password: '',
+                validationError: ''
+            };
+        },
+        methods: {
+            close: function () {
+                this.show = false;
+                this.title = '';
+                this.body = '';
+            },
+            updateUser: function() {
+            }
+        },
+        computed: {
+            validated: function() {
+                return (this.user.first_name != '' && this.user.last_name != ''
+                    && this.user.email != '');
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     Vue.component('fbshare', {
         template: '#fbshare-template',
         props: [ 'link', 'text' ]
@@ -309,6 +342,7 @@
         el: '#app',
         data: {
             showLoginModal: false,
+            showEditModal: false,
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,

@@ -7,7 +7,7 @@
         <header class="top">
             <!--<h1>Soapbox</h1> -->
             <button v-if="!loggedIn" class="ghost button" @click="showLoginModal = true">Login/Signup</button>
-            <button v-if="loggedIn" class="clear button button-logout" @click="logout">@{{ user.first_name }}</button>
+            <button v-if="loggedIn" class="clear button button-logout" @click="showEditModal = true">@{{ user.first_name }}</button>
             <div v-if="loggedIn" >
             <div class="image-upload">
                 <label for="file-input">
@@ -18,6 +18,7 @@
             </div>
         </header>
         <div class="main-column">
+            <edit-user-modal v-if="loggedIn" :show.sync="showEditModal"></login-modal>
             <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
             <div>
                 <feature :user="recipient" :is-admin="isAdmin"></feature>
@@ -38,5 +39,6 @@
     @include('frontend.vtemplates.login')
     @include('frontend.vtemplates.fbshare')
     @include('frontend.vtemplates.tweet')
+    @include('frontend.vtemplates.edituser')
     <script src="frontend/js/app.js"></script>
 @endsection

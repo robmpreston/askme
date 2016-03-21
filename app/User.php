@@ -136,6 +136,17 @@ class User extends Authenticatable
         return $questions;
     }
 
+    public function updateDetails($request)
+    {
+        $this->first_name = $request->first_name;
+        $this->last_name = $request->last_name;
+        $this->email = $request->email;
+        $this->password = bcrypt($request->password);
+        $this->save();
+
+        return true;
+    }
+
     public function updateProfile($request)
     {
         $this->first_name = $request->first_name;

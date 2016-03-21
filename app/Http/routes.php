@@ -39,6 +39,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     // profile
     Route::post('/api/user/picture', 'UserController@uploadPicture');
+    Route::post('/api/user/update', 'UserController@update');
     Route::post('/api/user/profile/update', 'UserController@updateProfile');
 });
 
