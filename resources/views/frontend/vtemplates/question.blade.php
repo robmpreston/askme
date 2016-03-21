@@ -21,6 +21,7 @@
                 </header>
                 <article>
                     <p>@{{ question.text_response }}</p>
+                    <youtube video-id="OgnPH1h1oOw"></youtube>
                 </article>
                 <article class="reply">
                     <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
@@ -35,6 +36,7 @@
                 </header>
                 <article>
                     <textarea v-model="answerText" placeholder="Type your response"></textarea>
+                    <input v-model="answerVideo" placeholder="Video link (i.e. https:\/\/www.youtube.com/watch?v=qffCO1b-7Js)">
                 </article>
                 <div class="like-block">
                     <p>

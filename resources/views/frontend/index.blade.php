@@ -41,6 +41,7 @@
     @include('frontend.vtemplates.login')
     @include('frontend.vtemplates.fbshare')
     @include('frontend.vtemplates.tweet')
+    @include('frontend.vtemplates.youtube')
     @include('frontend.vtemplates.edituser')
     <script src="frontend/js/app.js"></script>
 @endsection

@@ -359,6 +359,16 @@
 (function(){
     'use strict';
 
+    Vue.component('youtube', {
+        template: '#youtube-template',
+        props: [ 'videoId' ]
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     var vm = new Vue({
         el: '#app',
         data: {

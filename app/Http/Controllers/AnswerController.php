@@ -19,7 +19,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * AJAX REQUEST 
+     * AJAX REQUEST
      * If Validation Fails Json Response w/ Errors
      */
     public function store(Request $request)

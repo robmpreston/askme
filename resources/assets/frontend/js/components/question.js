@@ -57,14 +57,18 @@
             submitAnswer: function(e) {
                 e.preventDefault();
                 if (this.loggedIn && this.isAdmin) {
-                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
-                        .then(function (response) {
-                            if (response.data.success) {
-                                this.replyOpen = false;
-                                this.answerText = '';
-                                this.question.answer = response.data.data.answer;
-                            }
-                        });
+                    this.$http.post('/api/answer/store',
+                    {
+                        question_id: this.question.id,
+                        text_response: this.answerText,
+                        video_url: this.answerVideo
+                    }).then(function (response) {
+                        if (response.data.success) {
+                            this.replyOpen = false;
+                            this.answerText = '';
+                            this.question.answer = response.data.data.answer;
+                        }
+                    });
                 }
             },
             cancelAnswer: function(e) {
