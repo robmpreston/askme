@@ -134,7 +134,7 @@ class Question extends Model
     public static function getSign($s)
     {
         if ($s == 0) {
-            return 0;
+            return 1;
         }
         return $s > 0 ? 1 : -1;
     }
