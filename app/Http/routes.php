@@ -50,7 +50,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
-
+    Route::post('/auth/set_session', [ 'uses' => 'Auth\AuthController@setSoapboxAuth', 'as' => 'auth.setSoapboxAuth']);
     Route::get('/{slug}', 'HomeController@index');
     Route::get('/', 'HomeController@index');
 
