@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Commands\Inspire::class,
+        Commands\CalculateWeight::class,
     ];
 
     /**
@@ -26,5 +27,6 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('calculate_weight')->everyFiveMinutes();
     }
 }
