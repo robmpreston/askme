@@ -68,6 +68,11 @@ class AuthController extends Controller
     public function ajaxLogin(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true, true)) {
+
+            if (strpos(url('/'), 'askderay') !== false) {
+                $this->setSessionSoapbox();
+            }
+
             return [
                 'success' => true,
                 'data' => [ 'user' => Auth::user() ],
@@ -80,6 +85,39 @@ class AuthController extends Controller
             'data' => null,
             'error' => null
         ];
+    }
+
+    public function setSoapboxAuth(Request $request)
+    {
+        $sessionId = $request->session_id;
+        Session::setId($sessionId);
+        Session::start();
+    }
+
+    private function setSessionSoapbox()
+    {
+        $url = 'http://soapbox.cc/auth/set_session';
+        $fields = [
+            'session_id' => Session::getId()
+        ];
+
+        //url-ify the data for the POST
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, count($fields));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+        //execute post
+        $result = curl_exec($ch);
+
+        //close connection
+        curl_close($ch);
     }
 
     /**

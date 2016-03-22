@@ -1,6 +1,6 @@
 @extends('frontend.shared.master')
 
-@section('title', 'Ask {{ $recipient->first_name }}')
+@section('title', 'Ask DeRay')
 @section('content')
     @include('frontend.shared.icons')
     <div id="app" class="wrapper" v-cloak>
