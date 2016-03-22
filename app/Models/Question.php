@@ -124,10 +124,12 @@ class Question extends Model
     public function getScore()
     {
         $s = $this->net_votes; 
+        /*
         if ($this->hasAnswer()) {
             $s += $this->hasAnswerPoints();
             $s += $this->answer->likes()->count();
         }
+        */
         return $s * 2;
     }
 
