@@ -117,7 +117,6 @@ class AuthController extends Controller
 
     protected function facebookCreateOrLogin($data)
     {
-        dd($data);
         // Check If User Exists
         $user = User::getByEmail($data->email);
         if ($user && $user->facebook_id) {
