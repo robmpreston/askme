@@ -16,6 +16,7 @@
                 </label>
                 <i class="dropdown-toggle fa fa-angle-down"></i>
                 <ul class="dropdown">
+                    <li><a href="http://www.soapbox.cc/@{{ user.slug }}" target="_blank">My Soapbox</a></li>
                     <li @click="showEditModal = true">Edit Profile</li>
                     <li @click="openFile">Change Picture</li>
                     <li @click="logout">Logout</li>

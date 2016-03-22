@@ -314,7 +314,7 @@
                 return (this.email != '' && this.password != '');
             },
             signupValidated: function() {
-                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+                return (this.firstName != '' && this.lastName != '' && this.from != '' && this.email != '' && this.password != '');
             }
         }
     });
@@ -343,7 +343,7 @@
             },
             updateUser: function() {
                 this.$http.post('/api/user/update',
-                { first_name: this.user.first_name, last_name: this.user.last_name, email: this.user.email, password: this.password })
+                { first_name: this.user.first_name, last_name: this.user.last_name, from: this.user.from, email: this.user.email, password: this.password })
                 .then(function (response) {
                     if (response.data.success) {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -357,7 +357,7 @@
         computed: {
             validated: function() {
                 return (this.user.first_name != '' && this.user.last_name != ''
-                    && this.user.email != '');
+                    && this.user.from != '' && this.user.email != '');
             }
         }
     });

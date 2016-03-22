@@ -619,6 +619,11 @@ header.top {
         padding: 0.25rem; }
         header.top .user-menu-button .dropdown li:hover {
           background-color: #eef1f3; }
+        header.top .user-menu-button .dropdown li a {
+          color: black;
+          text-decoration: none; }
+          header.top .user-menu-button .dropdown li a:hover {
+            background-color: #eef1f3; }
     header.top .user-menu-button * {
       vertical-align: middle; }
   header.top .user-menu-button:hover > .dropdown {

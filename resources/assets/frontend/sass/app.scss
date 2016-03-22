@@ -113,6 +113,13 @@ header.top {
                 &:hover {
                     background-color:lighten($faded-grey,15);
                 }
+                a {
+                    color: black;
+                    text-decoration: none;
+                    &:hover {
+                        background-color:lighten($faded-grey,15);
+                    }
+                }
             }
         }
         * {
