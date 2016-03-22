@@ -101,7 +101,7 @@ class AuthController extends Controller
         $fields = [
             'session_id' => Session::getId()
         ];
-
+        $fields_string = '';
         //url-ify the data for the POST
         foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
         rtrim($fields_string, '&');
