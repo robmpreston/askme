@@ -18,7 +18,12 @@
                     }, function (response) {
                         this.answer.liked = !this.answer.liked;
                     });
+                } else {
+                    this.showSignupModal();
                 }
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {

@@ -24,6 +24,8 @@
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             downvote: function(questionId) {
@@ -40,6 +42,8 @@
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             hide: function() {
@@ -74,6 +78,9 @@
             cancelAnswer: function(e) {
                 e.preventDefault();
                 this.replyOpen = false;
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {

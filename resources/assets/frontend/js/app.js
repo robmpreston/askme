@@ -19,6 +19,7 @@
                 this.$http.get('/logout').then(function(response) {
                     this.loggedIn = false;
                     this.user = null;
+                    this.isAdmin = false;
                 });
             },
             bindFile: function() {
@@ -43,6 +44,9 @@
             },
             'questions-updated': function(questions) {
                 this.questions = questions;
+            },
+            'show-signup-modal': function() {
+                this.showLoginModal = true;
             }
         }
     });

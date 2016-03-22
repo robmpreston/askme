@@ -8,7 +8,7 @@
             return {
     	        title: '',
                 body: '',
-                login: true,
+                login: false,
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -18,6 +18,11 @@
         methods: {
             close: function () {
                 this.show = false;
+                this.login = false;
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
                 this.title = '';
                 this.body = '';
             },
