@@ -146,6 +146,9 @@
         computed: {
             shareUrl: function() {
                 return this.baseUrl + '/' + this.question.id;
+            },
+            shareText: function() {
+                return 'Ask ' + this.recipient.first_name;
             }
         }
     });

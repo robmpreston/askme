@@ -45,8 +45,8 @@
                 </div>
             </div>
             <div class="social-container">
-                <tweet :link="shareUrl" text="Ask @{{ recipient.name }}"></tweet>
-                <fbshare :link="shareUrl" text="Ask @{{ recipient.name }}"></fbshare>
+                <tweet :link="shareUrl" :text="shareText"></tweet>
+                <fbshare :link="shareUrl" :text="shareText"></fbshare>
                 <a class="small ghost button" v-if="isAdmin" @click="hide" href="#">Hide</a>
             </div>
         </div>
