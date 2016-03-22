@@ -46,7 +46,7 @@ class HomeController extends Controller
                 'logged_in' => $loggedIn,
                 'user' => $user,
                 'is_admin' => $isAdmin,
-                'base_url' => url($slug)
+                'base_url' => $baseUrl
             ]);
         }
         // return 404 error
