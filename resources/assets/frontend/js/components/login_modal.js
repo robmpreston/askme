@@ -57,7 +57,7 @@
                 return (this.email != '' && this.password != '');
             },
             signupValidated: function() {
-                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+                return (this.firstName != '' && this.lastName != '' && this.from != '' && this.email != '' && this.password != '');
             }
         }
     });

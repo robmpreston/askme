@@ -55,6 +55,7 @@ class UserController extends Controller
         $validation = [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+            'from' => 'required|max:255',
             'password' => 'min:6',
         ];
 
