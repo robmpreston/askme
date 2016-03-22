@@ -1,13 +1,13 @@
 @extends('frontend.shared.master')
 
-@section('title', 'Ask DeRay')
+@section('title', 'Ask {{ $recipient->first_name }}')
 @section('content')
     @include('frontend.shared.icons')
-    <div id="app" class="wrapper">
+    <div id="app" class="wrapper" v-cloak>
         <header class="top">
             <input class="file-input" id="file-input" type="file" @change.stop="bindFile" v-el:file-input/>
-            <!--<h1>Soapbox</h1> -->
-            <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
+            <h1 v-if="recipient.id != 5">Soapbox</h1>
+            <img v-if="recipient.id == 5" src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
             <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
@@ -16,6 +16,7 @@
                 </label>
                 <i class="dropdown-toggle fa fa-angle-down"></i>
                 <ul class="dropdown">
+                    <li><a href="http://www.soapbox.cc/@{{ user.slug }}" target="_blank">My Soapbox</a></li>
                     <li @click="showEditModal = true">Edit Profile</li>
                     <li @click="openFile">Change Picture</li>
                     <li @click="logout">Logout</li>

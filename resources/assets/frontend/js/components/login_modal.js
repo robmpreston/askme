@@ -42,7 +42,7 @@
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
-                { first_name: this.firstName, last_name: this.lastName, location: this.location, email: this.email, password: this.password }).then(function (response) {
+                { first_name: this.firstName, last_name: this.lastName, from: this.from, email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -57,7 +57,7 @@
                 return (this.email != '' && this.password != '');
             },
             signupValidated: function() {
-                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+                return (this.firstName != '' && this.lastName != '' && this.from != '' && this.email != '' && this.password != '');
             }
         }
     });

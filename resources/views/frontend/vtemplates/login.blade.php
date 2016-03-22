@@ -3,7 +3,7 @@
         <div class="modal-body" v-if="!login">
             <input v-model="firstName" type="text" placeholder="First Name">
             <input v-model="lastName" type="text" placeholder="Last Name">
-            <input v-model="location" type="text" placeholder="Location (ex: Baltimore, MD)">
+            <input v-model="from" type="text" placeholder="Location (ex: Baltimore, MD)">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
             <button class="ghost button full-width" @click="emailSignup" :disabled="!signupValidated">
