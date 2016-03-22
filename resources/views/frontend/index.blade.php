@@ -28,9 +28,7 @@
             <div>
                 <feature :user="recipient" :is-admin="isAdmin"></feature>
             </div>
-            <div v-show="loggedIn">
-                <ask :user.sync="user" :recipient="recipient"></ask>
-            </div>
+            <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn"></ask>
             <question v-for="question in questions" :question.sync="question"
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                 :base-url="baseUrl"></question>

@@ -11,13 +11,17 @@
                 errorMsg: ''
             };
         },
-        props: [ 'user', 'recipient' ],
+        props: [ 'user', 'recipient', 'loggedIn' ],
         methods: {
             toggle: function() {
-                this.open = !this.open;
-                this.$nextTick( function() {
-                    this.$els.questionText.focus();
-                });
+                if (this.loggedIn) {
+                    this.open = !this.open;
+                    this.$nextTick( function() {
+                        this.$els.questionText.focus();
+                    });
+                } else {
+                    this.showSignupModal();
+                }
             },
             sendQuestion: function() {
                 this.errorMsg = '';
@@ -39,6 +43,9 @@
                 }, function (response) {
                     console.log('failed');
                 });
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         events: {
@@ -77,6 +84,8 @@
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             downvote: function(questionId) {
@@ -93,6 +102,8 @@
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             hide: function() {
@@ -127,6 +138,9 @@
             cancelAnswer: function(e) {
                 e.preventDefault();
                 this.replyOpen = false;
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {
@@ -158,7 +172,12 @@
                     }, function (response) {
                         this.answer.liked = !this.answer.liked;
                     });
+                } else {
+                    this.showSignupModal();
                 }
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {
@@ -246,7 +265,7 @@
             return {
     	        title: '',
                 body: '',
-                login: true,
+                login: false,
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -256,6 +275,11 @@
         methods: {
             close: function () {
                 this.show = false;
+                this.login = false;
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
                 this.title = '';
                 this.body = '';
             },
@@ -275,7 +299,7 @@
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
-                { first_name: this.firstName, last_name: this.lastName, email: this.email, password: this.password }).then(function (response) {
+                { first_name: this.firstName, last_name: this.lastName, location: this.location, email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -391,6 +415,7 @@
                 this.$http.get('/logout').then(function(response) {
                     this.loggedIn = false;
                     this.user = null;
+                    this.isAdmin = false;
                 });
             },
             bindFile: function() {
@@ -415,6 +440,9 @@
             },
             'questions-updated': function(questions) {
                 this.questions = questions;
+            },
+            'show-signup-modal': function() {
+                this.showLoginModal = true;
             }
         }
     });
