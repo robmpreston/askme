@@ -6,8 +6,8 @@
         </header>
         <article>
             <p>@{{ answer.text_response }}</p>
-            <div class="video-embed">
-                <youtube v-if="answer.is_video" :video-id="answer.video_url"></youtube>
+            <div class="video-embed" v-if="answer.is_video">
+                <youtube :video-id="answer.video_url"></youtube>
             </div>
         </article>
         <div class="like-block">

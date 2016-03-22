@@ -777,7 +777,17 @@ input[type='text'] {
   border-radius: 0 0 0.1875rem 0.1875rem;
   background-clip: padding-box; }
   .answer.container .video-embed {
-    margin: .5rem 0rem .5rem 0rem; }
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0; }
+    .answer.container .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
   .answer.container .like-block {
     display: inline-block; }
     .answer.container .like-block * {
