@@ -3,7 +3,7 @@
 @section('title', 'Ask {{ $recipient->first_name }}')
 @section('content')
     @include('frontend.shared.icons')
-    <div id="app" class="wrapper">
+    <div id="app" class="wrapper" v-cloak>
         <header class="top">
             <input class="file-input" id="file-input" type="file" @change.stop="bindFile" v-el:file-input/>
             <h1 v-if="recipient.id != 5">Soapbox</h1>
