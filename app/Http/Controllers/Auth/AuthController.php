@@ -94,7 +94,7 @@ class AuthController extends Controller
         $sessionId = $request->session_id;
         Session::setId($sessionId);
         Session::start();
-        Log::('Session ID: ' . $sessionId);
+        Log::info('Session ID: ' . $sessionId);
     }
 
     private function setSessionSoapbox()
