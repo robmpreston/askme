@@ -35,6 +35,11 @@ class HomeController extends Controller
             if ($user && $user->id == $recipient->id) {
                 $isAdmin = true;
             }
+
+            $baseUrl = url($slug);
+            if ($slug == 'deray-mckesson') {
+                $baseUrl = "http://askderay.com";
+            }
             return view('frontend.index', [
                 'recipient' => $recipient,
                 'questions' => $questions,
