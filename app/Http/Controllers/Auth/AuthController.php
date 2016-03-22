@@ -12,6 +12,7 @@ use Laravel\Socialite\Contracts\Factory as Socialite;
 
 use Auth;
 use Session;
+use Log;
 
 class AuthController extends Controller
 {
@@ -93,6 +94,7 @@ class AuthController extends Controller
         $sessionId = $request->session_id;
         Session::setId($sessionId);
         Session::start();
+        Log::('Session ID: ' . $sessionId);
     }
 
     private function setSessionSoapbox()
