@@ -121,20 +121,14 @@ class Question extends Model
         $this->save();
     }
 
-    public function getWeight()
+    public function getScore()
     {
-        $ups = $this->exists ? $this->up_votes()->count() : 0;
-        $downs = $this->exists ? $this->down_votes()->count() : 0;
-        $s = $ups - $downs;
+        $s = $this->net_votes; 
         if ($this->hasAnswer()) {
             $s += $this->hasAnswerPoints();
             $s += $this->answer->likes()->count();
         }
-        $order = log10(max(abs($s), 1));
-        $sign = self::getSign($s);
-        $date = $this->exists ? $this->created_at->timestamp : time();
-        $seconds = $date - Carbon::now()->timestamp;
-        return round($sign * $order + $seconds / 45000, 7);
+        return $s * 2;
     }
 
     public static function getSign($s)
@@ -143,6 +137,16 @@ class Question extends Model
             return 0;
         }
         return $s > 0 ? 1 : -1;
+    }
+
+    public function getWeight()
+    {
+        $score = $this->getScore();
+        $order = log(max(abs($score), 1), 10);
+        $sign = self::getSign($score);
+        $date = $this->exists ? $this->created_at->timestamp : time();
+        $seconds = $date - 1134028003;
+        return round($order + ($sign * $seconds / 45000), 7);
     }
 
     public static function getNetVoteCount($question_id)
@@ -218,7 +222,4 @@ class Question extends Model
         }
         return $list;
     }
-
-
-
 }
