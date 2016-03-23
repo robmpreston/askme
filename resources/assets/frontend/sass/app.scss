@@ -298,6 +298,26 @@ input[type='text'] {
     padding: 1.5rem;
 }
 
+ul.sorting {
+    list-style: none;
+    margin: 0rem 0rem 1rem 0rem;
+    li {
+        margin: 0rem 1rem 0rem 0rem;
+        display: inline;
+        a {
+            color: $faded-grey;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+                color: $grey;
+            }
+        }
+    }
+    .active {
+        color: $grey;
+    }
+}
+
 .qa-container {
     position:relative;
     margin-bottom: 1.5rem;

@@ -380,6 +380,21 @@
 (function(){
     'use strict';
 
+    Vue.component('sorting', {
+        template: '#sorting-template',
+        props: [ 'sortType' ],
+        methods: {
+            sort: function(type) {
+                this.sortType = type;
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     Vue.component('tweet', {
         template: '#tweet-template',
         props: [ 'link', 'text' ]
@@ -408,6 +423,7 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
+            sortType: 'trending',
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,

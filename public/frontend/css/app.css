@@ -770,6 +770,21 @@ input[type='text'] {
   border-radius: 3px;
   padding: 1.5rem; }
 
+ul.sorting {
+  list-style: none;
+  margin: 0rem 0rem 1rem 0rem; }
+  ul.sorting li {
+    margin: 0rem 1rem 0rem 0rem;
+    display: inline; }
+    ul.sorting li a {
+      color: #c2cdd3;
+      text-decoration: none; }
+      ul.sorting li a:hover {
+        text-decoration: underline;
+        color: #607d8b; }
+  ul.sorting .active {
+    color: #607d8b; }
+
 .qa-container {
   position: relative;
   margin-bottom: 1.5rem;

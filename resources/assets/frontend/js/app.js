@@ -9,6 +9,7 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
+            sortType: 'trending',
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,

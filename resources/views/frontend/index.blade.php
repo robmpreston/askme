@@ -30,6 +30,7 @@
                 <feature :user="recipient" :is-admin="isAdmin"></feature>
             </div>
             <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn"></ask>
+            <sorting :sort-type="sortType"></sorting>
             <question v-for="question in questions" :question.sync="question"
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                 :base-url="baseUrl"></question>
@@ -48,5 +49,6 @@
     @include('frontend.vtemplates.tweet')
     @include('frontend.vtemplates.youtube')
     @include('frontend.vtemplates.edituser')
+    @include('frontend.vtemplates.sorting')
     <script src="frontend/js/app.js"></script>
 @endsection
