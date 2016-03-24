@@ -55,7 +55,11 @@
                 this.showLoginModal = true;
             },
             'update-question-sort': function(sortType) {
-
+                this.$http.post('/api/question/get', { recipient_id: recipient.id, sort: sortType}, function(data){
+                    this.questions = data;
+                }).error(function (data, status, request) {
+                    //error handling here
+                });
             }
         }
     });
