@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use App\User;
 
@@ -34,7 +35,7 @@ class HomeController extends Controller
             $loggedIn = Auth::check();
             $user = Auth::user();
             $show_hidden = false; //$user && $user->isRecipient($recipient->id) ? true : false;
-            $questions = $recipient->listQuestions(20, [], $show_hidden, $question);
+            $questions = $recipient->listQuestions(20, [], $show_hidden, Input::get('sort'));
             $featuredQuestion = null;
             if ($question) {
                 $featuredQuestion = $recipient->getFeaturedQuestion($question);

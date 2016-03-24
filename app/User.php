@@ -136,7 +136,7 @@ class User extends Authenticatable
         return $featuredQuestion;
     }
 
-    public function listQuestions($limit, $skip_ids = [], $show_hidden = false)
+    public function listQuestions($limit, $skip_ids = [], $show_hidden = false, $sort = 'trending')
     {
         // Collect the Questions w/ Answers By Weight
         $questions = $this->questions()->with('asker', 'answer');
@@ -146,7 +146,23 @@ class User extends Authenticatable
         if (!$show_hidden) {
             $questions->where('hide', '=', false);
         }
-        $questions = $questions->orderBy('weight', 'DESC')->take($limit)->get();
+        switch ($sort) {
+            case 'trending':
+                $questions->orderBy('weight', 'DESC');
+                break;
+            case 'date':
+                $questions->orderBy('created_at', 'DESC');
+                break;
+            case 'answered':
+                $questions->join('answers', 'questions.id', '=', 'answers.question_id')->select('questions.*')->orderBy('created_at', 'DESC');
+                break;
+            case 'rank':
+                $questions->orderBy('net_votes', 'DESC');
+                break;
+            default: 
+                $questions->orderBy('weight', 'DESC');
+        }
+        $questions = $questions->take($limit)->get();
 
         // Assign Whether and How The Logged In User Has Voted On Each Question && Answer
         if (Auth::check()) {

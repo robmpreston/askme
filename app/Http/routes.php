@@ -53,6 +53,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/{slug}/{question}', 'HomeController@index');
     Route::get('/{slug}', 'HomeController@index');
     Route::get('/', 'HomeController@index');
+    Route::post('/', 'HomeController@index');
 
     // AJAX LOGIN
     Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
