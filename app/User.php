@@ -126,6 +126,16 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getFeaturedQuestion($question_id)
+    {
+        $featuredQuestion = null;
+        if ($question_id) {
+            $featuredQuestion = $this->questions()->with('asker', 'answer')->where('id','=',$question_id)->first();
+        }
+
+        return $featuredQuestion;
+    }
+
     public function listQuestions($limit, $skip_ids = [], $show_hidden = false)
     {
         // Collect the Questions w/ Answers By Weight

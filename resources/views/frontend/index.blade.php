@@ -30,10 +30,20 @@
                 <feature :user="recipient" :is-admin="isAdmin"></feature>
             </div>
             <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn"></ask>
-            <sorting :sort-type="sortType"></sorting>
-            <question v-for="question in questions" :question.sync="question"
-                :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
-                :base-url="baseUrl"></question>
+            <div v-show="featuredQuestion != null && featuredShowing">
+                <ul class="sorting">
+                    <li><a href="#" @click="toggleFeatured" class="active">Show All Questions</a></li>
+                </ul>
+                <question :question.sync="featuredQuestion"
+                    :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
+                    :base-url="baseUrl"></question>
+            </div>
+            <div v-show="(featuredQuestion != null && !featuredShowing) || featuredQuestion == null">
+                <sorting :sort-type="sortType"></sorting>
+                <question v-for="question in questions" :question.sync="question"
+                    :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
+                    :base-url="baseUrl"></question>
+            </div>
         </div>
         <footer>
             <a href="http://madewithloveinbaltimore.org">Made with &hearts; in Baltimore</a>
@@ -50,5 +60,5 @@
     @include('frontend.vtemplates.youtube')
     @include('frontend.vtemplates.edituser')
     @include('frontend.vtemplates.sorting')
-    <script src="frontend/js/app.js"></script>
+    <script src="{{ asset('frontend/js/app.js') }}"></script>
 @endsection

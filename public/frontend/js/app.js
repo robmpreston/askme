@@ -386,6 +386,7 @@
         methods: {
             sort: function(type) {
                 this.sortType = type;
+                this.$dispatch('update-question-sort', this.sortType);
             }
         }
     });
@@ -423,6 +424,8 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
+            featuredQuestion: featuredQuestion,
+            featuredShowing: true,
             sortType: 'trending',
             user: user,
             isAdmin: isAdmin,
@@ -450,6 +453,9 @@
             },
             openFile: function() {
                 this.$els.fileInput.click();
+            },
+            toggleFeatured: function() {
+                this.featuredShowing = false;
             }
         },
         events: {
@@ -462,6 +468,9 @@
             },
             'show-signup-modal': function() {
                 this.showLoginModal = true;
+            },
+            'update-question-sort': function(sortType) {
+
             }
         }
     });

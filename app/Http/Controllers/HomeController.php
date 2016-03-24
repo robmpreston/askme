@@ -23,14 +23,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug = 'deray-mckesson')
+    public function index($slug = 'deray-mckesson', $question = null)
     {
+        if (is_numeric($slug)) {
+            $question = $slug;
+            $slug = 'deray-mckesson';
+        }
         $recipient = User::getBySlug($slug);
         if ($recipient) {
             $loggedIn = Auth::check();
             $user = Auth::user();
-            $show_hidden = $user && $user->isRecipient($recipient->id) ? true : false;
-            $questions = $recipient->listQuestions(20, [], $show_hidden);
+            $show_hidden = false; //$user && $user->isRecipient($recipient->id) ? true : false;
+            $questions = $recipient->listQuestions(20, [], $show_hidden, $question);
+            $featuredQuestion = null;
+            if ($question) {
+                $featuredQuestion = $recipient->getFeaturedQuestion($question);
+            }
             $isAdmin = false;
             if ($user && $user->id == $recipient->id) {
                 $isAdmin = true;
@@ -40,13 +48,15 @@ class HomeController extends Controller
             if ($slug == 'deray-mckesson') {
                 $baseUrl = "http://askderay.com";
             }
+
             return view('frontend.index', [
                 'recipient' => $recipient,
                 'questions' => $questions,
                 'logged_in' => $loggedIn,
                 'user' => $user,
                 'is_admin' => $isAdmin,
-                'base_url' => $baseUrl
+                'base_url' => $baseUrl,
+                'featured_question' => $featuredQuestion
             ]);
         }
         // return 404 error

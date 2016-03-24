@@ -7,6 +7,7 @@
         methods: {
             sort: function(type) {
                 this.sortType = type;
+                this.$dispatch('update-question-sort', this.sortType);
             }
         }
     });
