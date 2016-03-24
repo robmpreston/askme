@@ -24,6 +24,8 @@
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             downvote: function(questionId) {
@@ -40,6 +42,8 @@
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             hide: function() {
@@ -57,24 +61,34 @@
             submitAnswer: function(e) {
                 e.preventDefault();
                 if (this.loggedIn && this.isAdmin) {
-                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
-                        .then(function (response) {
-                            if (response.data.success) {
-                                this.replyOpen = false;
-                                this.answerText = '';
-                                this.question.answer = response.data.data.answer;
-                            }
-                        });
+                    this.$http.post('/api/answer/store',
+                    {
+                        question_id: this.question.id,
+                        text_response: this.answerText,
+                        video_url: this.answerVideo
+                    }).then(function (response) {
+                        if (response.data.success) {
+                            this.replyOpen = false;
+                            this.answerText = '';
+                            this.question.answer = response.data.data.answer;
+                        }
+                    });
                 }
             },
             cancelAnswer: function(e) {
                 e.preventDefault();
                 this.replyOpen = false;
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {
             shareUrl: function() {
-                return this.baseUrl + '/' + this.question.id;
+                return this.baseUrl + '/#question-' + this.question.id;
+            },
+            shareText: function() {
+                return 'Ask ' + this.recipient.first_name;
             }
         }
     });

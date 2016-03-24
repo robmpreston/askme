@@ -50,17 +50,17 @@ class Question extends Model
 
     public function votes()
     {
-        return $this->hasMany('App\Models\Question_Votes', 'question_id');
+        return $this->hasMany('App\Models\Question_Vote', 'question_id');
     }
 
     public function up_votes()
     {
-        return $this->hasMany('App\Models\Question_Votes', 'question_id')->where('is_down_vote', '=', false);
+        return $this->hasMany('App\Models\Question_Vote', 'question_id')->where('is_down_vote', '=', false);
     }
 
     public function down_votes()
     {
-        return $this->hasMany('App\Models\Question_Votes', 'question_id')->where('is_down_vote', '=', true);
+        return $this->hasMany('App\Models\Question_Vote', 'question_id')->where('is_down_vote', '=', true);
     }
 
     public function answer()
@@ -99,6 +99,16 @@ class Question extends Model
         return 3;
     }
 
+    public function hasAnswer()
+    {
+        return $this->answer()->exists();
+    }
+
+    public function hasAnswerPoints()
+    {
+        return 20;
+    }
+
     public function hide()
     {
         $this->hide = true;
@@ -111,24 +121,34 @@ class Question extends Model
         $this->save();
     }
 
-    public function getWeight()
+    public function getScore()
     {
-        $ups = $this->exists ? $this->up_votes()->count() : 0;
-        $downs = $this->exists ? $this->down_votes()->count() : 0;
-        $s = $ups - $downs;
-        $order = log10(max(abs($s), 1));
-        $sign = self::getSign($s);
-        $date = $this->exists ? $this->created_at->timestamp : time();
-        $seconds = $date - 1134028003;
-        return round($sign * $order + $seconds / 45000, 7);
+        $s = $this->net_votes; 
+        /*
+        if ($this->hasAnswer()) {
+            $s += $this->hasAnswerPoints();
+            $s += $this->answer->likes()->count();
+        }
+        */
+        return $s * 2;
     }
 
     public static function getSign($s)
     {
         if ($s == 0) {
-            return 0;
+            return 1;
         }
         return $s > 0 ? 1 : -1;
+    }
+
+    public function getWeight()
+    {
+        $score = $this->getScore();
+        $order = log(max(abs($score), 1), 10);
+        $sign = self::getSign($score);
+        $date = $this->exists ? $this->created_at->timestamp : time();
+        $seconds = $date - 1134028003;
+        return round($order + ($sign * $seconds / 45000), 7);
     }
 
     public static function getNetVoteCount($question_id)
@@ -204,7 +224,4 @@ class Question extends Model
         }
         return $list;
     }
-
-
-
 }

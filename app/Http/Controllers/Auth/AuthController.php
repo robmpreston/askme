@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 
 use Auth;
+use Session;
+use Log;
 
 class AuthController extends Controller
 {

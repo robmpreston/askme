@@ -559,6 +559,13 @@ p {
 article p {
   margin: 0.5rem 0; }
 
+.file-input {
+  position: absolute;
+  opacity: 0;
+  left: -100px;
+  width: 0px;
+  height: 0px; }
+
 header.top {
   position: relative;
   margin: 1.5rem 0 1.5rem 0;
@@ -585,8 +592,6 @@ header.top {
         cursor: pointer; }
     header.top .user-menu-button .button:hover {
       text-decoration: none; }
-    header.top .user-menu-button > input {
-      display: none; }
     header.top .user-menu-button i {
       color: #607d8b; }
     header.top .user-menu-button label {
@@ -609,6 +614,11 @@ header.top {
         padding: 0.25rem; }
         header.top .user-menu-button .dropdown li:hover {
           background-color: #eef1f3; }
+        header.top .user-menu-button .dropdown li a {
+          color: black;
+          text-decoration: none; }
+          header.top .user-menu-button .dropdown li a:hover {
+            background-color: #eef1f3; }
     header.top .user-menu-button * {
       vertical-align: middle; }
   header.top .user-menu-button:hover > .dropdown {
@@ -617,7 +627,8 @@ header.top {
 .featured {
   position: relative;
   margin: 0 auto 2rem auto;
-  text-align: center; }
+  text-align: center;
+  min-height: 5rem; }
   .featured .avatar-container {
     float: left;
     margin-right: 1.5rem; }
@@ -757,6 +768,21 @@ input[type='text'] {
   border-radius: 3px;
   padding: 1.5rem; }
 
+ul.sorting {
+  list-style: none;
+  margin: 0rem 0rem 1rem 0rem; }
+  ul.sorting li {
+    margin: 0rem 1rem 0rem 0rem;
+    display: inline; }
+    ul.sorting li a {
+      color: #c2cdd3;
+      text-decoration: none; }
+      ul.sorting li a:hover {
+        text-decoration: underline;
+        color: #607d8b; }
+  ul.sorting .active {
+    color: #607d8b; }
+
 .qa-container {
   position: relative;
   margin-bottom: 1.5rem;
@@ -769,6 +795,18 @@ input[type='text'] {
   background: #f7f9fa;
   border-radius: 0 0 0.1875rem 0.1875rem;
   background-clip: padding-box; }
+  .answer.container .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0; }
+    .answer.container .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
   .answer.container .like-block {
     display: inline-block; }
     .answer.container .like-block * {
@@ -806,6 +844,9 @@ input[type='text'] {
     border: 0px;
     outline: 0;
     resize: none; }
+  .answer.container input {
+    padding: .5rem 1.0rem .5rem 1.0rem;
+    width: 100%; }
 
 .container header p {
   color: #607d8b; }

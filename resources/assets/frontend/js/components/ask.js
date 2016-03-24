@@ -11,13 +11,17 @@
                 errorMsg: ''
             };
         },
-        props: [ 'user', 'recipient' ],
+        props: [ 'user', 'recipient', 'loggedIn' ],
         methods: {
             toggle: function() {
-                this.open = !this.open;
-                this.$nextTick( function() {
-                    this.$els.questionText.focus();
-                });
+                if (this.loggedIn) {
+                    this.open = !this.open;
+                    this.$nextTick( function() {
+                        this.$els.questionText.focus();
+                    });
+                } else {
+                    this.showSignupModal();
+                }
             },
             sendQuestion: function() {
                 this.errorMsg = '';
@@ -39,6 +43,9 @@
                 }, function (response) {
                     console.log('failed');
                 });
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         events: {

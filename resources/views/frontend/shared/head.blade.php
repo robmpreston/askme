@@ -2,6 +2,11 @@
     <title>@yield('title')</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
     <link href="frontend/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="bower_components/vue/dist/vue.min.js"></script>

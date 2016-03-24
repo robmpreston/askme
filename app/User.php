@@ -152,6 +152,7 @@ class User extends Authenticatable
         $this->first_name = $request->first_name;
         $this->last_name = $request->last_name;
         $this->email = $request->email;
+        $this->from = $request->from;
         if ($request->password && $request->password != '') {
             $this->password = bcrypt($request->password);
         }

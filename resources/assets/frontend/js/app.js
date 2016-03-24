@@ -9,6 +9,7 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
+            sortType: 'trending',
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,
@@ -19,10 +20,11 @@
                 this.$http.get('/logout').then(function(response) {
                     this.loggedIn = false;
                     this.user = null;
+                    this.isAdmin = false;
                 });
             },
             bindFile: function() {
-                this.profileFormUpload.append('file', this.$els.fileinput.files[0]);
+                this.profileFormUpload.append('file', this.$els.fileInput.files[0]);
                 this.$http.post('/api/user/picture', this.profileFormUpload, function(data){
                     this.user = data.data;
                     if (this.user.id == this.recipient.id) {
@@ -31,6 +33,9 @@
                 }).error(function (data, status, request) {
                     //error handling here
                 });
+            },
+            openFile: function() {
+                this.$els.fileInput.click();
             }
         },
         events: {
@@ -40,6 +45,9 @@
             },
             'questions-updated': function(questions) {
                 this.questions = questions;
+            },
+            'show-signup-modal': function() {
+                this.showLoginModal = true;
             }
         }
     });

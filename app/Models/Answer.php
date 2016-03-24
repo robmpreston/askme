@@ -70,8 +70,9 @@ class Answer extends Model
         $answer->question_id = $question->id;
         $answer->user_id = Auth::user() ? Auth::user()->id : 5;
         $answer->text_response = array_get($params, 'text_response');
-        $answer->video_url = array_get($params, 'video_url', null);
-        $answer->is_video = array_get($params, 'is_video', false);
+        $videoUrl = array_get($params, 'video_url', null);
+        $answer->is_video = ($videoUrl !== null && $videoUrl !== false);
+        $answer->video_url = self::getIdFromUrl($videoUrl);
         $answer->save();
 
         //Event::fire(new AnswerWasGiven($answer));
@@ -90,4 +91,21 @@ class Answer extends Model
         return $count;
     }
 
+    private static function getIdFromUrl($url)
+    {
+        $parts = parse_url($url);
+        if(isset($parts['query'])){
+            parse_str($parts['query'], $qs);
+            if(isset($qs['v'])){
+                return $qs['v'];
+            } else if(isset($qs['vi'])){
+                return $qs['vi'];
+            }
+        }
+        if(isset($parts['path'])){
+            $path = explode('/', trim($parts['path'], '/'));
+            return $path[count($path)-1];
+        }
+        return false;
+    }
 }

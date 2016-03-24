@@ -19,7 +19,9 @@ elixir(function(mix) {
         './resources/assets/frontend/js/components/login_modal.js',
         './resources/assets/frontend/js/components/edit_user_modal.js',
         './resources/assets/frontend/js/components/fbshare.js',
+        './resources/assets/frontend/js/components/sorting.js',
         './resources/assets/frontend/js/components/tweet.js',
+        './resources/assets/frontend/js/components/youtube.js',
         './resources/assets/frontend/js/app.js'
     ], 'public/frontend/js/app.js');
 });

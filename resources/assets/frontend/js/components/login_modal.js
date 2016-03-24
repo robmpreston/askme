@@ -8,7 +8,7 @@
             return {
     	        title: '',
                 body: '',
-                login: true,
+                login: false,
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -18,6 +18,11 @@
         methods: {
             close: function () {
                 this.show = false;
+                this.login = false;
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
                 this.title = '';
                 this.body = '';
             },
@@ -37,7 +42,7 @@
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
-                { first_name: this.firstName, last_name: this.lastName, email: this.email, password: this.password }).then(function (response) {
+                { first_name: this.firstName, last_name: this.lastName, from: this.from, email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -52,7 +57,7 @@
                 return (this.email != '' && this.password != '');
             },
             signupValidated: function() {
-                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+                return (this.firstName != '' && this.lastName != '' && this.from != '' && this.email != '' && this.password != '');
             }
         }
     });

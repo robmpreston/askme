@@ -11,13 +11,17 @@
                 errorMsg: ''
             };
         },
-        props: [ 'user', 'recipient' ],
+        props: [ 'user', 'recipient', 'loggedIn' ],
         methods: {
             toggle: function() {
-                this.open = !this.open;
-                this.$nextTick( function() {
-                    this.$els.questionText.focus();
-                });
+                if (this.loggedIn) {
+                    this.open = !this.open;
+                    this.$nextTick( function() {
+                        this.$els.questionText.focus();
+                    });
+                } else {
+                    this.showSignupModal();
+                }
             },
             sendQuestion: function() {
                 this.errorMsg = '';
@@ -39,6 +43,9 @@
                 }, function (response) {
                     console.log('failed');
                 });
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         events: {
@@ -77,6 +84,8 @@
                     }, function (response) {
                         this.question.upvoted = !this.question.upvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             downvote: function(questionId) {
@@ -93,6 +102,8 @@
                     }, function (response) {
                         this.question.downvoted = !this.question.downvoted;
                     });
+                } else {
+                    this.showSignupModal();
                 }
             },
             hide: function() {
@@ -110,24 +121,34 @@
             submitAnswer: function(e) {
                 e.preventDefault();
                 if (this.loggedIn && this.isAdmin) {
-                    this.$http.post('/api/answer/store', { question_id: this.question.id, text_response: this.answerText })
-                        .then(function (response) {
-                            if (response.data.success) {
-                                this.replyOpen = false;
-                                this.answerText = '';
-                                this.question.answer = response.data.data.answer;
-                            }
-                        });
+                    this.$http.post('/api/answer/store',
+                    {
+                        question_id: this.question.id,
+                        text_response: this.answerText,
+                        video_url: this.answerVideo
+                    }).then(function (response) {
+                        if (response.data.success) {
+                            this.replyOpen = false;
+                            this.answerText = '';
+                            this.question.answer = response.data.data.answer;
+                        }
+                    });
                 }
             },
             cancelAnswer: function(e) {
                 e.preventDefault();
                 this.replyOpen = false;
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {
             shareUrl: function() {
-                return this.baseUrl + '/' + this.question.id;
+                return this.baseUrl + '/#question-' + this.question.id;
+            },
+            shareText: function() {
+                return 'Ask ' + this.recipient.first_name;
             }
         }
     });
@@ -154,7 +175,12 @@
                     }, function (response) {
                         this.answer.liked = !this.answer.liked;
                     });
+                } else {
+                    this.showSignupModal();
                 }
+            },
+            showSignupModal: function() {
+                this.$dispatch('show-signup-modal');
             }
         },
         computed: {
@@ -242,7 +268,7 @@
             return {
     	        title: '',
                 body: '',
-                login: true,
+                login: false,
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -252,6 +278,11 @@
         methods: {
             close: function () {
                 this.show = false;
+                this.login = false;
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
                 this.title = '';
                 this.body = '';
             },
@@ -271,7 +302,7 @@
             },
             emailSignup: function () {
                 this.$http.post('/api/user/store',
-                { first_name: this.firstName, last_name: this.lastName, email: this.email, password: this.password }).then(function (response) {
+                { first_name: this.firstName, last_name: this.lastName, from: this.from, email: this.email, password: this.password }).then(function (response) {
                     if (!response.data.success) {
                     } else {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -286,7 +317,7 @@
                 return (this.email != '' && this.password != '');
             },
             signupValidated: function() {
-                return (this.firstName != '' && this.lastName != '' && this.email != '' && this.password != '');
+                return (this.firstName != '' && this.lastName != '' && this.from != '' && this.email != '' && this.password != '');
             }
         }
     });
@@ -315,7 +346,7 @@
             },
             updateUser: function() {
                 this.$http.post('/api/user/update',
-                { first_name: this.user.first_name, last_name: this.user.last_name, email: this.user.email, password: this.password })
+                { first_name: this.user.first_name, last_name: this.user.last_name, from: this.user.from, email: this.user.email, password: this.password })
                 .then(function (response) {
                     if (response.data.success) {
                         this.$dispatch('user-updated', response.data.data.user);
@@ -329,7 +360,7 @@
         computed: {
             validated: function() {
                 return (this.user.first_name != '' && this.user.last_name != ''
-                    && this.user.email != '');
+                    && this.user.from != '' && this.user.email != '');
             }
         }
     });
@@ -349,9 +380,34 @@
 (function(){
     'use strict';
 
+    Vue.component('sorting', {
+        template: '#sorting-template',
+        props: [ 'sortType' ],
+        methods: {
+            sort: function(type) {
+                this.sortType = type;
+            }
+        }
+    });
+
+})();
+
+(function(){
+    'use strict';
+
     Vue.component('tweet', {
         template: '#tweet-template',
         props: [ 'link', 'text' ]
+    });
+
+})();
+
+(function(){
+    'use strict';
+
+    Vue.component('youtube', {
+        template: '#youtube-template',
+        props: [ 'videoId' ]
     });
 
 })();
@@ -367,6 +423,7 @@
             recipient: recipient,
             questions: questions,
             loggedIn: loggedIn,
+            sortType: 'trending',
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,
@@ -377,10 +434,11 @@
                 this.$http.get('/logout').then(function(response) {
                     this.loggedIn = false;
                     this.user = null;
+                    this.isAdmin = false;
                 });
             },
             bindFile: function() {
-                this.profileFormUpload.append('file', this.$els.fileinput.files[0]);
+                this.profileFormUpload.append('file', this.$els.fileInput.files[0]);
                 this.$http.post('/api/user/picture', this.profileFormUpload, function(data){
                     this.user = data.data;
                     if (this.user.id == this.recipient.id) {
@@ -389,6 +447,9 @@
                 }).error(function (data, status, request) {
                     //error handling here
                 });
+            },
+            openFile: function() {
+                this.$els.fileInput.click();
             }
         },
         events: {
@@ -398,6 +459,9 @@
             },
             'questions-updated': function(questions) {
                 this.questions = questions;
+            },
+            'show-signup-modal': function() {
+                this.showLoginModal = true;
             }
         }
     });

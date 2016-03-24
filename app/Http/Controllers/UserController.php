@@ -29,6 +29,7 @@ class UserController extends Controller
         $this->validate($request, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+            'from' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ]);
@@ -37,6 +38,7 @@ class UserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'from' => $request->from,
             'slug' => User::createSlug($request->first_name, $request->last_name),
             'password' => bcrypt($request->password),
         ]);
@@ -53,6 +55,7 @@ class UserController extends Controller
         $validation = [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+            'from' => 'required|max:255',
             'password' => 'min:6',
         ];
 
