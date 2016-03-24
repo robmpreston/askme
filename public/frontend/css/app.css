@@ -666,7 +666,6 @@ header.top {
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box; }
     .featured article textarea {
-      margin-top: 1rem;
       border: solid 1px #b0bec5;
       color: #607d8b;
       outline: 0;
@@ -731,6 +730,9 @@ input[type='text'] {
   margin: 0 auto 1.5rem auto;
   padding: 0; }
   .ask-input.container input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     width: 100%; }
 
 .ask.container {
@@ -966,6 +968,10 @@ footer {
     footer a:visited {
       color: #607d8b; }
 
+@media screen and (min-width: 860px) {
+  .featured .info .row {
+    margin: 1rem 0; } }
+
 @media screen and (max-width: 859px) {
   header.top {
     margin: 1.5rem; }
@@ -986,8 +992,13 @@ footer {
     float: none;
     margin: 0 auto;
     text-align: center; }
+    .featured .avatar-container .edit-text {
+      position: relative;
+      top: 0; }
   .featured article {
     margin: 0; }
+    .featured article input {
+      margin: 0.5rem 0; }
     .featured article .description {
       margin: 0; }
   .featured .social-container {
@@ -1017,6 +1028,7 @@ footer {
     top: 0;
     text-align: left; }
     .social-container .social.button {
+      margin-right: 0.25rem;
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;

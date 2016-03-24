@@ -48,7 +48,7 @@
         <div class="social-container">
             <tweet :link="shareUrl" text="Ask me"></tweet>
             <fbshare :link="shareUrl" text="Ask me"></fbshare>
-            <a class="small ghost button" v-if="isAdmin" @click="hide" href="#">Hide</a>
+            <a class="social button" v-if="isAdmin" @click="hide" href="#">Hide</a>
         </div>
     </div>
 </template>

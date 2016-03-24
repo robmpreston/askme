@@ -178,7 +178,6 @@ header.top {
             @include border-box();
         }
         textarea {
-            margin-top:1rem;
             border: solid 1px #b0bec5;
             color:$grey;
             outline: 0;
@@ -255,6 +254,7 @@ input[type='text'] {
     margin: 0 auto 1.5rem auto;
     padding:0;
     input {
+        @include border-box();
         width: 100%;
     }
 }
@@ -562,6 +562,16 @@ footer {
     }
 }
 
+@media screen and (min-width: $desktop-min) {
+    .featured {
+        .info {
+            .row {
+                margin:1rem 0;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: $mobile-max) {
     header.top {
         margin: 1.5rem;
@@ -585,9 +595,16 @@ footer {
             float:none;
             margin:0 auto;
             text-align:center;
+            .edit-text {
+                position:relative;
+                top:0;
+            }
         }
         article {
             margin:0;
+            input {
+                margin:0.5rem 0;
+            }
             .description {
                 margin:0;
             }
@@ -631,6 +648,7 @@ footer {
         top:0;
         text-align:left;
         .social.button {
+            margin-right:0.25rem;
             @include border-box();
             display:inline-block;
         }
