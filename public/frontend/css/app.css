@@ -777,6 +777,7 @@ ul.sorting {
     margin: 0rem 1rem 0rem 0rem;
     display: inline; }
     ul.sorting li a {
+      cursor: pointer;
       color: #c2cdd3;
       text-decoration: none; }
       ul.sorting li a:hover {

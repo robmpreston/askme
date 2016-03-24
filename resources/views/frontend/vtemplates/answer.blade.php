@@ -20,7 +20,7 @@
                 </p>
                 <p class="votes">@{{ answer.net_votes }}</p>
                 <p class="edit">
-                    <a class="small ghost button" v-if="isAdmin" @click="editAnswer" href="#">Edit</a>
+                    <a class="small ghost button" v-if="isAdmin" @click="editAnswer">Edit</a>
                 </p>
             </p>
         </div>

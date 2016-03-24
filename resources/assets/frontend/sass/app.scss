@@ -309,6 +309,7 @@ ul.sorting {
         margin: 0rem 1rem 0rem 0rem;
         display: inline;
         a {
+            cursor: pointer;
             color: $faded-grey;
             text-decoration: none;
             &:hover {

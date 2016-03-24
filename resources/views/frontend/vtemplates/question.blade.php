@@ -23,7 +23,7 @@
                     <p>@{{ question.text_response }}</p>
                 </article>
                 <article class="reply">
-                    <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply" href="#">Reply</a>
+                    <a class="small ghost button" v-if="isAdmin && question.answer == null && !replyOpen" @click="reply">Reply</a>
                 </article>
             </div>
             <answer v-if="question.answer != null" :answer="question.answer"
@@ -39,8 +39,8 @@
                 </article>
                 <div class="like-block">
                     <p>
-                        <a class="small ghost button" @click="submitAnswer" href="#">Submit</a>
-                        <a class="small ghost button" @click="cancelAnswer" href="#">Cancel</a>
+                        <a class="small ghost button" @click="submitAnswer">Submit</a>
+                        <a class="small ghost button" @click="cancelAnswer">Cancel</a>
                     </p>
                 </div>
             </div>
@@ -48,7 +48,7 @@
         <div class="social-container">
             <tweet :link="shareUrl" text="Ask me"></tweet>
             <fbshare :link="shareUrl" text="Ask me"></fbshare>
-            <a class="social button" v-if="isAdmin" @click="hide" href="#">Hide</a>
+            <a class="social button" v-if="isAdmin" @click="hide">Hide</a>
         </div>
     </div>
 </template>

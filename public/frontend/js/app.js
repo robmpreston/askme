@@ -110,7 +110,9 @@
                 if (this.loggedIn && this.isAdmin) {
                     this.$http.post('/api/question/hide', { question_id: this.question.id })
                         .then(function (response) {
-
+                            if (response.data.success) {
+                                this.$dispatch('questions-updated', response.data.data);
+                            }
                         });
                 }
             },
