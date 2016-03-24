@@ -1,5 +1,5 @@
 <template id="question-template">
-    <div id="question-@{{ question.id }}">
+    <div class="outer-question-container" id="question-@{{ question.id }}">
         <div class="vote-block">
             <div class="up vote" @click="upvote(question.id)" :class="{disabled: question.upvoted}">
                 <svg class="svg-icon static"><use xlink:href="#up-static-icon"></use></svg>
@@ -44,11 +44,11 @@
                     </p>
                 </div>
             </div>
-            <div class="social-container">
-                <tweet :link="shareUrl" :text="shareText"></tweet>
-                <fbshare :link="shareUrl" :text="shareText"></fbshare>
-                <a class="small ghost button" v-if="isAdmin" @click="hide" href="#">Hide</a>
-            </div>
+        </div>
+        <div class="social-container">
+            <tweet :link="shareUrl" text="Ask me"></tweet>
+            <fbshare :link="shareUrl" text="Ask me"></fbshare>
+            <a class="social button" v-if="isAdmin" @click="hide" href="#">Hide</a>
         </div>
     </div>
 </template>

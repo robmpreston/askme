@@ -178,7 +178,6 @@ header.top {
             @include border-box();
         }
         textarea {
-            margin-top:1rem;
             border: solid 1px #b0bec5;
             color:$grey;
             outline: 0;
@@ -190,6 +189,10 @@ header.top {
             @include border-radius(0.1875rem);
         }
     }
+}
+
+.outer-question-container {
+    position:relative;
 }
 
 .social-container {
@@ -251,6 +254,7 @@ input[type='text'] {
     margin: 0 auto 1.5rem auto;
     padding:0;
     input {
+        @include border-box();
         width: 100%;
     }
 }
@@ -449,6 +453,7 @@ ul.sorting {
         margin: 0;
         padding: 0;
         input[type="text"], input[type="password"] {
+            @include border-box();
             width: 100%;
             border-radius: 3px;
             border: solid 1px $light-grey;
@@ -546,8 +551,6 @@ ul.sorting {
 }
 
 footer {
-    max-width:40.5rem;
-    margin:3rem auto 1rem auto;
     text-align:center;
     a {
         text-decoration:none;
@@ -557,4 +560,111 @@ footer {
             color:$grey;
         }
     }
+}
+
+@media screen and (min-width: $desktop-min) {
+    .featured {
+        .info {
+            .row {
+                margin:1rem 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-max) {
+    header.top {
+        margin: 1.5rem;
+        img.logo {
+            margin-top:0.4375rem;
+            width:8.5rem;
+            float:left;
+        }
+        .login.button {
+            margin-right:0;
+        }
+    }
+    .main-column {
+        max-width:none;
+        width:100%;
+        padding:0 1.5rem;
+        @include border-box();
+    }
+    .featured {
+        .avatar-container {
+            float:none;
+            margin:0 auto;
+            text-align:center;
+            .edit-text {
+                position:relative;
+                top:0;
+            }
+        }
+        article {
+            margin:0;
+            input {
+                margin:0.5rem 0;
+            }
+            .description {
+                margin:0;
+            }
+        }
+        .social-container{
+            position:relative;
+        }
+    }
+    #ask-container {
+        .ask-input {
+            @include border-box();
+            input[type='text'] {
+                font-size:0.875rem;
+                @include border-box();
+            }
+        }
+    }
+    .outer-question-container {
+        .vote-block {
+            position:relative;
+            left:0;
+            p, .vote {
+                display:inline-block
+            }
+        }
+        .qa-container {
+            margin-bottom:0.5rem;
+            .question.container {
+
+            }
+        }
+        .social-container {
+            position:relative;
+        }
+    }
+
+    .social-container {
+        margin-top:0.5rem;
+        margin-bottom:1.5rem;
+        right:0;
+        top:0;
+        text-align:left;
+        .social.button {
+            margin-right:0.25rem;
+            @include border-box();
+            display:inline-block;
+        }
+    }
+
+    .vote.disabled .focus {
+        display: inline-block !important;
+    }
+    .modal-mask {
+        overflow:auto;
+        .modal-container {
+            margin:0;
+            @include border-box();
+            width:100%;
+            overflow:auto;
+        }
+    }
+
 }
