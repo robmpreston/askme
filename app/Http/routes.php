@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('/api/question/downvote', 'QuestionController@downvote');
     Route::post('/api/question/hide', 'QuestionController@hideQuestion');
     Route::post('/api/question/show', 'QuestionController@showQuestion');
+    Route::post('/api/question/get', 'QuestionController@getQuestions');
 
     // ANSWER
 	Route::post('/api/answer/like', 'AnswerController@like');
@@ -47,6 +48,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+
+    Route::post('/api/question/get', 'QuestionController@getQuestions');
 
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);

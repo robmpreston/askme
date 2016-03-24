@@ -111,4 +111,14 @@ class QuestionController extends Controller
     {
         return Question::getForRespondent($respondent_id);
     }
+
+    public function getQuestions(Request $request)
+    {
+        $user = Auth::user();
+        $recipient = User::find($request->input('recipient_id'));
+        if ($recipient) {
+            $show_hidden = $user && $user->isRecipient($recipient->id) ? true : false;
+        }
+        return response()->json($recipient->listQuestions(20, [], $show_hidden, $request->input('sort')));
+    }
 }
