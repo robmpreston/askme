@@ -1022,6 +1022,15 @@ footer {
       -webkit-box-sizing: border-box;
       display: inline-block; }
   .vote.disabled .focus {
-    display: inline-block !important; } }
+    display: inline-block !important; }
+  .modal-mask {
+    overflow: auto; }
+    .modal-mask .modal-container {
+      margin: 0;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      width: 100%;
+      overflow: auto; } }
 
 /*# sourceMappingURL=app.css.map */

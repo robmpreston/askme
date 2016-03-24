@@ -639,4 +639,14 @@ footer {
     .vote.disabled .focus {
         display: inline-block !important;
     }
+    .modal-mask {
+        overflow:auto;
+        .modal-container {
+            margin:0;
+            @include border-box();
+            width:100%;
+            overflow:auto;
+        }
+    }
+
 }
