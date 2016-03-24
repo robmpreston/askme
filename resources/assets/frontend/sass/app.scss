@@ -179,6 +179,10 @@ header.top {
     }
 }
 
+.outer-question-container {
+    position:relative;
+}
+
 .social-container {
     position:absolute;
     right:-5.5rem;
@@ -399,6 +403,7 @@ input[type='text'] {
         margin: 0;
         padding: 0;
         input[type="text"], input[type="password"] {
+            @include border-box();
             width: 100%;
             border-radius: 3px;
             border: solid 1px $light-grey;
@@ -496,8 +501,6 @@ input[type='text'] {
 }
 
 footer {
-    max-width:40.5rem;
-    margin:3rem auto 1rem auto;
     text-align:center;
     a {
         text-decoration:none;
@@ -506,5 +509,84 @@ footer {
         &:visited {
             color:$grey;
         }
+    }
+}
+
+@media screen and (max-width: $mobile-max) {
+    header.top {
+        margin: 1.5rem;
+        img.logo {
+            margin-top:0.4375rem;
+            width:8.5rem;
+            float:left;
+        }
+        .login.button {
+            margin-right:0;
+        }
+    }
+    .main-column {
+        max-width:none;
+        width:100%;
+        padding:0 1.5rem;
+        @include border-box();
+    }
+    .featured {
+        .avatar-container {
+            float:none;
+            margin:0 auto;
+            text-align:center;
+        }
+        article {
+            margin:0;
+            .description {
+                margin:0;
+            }
+        }
+        .social-container{
+            position:relative;
+        }
+    }
+    #ask-container {
+        .ask-input {
+            @include border-box();
+            input[type='text'] {
+                font-size:0.875rem;
+                @include border-box();
+            }
+        }
+    }
+    .outer-question-container {
+        .vote-block {
+            position:relative;
+            left:0;
+            p, .vote {
+                display:inline-block
+            }
+        }
+        .qa-container {
+            margin-bottom:0.5rem;
+            .question.container {
+
+            }
+        }
+        .social-container {
+            position:relative;
+        }
+    }
+
+    .social-container {
+        margin-top:0.5rem;
+        margin-bottom:1.5rem;
+        right:0;
+        top:0;
+        text-align:left;
+        .social.button {
+            @include border-box();
+            display:inline-block;
+        }
+    }
+
+    .vote.disabled .focus {
+        display: inline-block !important;
     }
 }

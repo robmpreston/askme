@@ -6,7 +6,7 @@
     <div id="app" class="wrapper">
         <header class="top">
             <!--<h1>Soapbox</h1> -->
-            <img src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
+            <img class="logo" src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
             <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
@@ -36,7 +36,7 @@
                 :base-url="baseUrl"></question>
         </div>
         <footer>
-            <a href="http://madewithloveinbaltimore.org">Made with &hearts; in Baltimore</a>
+            <p><a href="http://madewithloveinbaltimore.org">Made with &hearts; in Baltimore</a></p>
         </footer>
     </div>
     @include('frontend.vtemplates.question')
