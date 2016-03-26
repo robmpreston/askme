@@ -282,6 +282,10 @@ input[type='text'] {
 .answer.container, .ask.container, .question.container {
     header {
         margin: 0 0 0.5rem 0;
+        .date {
+            color: $faded-grey;
+            margin-top: .33rem;
+        }
     }
     article{
         p {

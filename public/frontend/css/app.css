@@ -755,6 +755,9 @@ input[type='text'] {
 
 .answer.container header, .ask.container header, .question.container header {
   margin: 0 0 0.5rem 0; }
+  .answer.container header .date, .ask.container header .date, .question.container header .date {
+    color: #c2cdd3;
+    margin-top: .33rem; }
 
 .answer.container article p, .ask.container article p, .question.container article p {
   margin: 0; }

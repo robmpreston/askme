@@ -3,6 +3,7 @@
         <header>
             <img :src="recipient.picture">
             <p><span class="faded-text">Reply from</span> @{{ recipient.first_name }}</p>
+            <p class="date pull-right">@{{ answer.created_at | moment "from" }}</p>
         </header>
         <article>
             <p>@{{ answer.text_response }}</p>
