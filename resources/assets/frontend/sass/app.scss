@@ -44,6 +44,12 @@ p {
     color: $faded-grey;
 }
 
+.error-text {
+    color: $error;
+    margin: 0 0 5px 0;
+    text-align: center;
+}
+
 article {
     p {
         margin:0.5rem 0;

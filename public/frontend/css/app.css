@@ -556,6 +556,11 @@ p {
 .faded-text {
   color: #c2cdd3; }
 
+.error-text {
+  color: #ff0033;
+  margin: 0 0 5px 0;
+  text-align: center; }
+
 article p {
   margin: 0.5rem 0; }
 

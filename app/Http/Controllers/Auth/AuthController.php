@@ -78,7 +78,7 @@ class AuthController extends Controller
             ];
         }
         return [
-            'success' => true,
+            'success' => false,
             'data' => null,
             'error' => null
         ];
