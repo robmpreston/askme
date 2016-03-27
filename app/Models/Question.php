@@ -43,7 +43,7 @@ class Question extends Model
         return $this->belongsTo('App\User', 'from_user_id');
     }
 
-    public function respondent()
+    public function recipient()
     {
         return $this->belongsTo('App\User', 'to_user_id');
     }
@@ -92,6 +92,11 @@ class Question extends Model
             Auth::user()->setFrom($request->user_from); 
         }
         return $question;
+    }
+
+    public function getRecipient()
+    {
+        $this->recipient()->with('profile')->first();
     }
 
     public static function latencyMinutes()

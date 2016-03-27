@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Question;
 use App\Models\Answer;
 use Auth;
 use Carbon\Carbon;
+use Torann\GeoIP\GeoIPFacade as GeoIP;
 
 class User extends Authenticatable
 {
@@ -136,7 +138,7 @@ class User extends Authenticatable
         return $featuredQuestion;
     }
 
-    public function listQuestions($limit, $skip_ids = [], $show_hidden = false, $sort = 'trending')
+    public function listQuestions($limit, $skip_ids = [], $show_hidden = false, $sort = 'trending', $offset = 0)
     {
         // Collect the Questions w/ Answers By Weight
         $questions = $this->questions()->with('asker', 'answer');
@@ -161,6 +163,10 @@ class User extends Authenticatable
                 break;
             default: 
                 $questions->orderBy('weight', 'DESC');
+        }
+
+        if ($offset) {
+            $questions->skip($offset);
         }
         $questions = $questions->take($limit)->get();
 
@@ -216,5 +222,14 @@ class User extends Authenticatable
     public function getAnswerVotes($answer_ids = [])
     {
         return DB::table('answer_votes')->where('user_id', '=', $this->id)->whereIn('answer_id', $answer_ids)->lists('is_down_vote', 'answer_id');
+    }
+
+    public static function getLocation()
+    {
+        $location = GeoIP::getLocation(Request::ip());
+        if ($location) {
+            return $location['city'] . ', ' . $location['state'];
+        }
+        return null;
     }
 }

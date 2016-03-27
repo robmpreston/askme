@@ -119,6 +119,6 @@ class QuestionController extends Controller
         if ($recipient) {
             $show_hidden = false; // $user && $user->isRecipient($recipient->id) ? true : false;
         }
-        return response()->json($recipient->listQuestions(20, [], $show_hidden, $request->input('sort')));
+        return response()->json($recipient->listQuestions(20, [], $show_hidden, $request->input('sort')), $request->input('offset'));
     }
 }
