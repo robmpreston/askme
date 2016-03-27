@@ -12,7 +12,7 @@
     <script src="{{ asset('bower_components/vue/dist/vue.min.js') }}"></script>
     <script src="{{ asset('bower_components/vue-resource/dist/vue-resource.min.js') }}"></script>
     <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
-    <script src="{{ asset('bower_components/vue-moment/vue-moment.min.js') }}"></script>
+    <script src="{{ asset('js/vue-moment.min.js') }}"></script>
     <script>
         var recipient = <?php echo json_encode($recipient); ?>;
         var questions = <?php echo json_encode($questions); ?>;

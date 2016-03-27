@@ -6,6 +6,7 @@
             <input v-model="from" type="text" placeholder="Location (ex: Baltimore, MD)">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
+            <p class="error-text" v-if="errorText != ''">@{{{ errorText }}}</p>
             <button class="ghost button full-width" @click="emailSignup" :disabled="!signupValidated">
                 Signup
             </button>
@@ -19,6 +20,7 @@
         <div class="modal-body" v-if="login">
             <input v-model="email" type="text" placeholder="Email">
             <input v-model="password" type="password" placeholder="Password">
+            <p class="error-text" v-if="errorText != ''">@{{{ errorText }}}</p>
             <button class="ghost button full-width" @click="emailLogin" :disabled="!loginValidated">
                 Login
             </button>

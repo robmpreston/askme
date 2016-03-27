@@ -18,6 +18,7 @@
                 <header>
                     <img :src="question.asker.picture">
                     <p>@{{ question.asker.first_name }} <span class="faded-text">from</span> @{{ question.asker.from }}</p>
+                    <p class="date pull-right">@{{ question.created_at | moment "from" }}</p>
                 </header>
                 <article>
                     <p>@{{ question.text_response }}</p>
