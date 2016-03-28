@@ -9,7 +9,8 @@
                 <p class="description">@{{ user.profile.description }}</p>
             </article>
         </div>
-        <p>@{{ topic.name }}</p>
+        <p v-if="!topic.is_live">Next AMA: @{{ topic.opens_at | moment "dddd, MMM Do h:mm a" }}</p>
+        <p>Topic will be @{{ topic.name }}</p>
         <div class="social-container">
             <a class="social button website" v-if="user.profile.website_url != ''" :href="user.profile.website_url" target="_blank"><i class="fa fa-external-link"></i> Website</a>
             <a class="social button" v-if="user.profile.twitter_url != ''" :href="user.profile.twitter_url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
