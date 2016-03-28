@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Models\Question;
 use App\Models\Question_Vote;
+use App\Models\Topic;
 use App\User;
 use Log;
 
@@ -84,6 +85,16 @@ class QuestionController extends Controller
                 'data' => null,
             ];
         }
+
+        $topic = Topic::find($request->topic_id);
+        if (!$topic || !$topic->isLive()) {
+            return [
+                'successs' => false,
+                'error' => 'You cannot post a question yet for this topic.',
+                'data' => null,
+            ];
+        }
+
 
         $question = Question::makeOne($request);
         if ($question) {
