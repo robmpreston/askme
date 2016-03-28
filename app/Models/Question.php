@@ -68,6 +68,11 @@ class Question extends Model
         return $this->hasOne('App\Models\Answer', 'question_id');
     }
 
+    public function topic()
+    {
+        return $this->belongsTo('App\Models\Topic', 'topic_id');
+    }
+
     /***************************************************************************************************
      ** GENERAL METHODS
      ***************************************************************************************************/

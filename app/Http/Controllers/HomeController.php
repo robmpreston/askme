@@ -24,53 +24,69 @@ class HomeController extends Controller
     /**
      * MAIN LIST OF QUESTIONS OR SINGLE QUESTION
      */
-    public function index($slug = 'deray-mckesson', $question = null)
+    public function index($recipient_slug = 'deray-mckesson', $topic_slug = null, $featured_question_id = null)
     {
-        // SINGLE QUESTION
+        // Get Recipient
+        $recipient_slug = self::isForDeRay($recipient_slug) ? 'deray-mckesson' : $recipient_slug; 
+        $recipient = User::getBySlug($recipient_slug);
+        if (!$recipient) {
+            return view('errors.404');
+        }
+
+        // Get User
+        $user = Auth::user();
+        if ($user) {
+            $user->setIP(); // update ip address
+        }
+
+        // Get The Topic
+        $topic = $topic_slug ? $recipient->getTopicBySlug($topic_slug) : $recipient->getDefaultTopic();
+        if (!$topic) {
+            // do something
+        }
+
+        // Featured Question
         $featuredQuestion = null;
-        if (is_numeric($slug)) {
-            $question_id = $slug;
-            $featuredQuestion = Question::find($question_id);
+        if ($featured_question_id && is_numeric($featured_question_id)) {
+            $featuredQuestion = $topic->getQuestionByID($featured_question_id);
             if (!$featuredQuestion) {
                 return view('errors.404');
             }
-            $recipient = $featuredQuestion->getRecipient();
-            $slug = $recipient->slug;
         }
 
-        // GET THE QUESTION RECIPIENT
-        $recipient = $featuredQuestion ? $recipient : User::getBySlug($slug);
-        if ($recipient) {
+        // List Questions
+        $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false; 
+        $show_hidden = $isAdmin ? true : false;
+        $limit = 20;
+        $questions = $topic->listQuestions($limit, [], $show_hidden, Input::get('sort'));
 
-            // get user
-            $loggedIn = Auth::check();
-            $user = Auth::user();
-
-            // show hidden for the recipient
-            $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false; 
-            $show_hidden = $isAdmin ? true : false;
-
-            // get questions list
-            $limit = 20;
-            $questions = $recipient->listQuestions($limit, [], $show_hidden, Input::get('sort'));
-         
-            // set base url
-            $baseUrl = url($slug);
-            if ($slug == 'deray-mckesson') {
-                $baseUrl = "http://askderay.com";
-            }
-
-            return view('frontend.index', [
-                'recipient' => $recipient,
-                'questions' => $questions,
-                'logged_in' => $loggedIn,
-                'user' => $user,
-                'is_admin' => $isAdmin,
-                'base_url' => $baseUrl,
-                'location' => User::getLocation(),
-                'featured_question' => $featuredQuestion
-            ]);
+        // set base url
+        $baseUrl = url($recipient_slug);
+        if ($recipient_slug == 'deray-mckesson') {
+            $baseUrl = "http://askderay.com";
         }
-        // return 404 error
+
+        return view('frontend.index', [
+            'recipient' => $recipient,
+            'questions' => $questions,
+            'logged_in' => Auth::check(),
+            'user' => $user,
+            'is_admin' => $isAdmin,
+            'base_url' => $baseUrl,
+            'user_location' => User::getLocation(),
+            'topic' => $topic,
+            'featured_question' => $featuredQuestion
+        ]);
+    }
+
+    private static function isForDeRay($recipient_slug)
+    {
+        if ($recipient_slug == 'deray-mckesson') {
+            return true;
+        }
+        if (is_numeric($recipient_slug)) {
+            return true;
+        }
+        return false;
     }
 }

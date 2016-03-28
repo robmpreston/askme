@@ -7,9 +7,11 @@ use Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\User_IP;
 use Auth;
 use Carbon\Carbon;
 use Torann\GeoIP\GeoIPFacade as GeoIP;
+use Log;
 
 class User extends Authenticatable
 {
@@ -61,9 +63,19 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Profile', 'user_id');
     }
 
+    public function topics()
+    {
+        return $this->hasMany('App\Models\Topic', 'user_id');
+    }
+
     public function questions()
     {
         return $this->hasMany('App\Models\Question', 'to_user_id');
+    }
+
+    public function ips()
+    {
+        return $this->hasMany('App\Models\User_IP', 'user_id');
     }
 
     /***************************************************************************************************
@@ -83,6 +95,40 @@ class User extends Authenticatable
     public function getLastQuestionForRecipient($recipient_id)
     {
         return Question::where('to_user_id', '=', $recipient_id)->where('from_user_id', '=', $this->id)->orderBy('created_at', 'DESC')->first();
+    }
+
+    public function getIP($ip_address)
+    {
+        return $this->ips()->where('ip_address', '=', $ip_address)->first();
+    }
+
+    public function getDefaultTopic()
+    {
+        return $this->topics()->where('default', true)->first();
+    }
+
+    public function getTopicByID($topic_id)
+    {
+        return $this->topics()->where('id', $topic_id)->first();
+    }
+
+    public function getTopicBySlug($slug)
+    {
+        return $this->topics()->where('slug', $slug)->first();
+    }
+
+    /***************************************************************************************************
+     ** SETTERS
+     ***************************************************************************************************/
+
+    public function setIP()
+    {
+        $ip = Request::ip();
+        $ip_obj = $this->getIP($ip);
+        if ($ip_obj) {
+            return $ip_obj->setLastUsed();
+        }
+        return User_IP::makeOne($this, $ip);
     }
 
     /***************************************************************************************************
@@ -138,7 +184,7 @@ class User extends Authenticatable
         return $featuredQuestion;
     }
 
-    public function listQuestions($limit, $skip_ids = [], $show_hidden = false, $sort = 'trending', $offset = 0)
+    public function listQuestions($limit, $skip_ids = [], $show_hidden = false, $sort = 'trending', $offset = false)
     {
         // Collect the Questions w/ Answers By Weight
         $questions = $this->questions()->with('asker', 'answer');
@@ -168,6 +214,7 @@ class User extends Authenticatable
         if ($offset) {
             $questions->skip($offset);
         }
+
         $questions = $questions->take($limit)->get();
 
         // Assign Whether and How The Logged In User Has Voted On Each Question && Answer
@@ -223,6 +270,10 @@ class User extends Authenticatable
     {
         return DB::table('answer_votes')->where('user_id', '=', $this->id)->whereIn('answer_id', $answer_ids)->lists('is_down_vote', 'answer_id');
     }
+
+    /***************************************************************************************************
+     ** LOGGING
+     ***************************************************************************************************/
 
     public static function getLocation()
     {

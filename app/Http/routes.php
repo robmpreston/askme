@@ -53,8 +53,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
 	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
-    Route::get('/{slug}/{question}', 'HomeController@index');
-    Route::get('/{slug}', 'HomeController@index');
+    Route::get('/{recipient_slug}/{topic_slug}/{question}', 'HomeController@index');
+    Route::get('/{recipient_slug}/{topic_slug}', 'HomeController@index');
+    Route::get('/{recipient_slug}', 'HomeController@index');
     Route::get('/', 'HomeController@index');
     Route::post('/', 'HomeController@index');
 

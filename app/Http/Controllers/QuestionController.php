@@ -116,9 +116,10 @@ class QuestionController extends Controller
     {
         $user = Auth::user();
         $recipient = User::find($request->input('recipient_id'));
+        $topic = $request->input('topic_id') ? $recipient->getTopicByID($request->input('topic_id')) : $recipient->getDefaultTopic();
         if ($recipient) {
-            $show_hidden = false; // $user && $user->isRecipient($recipient->id) ? true : false;
+            $show_hidden = $user && $user->isRecipient($recipient->id) ? true : false;
+            return response()->json($recipient->listQuestions(20, [], $show_hidden, $request->input('sort'), $request->input('offset')));
         }
-        return response()->json($recipient->listQuestions(20, [], $show_hidden, $request->input('sort')), $request->input('offset'));
     }
 }
