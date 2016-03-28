@@ -11,7 +11,7 @@
                 errorMsg: ''
             };
         },
-        props: [ 'user', 'recipient', 'loggedIn' ],
+        props: [ 'user', 'recipient', 'loggedIn', 'topic' ],
         methods: {
             toggle: function() {
                 if (this.loggedIn) {
@@ -28,6 +28,7 @@
                 this.$http.post('/api/question/store',
                 {
                     recipient_id: this.recipient.id,
+                    topic_id: this.topic.id,
                     asker_id: this.user.id,
                     question: this.question_text
                 })

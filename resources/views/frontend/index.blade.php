@@ -27,7 +27,7 @@
             <div>
                 <feature :user="recipient" :topic="topic" :is-admin="isAdmin"></feature>
             </div>
-            <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn"></ask>
+            <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn" :topic="topic"></ask>
             <div v-show="featuredQuestion != null && featuredShowing">
                 <ul class="sorting">
                     <li><a href="#" @click="toggleFeatured" class="active">Show All Questions</a></li>

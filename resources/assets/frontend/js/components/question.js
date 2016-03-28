@@ -66,6 +66,7 @@
                     this.$http.post('/api/answer/store',
                     {
                         question_id: this.question.id,
+                        topic_id: this.topic.id,
                         text_response: this.answerText,
                         video_url: this.answerVideo
                     }).then(function (response) {
