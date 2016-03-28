@@ -72,11 +72,12 @@ class QuestionController extends Controller
     {
         $this->validate($request, [
             'recipient_id' => 'required|integer',
+            'topic_id' => 'required|integer',
             'asker_id' => 'required|integer',
             'question' => 'required|max:255',
         ]);
 
-        if (Auth::user()->justAsked($request->recipient_id)) {
+        if (Auth::user()->justAsked($request->topic_id)) {
             return [
                 'successs' => false,
                 'error' => 'To prevent spam. You have to wait ' . Question::latencyMinutes() . ' minutes between posting questions.',

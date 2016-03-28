@@ -92,9 +92,9 @@ class User extends Authenticatable
         return User::where('email', '=', $email)->first();
     }
 
-    public function getLastQuestionForRecipient($recipient_id)
+    public function getLastQuestionForTopic($topic_id)
     {
-        return Question::where('to_user_id', '=', $recipient_id)->where('from_user_id', '=', $this->id)->orderBy('created_at', 'DESC')->first();
+        return Question::where('topic_id', '=', $topic_id)->where('from_user_id', '=', $this->id)->orderBy('created_at', 'DESC')->first();
     }
 
     public function getIP($ip_address)
@@ -165,9 +165,9 @@ class User extends Authenticatable
         return User::where('slug', '=', $slug)->exists();
     }
 
-    public function justAsked($recipient_id)
+    public function justAsked($topic_id)
     {
-        $question = $this->getLastQuestionForRecipient($recipient_id);
+        $question = $this->getLastQuestionForTopic($topic_id);
         if ($question && Carbon::now()->subMinute(Question::latencyMinutes()) < $question->created_at->toDateTimeString()) {
             return true;
         }

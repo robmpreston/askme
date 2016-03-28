@@ -66,6 +66,10 @@ class HomeController extends Controller
             $baseUrl = "http://askderay.com";
         }
 
+        log::error('Is Live?');
+        log::error($topic->isLive());
+        log::error('end');
+
         return view('frontend.index', [
             'recipient' => $recipient,
             'questions' => $questions,

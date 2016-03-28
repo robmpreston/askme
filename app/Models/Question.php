@@ -85,6 +85,7 @@ class Question extends Model
     public static function makeOne(Request $request)
     {
         $question = new Question;
+        $question->topic_id = $request->topic_id;
         $question->to_user_id = $request->recipient_id;
         $question->asker()->associate(Auth::user());
         $question->text_response = $request->question;

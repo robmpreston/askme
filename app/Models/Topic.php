@@ -14,6 +14,7 @@ class Topic extends Model
     public $timestamps = true;
     protected $guarded = ['id'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['opens_at','created_at', 'updated_at', 'deleted_at'];
     use SoftDeletes;
 
     /***************************************************************************************************
@@ -28,6 +29,11 @@ class Topic extends Model
     public function questions()
     {
         return $this->hasMany('App\Models\Question', 'topic_id');
+    }
+
+    public function toArray()
+    {
+        //$this->is_live = $this->isLive();
     }
 
     /***************************************************************************************************
@@ -100,6 +106,18 @@ class Topic extends Model
             $questions = Question::assignUserVotes($questions, $question_ids, $answer_ids);
         }
         return $questions;
+    }
+
+    public function isLive()
+    {
+        if ($this->closed) {
+            return false;
+        }
+
+        if (Carbon::now($this->timezone) > $this->opens_at->timezone($this->timezone)) {
+            return true;
+        }
+        return false;
     }
 
     /***************************************************************************************************
