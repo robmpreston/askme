@@ -72,8 +72,8 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::get('cache_test', function () {
 
-    /Cache::put('holy_test_key', 'this is my super value!', 5);
+    Cache::put('holy_test_key', 'this is my super value!', 5);
 
-    echo /Cache::get('holy_test_key');
+    echo Cache::get('holy_test_key');
 
 });
