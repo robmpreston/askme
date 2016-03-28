@@ -60,7 +60,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/', 'HomeController@index');
 
     // AJAX LOGIN
-    Route::post('/api/login', ['uses' => 'Auth\AuthController@ajaxLogin', 'as' => 'auth.ajaxLogin']);
+    Route::post('/api/login', 'Auth\AuthController@ajaxLogin');
 
     // AJAX SIGNUP
     Route::post('/api/user/store', 'UserController@store');
