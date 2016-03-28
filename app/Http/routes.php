@@ -37,8 +37,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('/api/question/get', 'QuestionController@getQuestions');
 
     // ANSWER
-	Route::post('/api/answer/like', 'AnswerController@like');
-	Route::post('/api/answer/store', 'AnswerController@store');
+    Route::post('/api/answer/like', 'AnswerController@like');
+    Route::post('/api/answer/store', 'AnswerController@store');
 
     // profile
     Route::post('/api/user/picture', 'UserController@uploadPicture');
@@ -51,8 +51,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/api/question/get', 'QuestionController@getQuestions');
 
-    Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
-	Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+    Route::get('/social-login/{provider?}', ['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+    Route::get('/social-login/callback/{provider?}', ['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
     Route::get('/{recipient_slug}/{topic_slug}/{question}', 'HomeController@index');
     Route::get('/{recipient_slug}/{topic_slug}', 'HomeController@index');
     Route::get('/{recipient_slug}', 'HomeController@index');
@@ -66,6 +66,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/api/user/store', 'UserController@store');
 
     // SOCIAL LOGIN
-    Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
-    Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+    Route::get('/social-login/{provider?}', ['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
+    Route::get('/social-login/callback/{provider?}', ['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
+});
+
+Route::get('cache_test', function () {
+
+    /Cache::put('holy_test_key', 'this is my super value!', 5);
+
+    echo /Cache::get('holy_test_key');
+
 });
