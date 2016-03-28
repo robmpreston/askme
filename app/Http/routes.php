@@ -69,3 +69,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/social-login/{provider?}',['uses' => 'Auth\AuthController@getSocialAuth', 'as' => 'auth.getSocialAuth']);
     Route::get('/social-login/callback/{provider?}',['uses' => 'Auth\AuthController@getSocialAuthCallback', 'as' => 'auth.getSocialAuthCallback']);
 });
+
+Route::get('cache_test', function() {
+
+    /Cache::put('holy_test_key', 'this is my super value!', 5);
+
+    echo /Cache::get('holy_test_key');
+
+});
