@@ -21,7 +21,7 @@
         var isAdmin = <?php echo json_encode($is_admin); ?>;
         var baseUrl = <?php echo json_encode($base_url); ?>;
         var topic = <?php echo json_encode($topic); ?>;
-        var user_location = <?php echo json_encode($user_location); ?>;
+        var userLocation = <?php echo json_encode($user_location); ?>;
         var featuredQuestion = <?php echo json_encode($featured_question); ?>;
     </script>
     {!! Analytics::render() !!}

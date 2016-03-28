@@ -15,6 +15,8 @@
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,
+            topic: topic,
+            userLocation: userLocation,
             profileFormUpload:new FormData(),
         },
         methods: {

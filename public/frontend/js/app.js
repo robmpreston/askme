@@ -184,8 +184,6 @@
             showSignupModal: function() {
                 this.$dispatch('show-signup-modal');
             }
-        },
-        computed: {
         }
     });
 
@@ -196,7 +194,7 @@
 
     Vue.component('feature', {
         template: '#feature-template',
-        props: ['user', 'isAdmin'],
+        props: ['user', 'isAdmin', 'topic'],
         data: function() {
             return {
                 editing: false
@@ -217,7 +215,6 @@
                 }).then(function (response) {
                     if (!response.data.success) {
                     } else {
-                        console.log(response.data.data.user);
                         this.$dispatch('user-updated', response.data.data.user);
                     }
                 }, function (response) {
@@ -265,7 +262,7 @@
 
     Vue.component('loginModal', {
         template: '#login-modal-template',
-        props: ['show'],
+        props: ['show', 'userLocation'],
         data: function () {
             return {
     	        title: '',
@@ -279,25 +276,18 @@
                 errorText: ''
             };
         },
+        ready: function() {
+            this.from = this.userLocation;
+        },
         methods: {
             close: function () {
                 this.show = false;
                 this.login = false;
-                this.firstName = '';
-                this.lastName = '';
-                this.email = '';
-                this.password = '';
-                this.title = '';
-                this.body = '';
+                this.clearFields();
             },
             toggle: function() {
                 this.login = !this.login;
-                this.errorText = '';
-                this.firstName = '';
-                this.lastName = '';
-                this.email = '';
-                this.password = '';
-                this.from = '';
+                this.clearFields();
             },
             emailLogin: function () {
                 var self = this;
@@ -331,6 +321,15 @@
                         });
                     }
                 });
+            },
+            clearFields: function() {
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
+                this.errorText = '';
+                this.title = '';
+                this.body = '';
             }
         },
         computed: {
@@ -451,6 +450,8 @@
             user: user,
             isAdmin: isAdmin,
             baseUrl: baseUrl,
+            topic: topic,
+            userLocation: userLocation,
             profileFormUpload:new FormData(),
         },
         methods: {

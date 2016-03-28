@@ -3,7 +3,7 @@
 
     Vue.component('feature', {
         template: '#feature-template',
-        props: ['user', 'isAdmin'],
+        props: ['user', 'isAdmin', 'topic'],
         data: function() {
             return {
                 editing: false
@@ -24,7 +24,6 @@
                 }).then(function (response) {
                     if (!response.data.success) {
                     } else {
-                        console.log(response.data.data.user);
                         this.$dispatch('user-updated', response.data.data.user);
                     }
                 }, function (response) {

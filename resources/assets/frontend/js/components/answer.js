@@ -25,8 +25,6 @@
             showSignupModal: function() {
                 this.$dispatch('show-signup-modal');
             }
-        },
-        computed: {
         }
     });
 

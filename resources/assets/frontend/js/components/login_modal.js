@@ -3,7 +3,7 @@
 
     Vue.component('loginModal', {
         template: '#login-modal-template',
-        props: ['show'],
+        props: ['show', 'userLocation'],
         data: function () {
             return {
     	        title: '',
@@ -17,25 +17,18 @@
                 errorText: ''
             };
         },
+        ready: function() {
+            this.from = this.userLocation;
+        },
         methods: {
             close: function () {
                 this.show = false;
                 this.login = false;
-                this.firstName = '';
-                this.lastName = '';
-                this.email = '';
-                this.password = '';
-                this.title = '';
-                this.body = '';
+                this.clearFields();
             },
             toggle: function() {
                 this.login = !this.login;
-                this.errorText = '';
-                this.firstName = '';
-                this.lastName = '';
-                this.email = '';
-                this.password = '';
-                this.from = '';
+                this.clearFields();
             },
             emailLogin: function () {
                 var self = this;
@@ -69,6 +62,15 @@
                         });
                     }
                 });
+            },
+            clearFields: function() {
+                this.firstName = '';
+                this.lastName = '';
+                this.email = '';
+                this.password = '';
+                this.errorText = '';
+                this.title = '';
+                this.body = '';
             }
         },
         computed: {

@@ -23,9 +23,9 @@
         </header>
         <div class="main-column">
             <edit-user-modal v-if="loggedIn" :user="user" :show.sync="showEditModal"></edit-user-modal>
-            <login-modal v-if="!loggedIn" :show.sync="showLoginModal"></login-modal>
+            <login-modal v-if="!loggedIn" :show.sync="showLoginModal" :userLocation="userLocation"></login-modal>
             <div>
-                <feature :user="recipient" :is-admin="isAdmin"></feature>
+                <feature :user="recipient" :topic="topic" :is-admin="isAdmin"></feature>
             </div>
             <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn"></ask>
             <div v-show="featuredQuestion != null && featuredShowing">
