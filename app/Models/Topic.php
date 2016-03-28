@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
 use Carbon\Carbon;
+use Log;
 
 class Topic extends Model
 {
@@ -33,8 +34,11 @@ class Topic extends Model
 
     public function toArray()
     {
-        //$this->is_live = $this->isLive();
+        $array = parent::toArray();
+        $array['is_live'] = $this->isLive();
+        return $array;
     }
+        
 
     /***************************************************************************************************
      ** CRUD
@@ -114,7 +118,8 @@ class Topic extends Model
             return false;
         }
 
-        if (Carbon::now($this->timezone) > $this->opens_at->timezone($this->timezone)) {
+        $opens_at = Carbon::createFromFormat('Y-m-d H:i:s', $this->opens_at->toDateTimeString(), $this->timezone);
+        if (Carbon::now($this->timezone) > $opens_at) {
             return true;
         }
         return false;
