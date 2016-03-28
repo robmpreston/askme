@@ -3,7 +3,7 @@
 
     Vue.component('question', {
         template: '#question-template',
-        props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl'],
+        props: ['question', 'recipient', 'loggedIn', 'isAdmin', 'baseUrl', 'topic'],
         data: function() {
             return {
                 replyOpen: false,
