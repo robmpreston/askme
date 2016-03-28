@@ -24,4 +24,5 @@
         var user_location = <?php echo json_encode($user_location); ?>;
         var featuredQuestion = <?php echo json_encode($featured_question); ?>;
     </script>
+    {!! Analytics::render() !!}
 </head>
