@@ -25,13 +25,13 @@ class HomeController extends Controller
      * MAIN LIST OF QUESTIONS OR SINGLE QUESTION
      */
     public function index($recipient_slug = 'deray-mckesson', $topic_slug = null, $featured_question_id = null)
-    {
+    {/*
         if (strpos(url('/'), "askderay")) {
             $featured_question_id = $topic_slug;
             $topic_slug = $recipient_slug;
             $recipient_slug = 'deray-mckesson';
         }
-
+*/
         $isDeray = self::isForDeRay($recipient_slug);
         // Get Recipient
         $recipient_slug = $isDeray ? 'deray-mckesson' : $recipient_slug;
