@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         if (strpos(url('/'), "askderay")) {
             $featured_question_id = $topic_slug;
-            $topic_slug = $recipient_slug;
+            $topic_slug = ($recipient_slug == deray-mckesson) ? null : $recipient_slug;
             $recipient_slug = 'deray-mckesson';
         }
 
