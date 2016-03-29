@@ -26,6 +26,12 @@ class HomeController extends Controller
      */
     public function index($recipient_slug = 'deray-mckesson', $topic_slug = null, $featured_question_id = null)
     {
+        if (strpos(url('/'), "askderay")) {
+            $featured_question_id = $topic_slug;
+            $topic_slug = $recipient_slug;
+            $recipient_slug = 'deray-mckesson';
+        }
+
         $isDeray = self::isForDeRay($recipient_slug);
         // Get Recipient
         $recipient_slug = $isDeray ? 'deray-mckesson' : $recipient_slug;
@@ -57,9 +63,6 @@ class HomeController extends Controller
 
         // List Questions
         $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false;
-        $show_hidden = $isAdmin ? true : false;
-        $limit = 20;
-        $questions = $topic->listQuestions($limit, [], $show_hidden, Input::get('sort'));
 
         // set base url
         $baseUrl = url($recipient_slug);
@@ -69,7 +72,6 @@ class HomeController extends Controller
 
         return view('frontend.index', [
             'recipient' => $recipient,
-            'questions' => $questions,
             'logged_in' => Auth::check(),
             'user' => $user,
             'is_admin' => $isAdmin,
