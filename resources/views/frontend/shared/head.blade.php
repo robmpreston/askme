@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="{{ asset('bower_components/vue/dist/vue.min.js') }}"></script>
     <script src="{{ asset('bower_components/vue-resource/dist/vue-resource.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/vue-infinite-scroll.js') }}"></script>
     <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('js/vue-moment.min.js') }}"></script>
     <script>

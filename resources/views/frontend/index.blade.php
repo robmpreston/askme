@@ -27,16 +27,17 @@
             <div>
                 <feature :user="recipient" :topic="topic" :is-admin="isAdmin"></feature>
             </div>
-            <ask :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn" :topic="topic"></ask>
+            <ask v-show="topic.is_live" :user.sync="user" :recipient="recipient" :logged-in.sync="loggedIn" :topic="topic"></ask>
             <div v-show="featuredQuestion != null && featuredShowing">
                 <ul class="sorting">
-                    <li><a href="#" @click="toggleFeatured" class="active">Show All Questions</a></li>
+                    <li><a @click="toggleFeatured" class="active">Show All Questions</a></li>
                 </ul>
                 <question :question.sync="featuredQuestion"
                     :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                     :base-url="baseUrl"></question>
             </div>
-            <div v-show="(featuredQuestion != null && !featuredShowing) || featuredQuestion == null">
+            <div v-show="(featuredQuestion != null && !featuredShowing) || featuredQuestion == null"
+                 v-infinite-scroll="loadQuestions()" infinite-scroll-disabled="busy">
                 <sorting :sort-type="sortType"></sorting>
                 <question v-for="question in questions" :question.sync="question"
                     :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"

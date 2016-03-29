@@ -14,7 +14,7 @@
                 <p>@{{ user.first_name }} <span class="faded-text">from</span> @{{ user.from }}</p>
             </header>
             <textarea v-model="question_text" v-el:question-text placeholder="What do you want to ask @{{ recipient.first_name }}?"></textarea>
-            <p v-if="errorMsg != ''">@{{ errorMsg }}</p>
+            <p class="error-text" v-if="errorText != ''">@{{{ errorText }}}</p>
             <button class="ghost button" :disabled="question_text == ''" @click="sendQuestion">Submit</button>
         </div>
     </div>

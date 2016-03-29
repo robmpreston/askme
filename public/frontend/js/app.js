@@ -8,7 +8,7 @@
                 question_text: '',
                 open: false,
                 asked: false,
-                errorMsg: ''
+                errorText: ''
             };
         },
         props: [ 'user', 'recipient', 'loggedIn', 'topic' ],
@@ -24,7 +24,7 @@
                 }
             },
             sendQuestion: function() {
-                this.errorMsg = '';
+                this.errorText = '';
                 this.$http.post('/api/question/store',
                 {
                     recipient_id: this.recipient.id,
@@ -39,7 +39,7 @@
                         this.question_text = '';
                         this.asked = true;
                     } else {
-                        this.errorMsg = response.data.error;
+                        this.errorText = response.data.error;
                     }
                 }, function (response) {
                     console.log('failed');
@@ -149,7 +149,7 @@
         },
         computed: {
             shareUrl: function() {
-                return this.baseUrl + '/' + this.question.id;
+                return this.baseUrl + '/' + topic.slug + '/' + this.question.id;
             },
             shareText: function() {
                 return 'Ask ' + this.recipient.first_name;
@@ -444,7 +444,7 @@
             showLoginModal: false,
             showEditModal: false,
             recipient: recipient,
-            questions: questions,
+            questions: [],
             loggedIn: loggedIn,
             featuredQuestion: featuredQuestion,
             featuredShowing: true,
@@ -480,6 +480,21 @@
             },
             toggleFeatured: function() {
                 this.featuredShowing = false;
+            },
+            loadQuestions: function() {
+                this.$http.post('/api/question/get',
+                {
+                    recipient_id: recipient.id,
+                    topic_id: this.topic.id,
+                    sort: this.sortType,
+                    offset: this.questions.length
+                }, function(data){
+                    for (var c = 0; c < data.length; c++) {
+                        this.questions.push(data[c]);
+                    }
+                }).error(function (data, status, request) {
+                    //error handling here
+                });
             }
         },
         events: {
@@ -494,8 +509,17 @@
                 this.showLoginModal = true;
             },
             'update-question-sort': function(sortType) {
-                this.$http.post('/api/question/get', { recipient_id: recipient.id, sort: sortType}, function(data){
+                this.$http.post('/api/question/get',
+                {
+                    recipient_id: recipient.id,
+                    topic_id: this.topic.id,
+                    sort: sortType,
+                    offset: 0
+                }, function(data){
                     this.questions = data;
+                    this.questionOffset = 0;
+                    this.questionEnd = false;
+                    this.sortType = sortType;
                 }).error(function (data, status, request) {
                     //error handling here
                 });

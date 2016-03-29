@@ -7,7 +7,7 @@
             showLoginModal: false,
             showEditModal: false,
             recipient: recipient,
-            questions: questions,
+            questions: [],
             loggedIn: loggedIn,
             featuredQuestion: featuredQuestion,
             featuredShowing: true,
@@ -43,6 +43,21 @@
             },
             toggleFeatured: function() {
                 this.featuredShowing = false;
+            },
+            loadQuestions: function() {
+                this.$http.post('/api/question/get',
+                {
+                    recipient_id: recipient.id,
+                    topic_id: this.topic.id,
+                    sort: this.sortType,
+                    offset: this.questions.length
+                }, function(data){
+                    for (var c = 0; c < data.length; c++) {
+                        this.questions.push(data[c]);
+                    }
+                }).error(function (data, status, request) {
+                    //error handling here
+                });
             }
         },
         events: {
@@ -57,8 +72,17 @@
                 this.showLoginModal = true;
             },
             'update-question-sort': function(sortType) {
-                this.$http.post('/api/question/get', { recipient_id: recipient.id, sort: sortType}, function(data){
+                this.$http.post('/api/question/get',
+                {
+                    recipient_id: recipient.id,
+                    topic_id: this.topic.id,
+                    sort: sortType,
+                    offset: 0
+                }, function(data){
                     this.questions = data;
+                    this.questionOffset = 0;
+                    this.questionEnd = false;
+                    this.sortType = sortType;
                 }).error(function (data, status, request) {
                     //error handling here
                 });

@@ -26,8 +26,9 @@ class HomeController extends Controller
      */
     public function index($recipient_slug = 'deray-mckesson', $topic_slug = null, $featured_question_id = null)
     {
+        $isDeray = self::isForDeRay($recipient_slug);
         // Get Recipient
-        $recipient_slug = self::isForDeRay($recipient_slug) ? 'deray-mckesson' : $recipient_slug; 
+        $recipient_slug = $isDeray ? 'deray-mckesson' : $recipient_slug;
         $recipient = User::getBySlug($recipient_slug);
         if (!$recipient) {
             return view('errors.404');
@@ -55,7 +56,7 @@ class HomeController extends Controller
         }
 
         // List Questions
-        $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false; 
+        $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false;
         $show_hidden = $isAdmin ? true : false;
         $limit = 20;
         $questions = $topic->listQuestions($limit, [], $show_hidden, Input::get('sort'));

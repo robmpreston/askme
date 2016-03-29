@@ -8,7 +8,7 @@
                 question_text: '',
                 open: false,
                 asked: false,
-                errorMsg: ''
+                errorText: ''
             };
         },
         props: [ 'user', 'recipient', 'loggedIn', 'topic' ],
@@ -24,7 +24,7 @@
                 }
             },
             sendQuestion: function() {
-                this.errorMsg = '';
+                this.errorText = '';
                 this.$http.post('/api/question/store',
                 {
                     recipient_id: this.recipient.id,
@@ -39,7 +39,7 @@
                         this.question_text = '';
                         this.asked = true;
                     } else {
-                        this.errorMsg = response.data.error;
+                        this.errorText = response.data.error;
                     }
                 }, function (response) {
                     console.log('failed');
