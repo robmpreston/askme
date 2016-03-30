@@ -2,15 +2,9 @@
     <div class="outer-question-container" id="question-@{{ question.id }}">
         <div class="vote-block">
             <div class="up vote" @click="upvote(question.id)" :class="{disabled: question.upvoted}">
-                <svg class="svg-icon static"><use xlink:href="#up-static-icon"></use></svg>
-                <svg class="svg-icon focus"><use xlink:href="#up-focus-icon"></use></svg>
-                <svg class="svg-icon hover"><use xlink:href="#up-hover-icon"></use></svg>
             </div>
             <p>@{{ question.net_votes }}</p>
             <div class="down vote" @click="downvote(question.id)" :class="{disabled: question.downvoted}">
-                <svg class="svg-icon static"><use xlink:href="#down-static-icon"></use></svg>
-                <svg class="svg-icon focus"><use xlink:href="#down-focus-icon"></use></svg>
-                <svg class="svg-icon hover"><use xlink:href="#down-hover-icon"></use></svg>
             </div>
         </div>
         <div class="qa-container">

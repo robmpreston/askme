@@ -829,8 +829,7 @@ ul.sorting {
     .answer.container .like-block svg.static {
       padding-left: 1px; }
     .answer.container .like-block svg.hover {
-      padding-right: 1px;
-      display: none; }
+      padding-right: 1px; }
     .answer.container .like-block svg.active {
       padding: 0 0 0 1px; }
     .answer.container .like-block p {
@@ -935,38 +934,35 @@ ul.sorting {
   min-height: 100px;
   width: 100%; }
 
-.vote .svg-icon {
-  height: 15px;
+.vote {
   width: 22px;
+  height: 15px;
+  background-size: 213px 160px;
   cursor: pointer; }
 
 .up.vote {
-  margin-bottom: 4px; }
+  margin-bottom: 4px;
+  background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+  background-position: -1px -1px;
+  background-size: 213px 160px; }
+  .up.vote:hover {
+    background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+    background-position: -1px -17px; }
+  .up.vote:active, .up.vote.disabled {
+    background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+    background-position: -1px -34px; }
 
 .down.vote {
-  margin-top: 4px; }
-
-.vote .focus,
-.vote .hover {
-  display: none; }
-
-.vote:hover .static, .vote:hover .focus {
-  display: none; }
-
-.vote:hover .hover {
-  display: block; }
-
-.vote:active .static, .vote:active .hover {
-  display: none !important; }
-
-.vote:active .focus {
-  display: block !important; }
-
-.vote.disabled .static, .vote.disabled .hover {
-  display: none !important; }
-
-.vote.disabled .focus {
-  display: block !important; }
+  margin-bottom: 4px;
+  background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+  background-position: -23px -0px;
+  background-size: 213px 160px; }
+  .down.vote:hover {
+    background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+    background-position: -23px -17px; }
+  .down.vote:active, .down.vote.disabled {
+    background-image: url("https://s3.amazonaws.com/soapbox-prod/images/vote_sprite.png");
+    background-position: -23px -33px; }
 
 footer {
   text-align: center; }
