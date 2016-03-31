@@ -10,13 +10,15 @@
             </article>
         </div>
         <div class="ama-topic" v-if="!topic.is_live">
-            <p>Next AMA: @{{ topic.opens_at | moment "dddd, MMM Do h:mm a" }}</p>
+            <p>Next AMA: Friday, April 1st 12:00PM EST<!-- @{{ topic.opens_at | moment "dddd, MMM Do h:mm a" }}--></p>
             <p>Topic will be @{{ topic.name }}</p>
         </div>
+        <!--
         <div class="ama-topic" v-else>
             <p>@{{ user.first_name }} is live taking your questions!</p>
             <p>Today's topic is @{{ topic.name }}</p>
         </div>
+        -->
         <div class="social-container">
             <a class="social button website" v-if="user.profile.website_url != ''" :href="user.profile.website_url" target="_blank"><i class="fa fa-external-link"></i> Website</a>
             <a class="social button" v-if="user.profile.twitter_url != ''" :href="user.profile.twitter_url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
