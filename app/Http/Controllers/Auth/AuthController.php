@@ -158,7 +158,7 @@ class AuthController extends Controller
     private function getNameFromFacebook($user, $last = false)
     {
         // PREP FULL NAME
-        $full_name = array_get($user['name']);
+        $full_name = array_get($user, 'name');
         if ($full_name) {
             $name_array = explode(' ', $full_name);
         }
