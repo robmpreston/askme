@@ -1019,9 +1019,13 @@ footer {
       -webkit-box-sizing: border-box; }
   .outer-question-container .vote-block {
     position: relative;
-    left: 0; }
+    left: 0;
+    margin-bottom: 5px; }
     .outer-question-container .vote-block p, .outer-question-container .vote-block .vote {
-      display: inline-block; }
+      display: inline-block;
+      vertical-align: middle; }
+    .outer-question-container .vote-block p {
+      margin: 0 4px; }
   .outer-question-container .qa-container {
     margin-bottom: 0.5rem; }
   .outer-question-container .social-container {

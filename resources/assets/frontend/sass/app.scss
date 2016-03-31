@@ -627,8 +627,13 @@ footer {
         .vote-block {
             position:relative;
             left:0;
+            margin-bottom:5px;
             p, .vote {
-                display:inline-block
+                display:inline-block;
+                vertical-align: middle;
+            }
+            p {
+                margin: 0 4px;
             }
         }
         .qa-container {
