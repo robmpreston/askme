@@ -23,6 +23,9 @@
                     this.showSignupModal();
                 }
             },
+            close: function() {
+                this.open = false;  
+            },
             sendQuestion: function() {
                 this.errorText = '';
                 this.$http.post('/api/question/store',
