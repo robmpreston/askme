@@ -131,8 +131,8 @@ class AuthController extends Controller
 
         // user exists but facebook ID is not saved
         if ($user && !$user->facebook_id) {
-            $user->first_name = $data->user->first_name;
-            $user->last_name = $data->user->last_name;
+            $user->first_name = $data->user['first_name'];
+            $user->last_name = $data->user['last_name'];
             $user->facebook_id = $data->id;
             $user->save();
             Auth::login($user);
@@ -141,10 +141,10 @@ class AuthController extends Controller
 
         // new user
         $user = new User;
-        $user->first_name = $data->user->first_name;
-        $user->last_name = $data->user->last_name;
+        $user->first_name = $data->user['first_name'];
+        $user->last_name = $data->user['last_name'];
         $user->email = $data->email;
-        $user->slug = User::createSlug($data->user->first_name, $data->user->last_name);
+        $user->slug = User::createSlug($data->user['first_name'], $data->user['last_name']);
         $user->facebook_id = $data->id;
         $user->password = Hash::make($data->id . self::salt());
         $user->save();
