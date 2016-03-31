@@ -26,10 +26,18 @@ class HomeController extends Controller
      */
     public function index($recipient_slug = 'deray-mckesson', $topic_slug = null, $featured_question_id = null)
     {
+        $baseUrl = null;
+        
         if (strpos(url('/'), "askderay")) {
             $featured_question_id = $topic_slug;
             $topic_slug = ($recipient_slug == "deray-mckesson") ? null : $recipient_slug;
             $recipient_slug = 'deray-mckesson';
+            $baseUrl = "http://askderay.com";
+        } else if (strpos(url('/'), "45.33.85.156")) {
+            $featured_question_id = $topic_slug;
+            $topic_slug = ($recipient_slug == "deray-mckesson") ? null : $recipient_slug;
+            $recipient_slug = 'deray-mckesson';
+            $baseUrl = "http://45.33.85.156";    
         }
 
         $isDeray = self::isForDeRay($recipient_slug);
@@ -65,10 +73,9 @@ class HomeController extends Controller
         $isAdmin = $user && $user->isRecipient($recipient->id) ? true : false;
 
         // set base url
-        $baseUrl = url($recipient_slug);
-        if ($recipient_slug == 'deray-mckesson') {
-            $baseUrl = "http://askderay.com";
-        }
+        if (!$baseUrl) {
+            $baseUrl = url($recipient_slug);  
+        }    
 
         return view('frontend.index', [
             'recipient' => $recipient,
