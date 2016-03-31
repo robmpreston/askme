@@ -490,6 +490,10 @@
                     offset: this.questions.length
                 }, function(data){
                     for (var c = 0; c < data.length; c++) {
+                        data[c].created_at = moment.utc(data[c].created_at).toDate();
+                        if (data[c].answer != null) {
+                            data[c].answer.created_at = moment.utc(data[c].answer.created_at).toDate();
+                        }
                         this.questions.push(data[c]);
                     }
                 }).error(function (data, status, request) {
@@ -503,6 +507,12 @@
                 this.loggedIn = true;
             },
             'questions-updated': function(questions) {
+                for (var c = 0; c < questions.length; c++) {
+                    questions[c].created_at = moment.utc(questions[c].created_at).toDate();
+                    if (questions[c].answer != null) {
+                        questions[c].answer.created_at = moment.utc(questions[c].answer.created_at).toDate();
+                    }
+                }
                 this.questions = questions;
             },
             'show-signup-modal': function() {

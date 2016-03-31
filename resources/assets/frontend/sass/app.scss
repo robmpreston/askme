@@ -372,7 +372,6 @@ ul.sorting {
         }
         svg.hover {
             padding-right:1px;
-            display:none;
         }
         svg.active {
             padding:0 0 0 1px;
@@ -513,51 +512,42 @@ ul.sorting {
     width: 100%;
 }
 
-//SVG STUFF
-
-.vote .svg-icon {
-    height:15px;
-    width:22px;
+.vote {
+    width: 22px;
+    height: 15px;
+    background-size : 213px 160px;
     cursor:pointer;
 }
 
 .up.vote {
     margin-bottom:4px;
+    background-image: url($votes-sprite-url);
+    background-position: -1px -1px;
+    background-size : 213px 160px;
+    &:hover {
+        background-image: url($votes-sprite-url);
+        background-position: -1px -17px;
+    }
+    &:active,
+    &.disabled {
+        background-image: url($votes-sprite-url);
+        background-position: -1px -34px;
+    }
 }
 
 .down.vote {
-    margin-top:4px;
-}
-
-.vote .focus,
-.vote .hover {
-    display:none;
-}
-
-.vote:hover {
-    .static, .focus {
-        display:none;
+    margin-bottom:4px;
+    background-image: url($votes-sprite-url);
+    background-position: -23px -0px;
+    background-size : 213px 160px;
+    &:hover {
+        background-image: url($votes-sprite-url);
+        background-position: -23px -17px;
     }
-    .hover {
-        display:block;
-    }
-}
-
-.vote:active {
-    .static, .hover {
-        display:none !important;
-    }
-    .focus {
-        display:block !important;
-    }
-}
-
-.vote.disabled {
-    .static, .hover {
-        display:none !important;
-    }
-    .focus {
-        display:block !important;
+    &:active,
+    &.disabled {
+        background-image: url($votes-sprite-url);
+        background-position: -23px -33px;
     }
 }
 
