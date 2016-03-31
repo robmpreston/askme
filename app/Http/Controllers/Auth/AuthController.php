@@ -120,16 +120,22 @@ class AuthController extends Controller
     protected function facebookCreateOrLogin($data)
     {
         // Check If User Exists
+        log::error('Facebook Data');
+        log::error(json_encode($data));
+        log::error('End');
         $user = User::getByEmail($data->email);
         if ($user && $user->facebook_id) {
             Auth::login($user);
             return redirect()->intended('/');
         }
 
+        $first_name = $this->getNameFromFacebook($data->user);
+        $last_name = $this->getNameFromFacebook($data->user, true);
+
         // user exists but facebook ID is not saved
         if ($user && !$user->facebook_id) {
-            $user->first_name = $data->user->first_name;
-            $user->last_name = $data->user->last_name;
+            $user->first_name = $first_name;
+            $user->last_name = $last_name;
             $user->facebook_id = $data->id;
             $user->save();
             Auth::login($user);
@@ -138,15 +144,44 @@ class AuthController extends Controller
 
         // new user
         $user = new User;
-        $user->first_name = $data->user->first_name;
-        $user->last_name = $data->user->last_name;
+        $user->first_name = $first_name;
+        $user->last_name = $last_name;
         $user->email = $data->email;
-        $user->slug = User::createSlug($data->user->first_name, $data->user->last_name);
+        $user->slug = User::createSlug($first_name, $last_name);
         $user->facebook_id = $data->id;
-        $user->password = Hash::make($data->id . self::salt());
+        $user->password = bcrypt($data->id . self::salt());
         $user->save();
         Auth::login($user);
         return redirect()->intended('/');
+    }
+
+    private function getNameFromFacebook($user, $last = false)
+    {
+        // PREP FULL NAME
+        $full_name = array_get($user, 'name');
+        if ($full_name) {
+            $name_array = explode(' ', $full_name);
+        }
+
+        // GET LAST NAME
+        if ($last) {
+            if (array_has($user, 'last_name')) {
+                return $user['last_name'];   
+            }
+            if ($name_array && array_has($name_array, 1)) {
+                return $name_array[1];
+            }
+            return '';
+        }
+
+        // GET FIRST NAME
+        if (array_has($user, 'first_name')) {
+            return $user['first_name'];
+        }
+        if ($name_array && array_has($name_array, 0)) {
+            return $name_array[0];
+        }
+        return '';
     }
 
     public static function salt()
