@@ -149,7 +149,7 @@ class AuthController extends Controller
         $user->email = $data->email;
         $user->slug = User::createSlug($first_name, $last_name);
         $user->facebook_id = $data->id;
-        $user->password = Hash::make($data->id . self::salt());
+        $user->password = bcrypt($data->id . self::salt()));
         $user->save();
         Auth::login($user);
         return redirect()->intended('/');
