@@ -39,6 +39,15 @@
             <div v-show="(featuredQuestion != null && !featuredShowing) || featuredQuestion == null"
                  v-infinite-scroll="loadQuestions()" infinite-scroll-disabled="busy">
                 <sorting :sort-type="sortType"></sorting>
+                <div class="outer-question-container" v-if="questions.length == 0">
+                    <div class="qa-container">
+                        <div class="question container">
+                            <article>
+                                <p>Be the first one to ask @{{ recipient.first_name }} a question!</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
                 <question v-for="question in questions" :question.sync="question"
                     :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                     :base-url="baseUrl"></question>
