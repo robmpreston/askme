@@ -829,7 +829,8 @@ ul.sorting {
     .answer.container .like-block svg.static {
       padding-left: 1px; }
     .answer.container .like-block svg.hover {
-      padding-right: 1px; }
+      padding-right: 1px;
+      display: none; }
     .answer.container .like-block svg.active {
       padding: 0 0 0 1px; }
     .answer.container .like-block p {
