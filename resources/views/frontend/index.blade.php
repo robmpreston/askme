@@ -43,7 +43,7 @@
                     <div class="qa-container">
                         <div class="question container">
                             <article>
-                                <p>Be the first one to ask @{{ recipient.first_name }} a question!</p>
+                                <p>No questions yet! Be the first one to ask @{{ recipient.first_name }}!</p>
                             </article>
                         </div>
                     </div>
