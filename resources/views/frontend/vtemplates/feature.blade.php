@@ -9,7 +9,7 @@
                 <p class="description">@{{ user.profile.description }}</p>
             </article>
         </div>
-        <div class="ama-topic" v-if="!topic.is_live">
+        <div class="ama-topic">
             <p>Next AMA: Friday, April 1st 12:00PM EST<!-- @{{ topic.opens_at | moment "dddd, MMM Do h:mm a" }}--></p>
             <p>Topic will be @{{ topic.name }}</p>
         </div>
