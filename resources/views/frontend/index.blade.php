@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <question v-for="question in questions" :question.sync="question"
+                <question v-for="question in questions" :question.sync="question" :topic="topic"
                     :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"
                     :base-url="baseUrl"></question>
             </div>
