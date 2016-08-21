@@ -47,25 +47,13 @@ return [
     'connections' => [
 
         'mysql' => [
-            'driver'    => 'mysql',
-            'read' => [
-                'host'      => getenv('MYSQL_READ_HOSTNAME'),
-                'database'  => getenv('MYSQL_DATABASE_NAME'),
-                'username'  => getenv('MYSQL_USERNAME'),
-                'password'  => getenv('MYSQL_PASSWORD'),
-                'charset'   => 'utf8',
-                'collation' => 'utf8_unicode_ci',
-                'prefix'    => '',
-            ],
-            'write' => [
-                'host'      => getenv('MYSQL_HOSTNAME'),
-                'database'  => getenv('MYSQL_DATABASE_NAME'),
-                'username'  => getenv('MYSQL_USERNAME'),
-                'password'  => getenv('MYSQL_PASSWORD'),
-                'charset'   => 'utf8',
-                'collation' => 'utf8_unicode_ci',
-                'prefix'    => '',
-            ],
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
         ],
 
     ],
