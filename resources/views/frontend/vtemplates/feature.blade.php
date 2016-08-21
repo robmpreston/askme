@@ -2,7 +2,7 @@
     <div class="featured" v-if="!editing">
         <div class="info">
             <div class="avatar-container">
-                <img class="avatar" :src="user.picture">
+                <img class="avatar" src="/images/deray_profile.jpg"/>
             </div>
             <article>
                 <p class="info">@{{ name }}, <span class="grey-text">@{{ user.profile.i_am_a }}</span> <span class="faded-text">from</span> <span class="grey-text">@{{ user.from }}</span></p>
