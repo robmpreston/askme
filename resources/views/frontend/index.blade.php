@@ -7,11 +7,11 @@
         <header class="top">
             <input class="file-input" id="file-input" type="file" @change.stop="bindFile" v-el:file-input/>
             <h1 v-if="recipient.id != 5">Soapbox</h1>
-            <img class="logo" v-if="recipient.id == 5" src="/images/derayformayor_logo.png" width="200" />
+            <img class="logo" v-if="recipient.id == 5" src="{{ env('S3_URL') }}/images/derayformayor_logo.png" width="200" />
             <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
-                <img src="/images/deray_profile.jpg"/>
+                <img :src="user.picture"/>
                 <i class="dropdown-toggle fa fa-angle-down"></i>
                 <ul class="dropdown">
                     <!--<li><a href="http://www.soapbox.cc/@{{ user.slug }}" target="_blank">My Soapbox</a></li>-->

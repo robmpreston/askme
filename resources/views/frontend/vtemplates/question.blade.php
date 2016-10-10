@@ -25,7 +25,7 @@
                 :recipient="recipient" :logged-in.sync="loggedIn" :is-admin="isAdmin"></answer>
             <div v-if="replyOpen" class="answer container">
                 <header>
-                    <img src="/images/deray_profile.jpg"/>
+                    <img :src="recipient.picture" />
                     <p><span class="faded-text">Reply from</span> @{{ recipient.first_name }}</p>
                 </header>
                 <article>
