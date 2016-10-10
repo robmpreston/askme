@@ -7,7 +7,7 @@
         <header class="top">
             <input class="file-input" id="file-input" type="file" @change.stop="bindFile" v-el:file-input/>
             <h1 v-if="recipient.id != 5">Soapbox</h1>
-            <img class="logo" v-if="recipient.id == 5" src="{{ env('S3_URL') }}/images/derayformayor_logo.png" width="200" />
+            <img class="logo" v-if="recipient.id == 5" src="{{ env('S3_URL') }}images/derayformayor_logo.png" width="200" />
             <button v-if="!loggedIn" class="login ghost button" @click="showLoginModal = true">Login/Signup</button>
             <div class="user-menu-button" v-if="loggedIn">
                 <button v-if="loggedIn" class="clear button button-logout">@{{ user.first_name }}</button>
